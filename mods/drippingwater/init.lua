@@ -4,7 +4,7 @@
 -- License of code, textures & sounds: CC0
 
 --Random
-math.randomseed(50)
+math.randomseed(3)
 
 
 --Drop entities
@@ -86,7 +86,7 @@ minetest.register_entity("drippingwater:drop_lava", {
 --Create drop
 
 minetest.register_abm(
-        {nodenames = {"group:crumbly", "group:cracky"},
+        {nodenames = {"group:crumbly"},
 	neighbors = {"group:water"},
         interval = 2,
         chance = 22,

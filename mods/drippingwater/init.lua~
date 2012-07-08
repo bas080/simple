@@ -4,7 +4,7 @@
 -- License of code, textures & sounds: CC0
 
 --Random
-math.randomseed(3)
+math.randomseed(50)
 
 
 --Drop entities
@@ -17,7 +17,7 @@ minetest.register_entity("drippingwater:drop_water", {
 	collisionbox = {0,0,0,0,0,0},
 	visual = "cube",
 	visual_size = {x=0.05, y=0.1},
-	textures = {"default_water.png","default_water.png","default_water.png","default_water.png", "default_water.png", 	"default_water.png"},
+	textures = {"default_water.png", "default_water.png", "default_water.png", "default_water.png", "default_water.png", "default_water.png"},
 	spritediv = {x=1, y=1},
 	initial_sprite_basepos = {x=0, y=0},
 
