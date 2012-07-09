@@ -41,8 +41,8 @@ local TOP = {
 for i, node in ipairs(NODE) do
     minetest.register_abm(
     {nodenames = {NODE[i]},
-    interval = 30,
-    chance = 3,
+    interval = math.floor(math.random(100)),
+    chance = 1,
     action = function(pos)
         
         local bottom = {x=pos.x, y=pos.y-1, z=pos.z}
