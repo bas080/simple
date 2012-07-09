@@ -32,13 +32,13 @@ minetest.register_craft({
 	recipe = {
 	{'','"mesecons:mesecon_off"',''},
 	{'','"mesecons:mesecon_off"',''},
-	{'"default:junglegrass"','"default:junglegrass"','"default:junglegrass"'},
+	{'"default:leaves"','"default:leaves"','"default:leaves"'},
 	}
 })
 
 minetest.register_abm(
 	{nodenames = {"mesecons_blinkyplant:blinky_plant_off"},
-	interval = BLINKY_PLANT_INTERVAL,
+	interval = leaves,
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		--minetest.env:remove_node(pos)
