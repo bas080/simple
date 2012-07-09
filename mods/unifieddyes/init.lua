@@ -1,11 +1,181 @@
--- Unified Dyes Mod by Vanessa Ezekowitz  ~~  2012-06-26
+-- Unified Dyes Mod by Vanessa Ezekowitz  ~~  2012-07-08
 --
 -- License: GPL
 --
--- This mod requires ironzorg's flowers mod, which should have
--- been included in the distribution archive in which this mod
--- was found.
+-- This mod depends on ironzorg's flowers mod
 --
+
+--=================================================================
+-- Smelting/crafting recipes needed to generate various base colors
+-- (the register_craftitem functions are in the generate-the-rest
+-- loop below the base colors).
+
+-----------------
+-- Primary colors
+
+-- Red (rose)
+
+minetest.register_craft({
+        type = "cooking",
+        output = "unifieddyes:red 2",
+        recipe = "flowers:flower_rose",
+})
+
+-- Green (cactus)
+
+minetest.register_craft({
+        type = "cooking",
+        output = "unifieddyes:green 2",
+        recipe = "default:cactus",
+})
+
+minetest.register_craft({
+        type = "cooking",
+        output = "unifieddyes:green 2",
+        recipe = "flowers:flower_waterlily",
+})
+
+minetest.register_craft( {
+       type = "shapeless",
+       output = "unifieddyes:green 2",
+       recipe = {
+               "unifieddyes:blue",
+               "unifieddyes:yellow",
+		},
+})
+
+-- Blue (Viola)
+
+minetest.register_craft({
+        type = "cooking",
+        output = "unifieddyes:blue 2",
+        recipe = "flowers:flower_viola",
+})
+
+
+-------------------
+-- Secondary colors
+
+-- Cyan
+
+minetest.register_craft( {
+       type = "shapeless",
+       output = "unifieddyes:cyan 2",
+       recipe = {
+               "unifieddyes:blue",
+               "unifieddyes:green",
+		},
+})
+
+-- Magenta
+
+minetest.register_craft( {
+       type = "shapeless",
+       output = "unifieddyes:magenta 2",
+       recipe = {
+               "unifieddyes:blue",
+               "unifieddyes:red",
+		},
+})
+
+-- Yellow (yellow dandelion)
+
+minetest.register_craft({
+        type = "cooking",
+        output = "unifieddyes:yellow 2",
+        recipe = "flowers:flower_dandelion_yellow",
+})
+
+
+------------------
+-- Tertiary colors
+
+-- Orange (tulip)
+
+minetest.register_craft({
+        type = "cooking",
+        output = "unifieddyes:orange 2",
+        recipe = "flowers:flower_tulip",
+})
+
+minetest.register_craft( {
+       type = "shapeless",
+       output = "unifieddyes:orange 2",
+       recipe = {
+               "unifieddyes:yellow",
+               "unifieddyes:red",
+		},
+})
+
+
+-- Lime
+
+minetest.register_craft( {
+       type = "shapeless",
+       output = "unifieddyes:lime 2",
+       recipe = {
+               "unifieddyes:yellow",
+               "unifieddyes:green",
+		},
+})
+
+-- Aqua
+
+minetest.register_craft( {
+       type = "shapeless",
+       output = "unifieddyes:aqua 2",
+       recipe = {
+               "unifieddyes:cyan",
+               "unifieddyes:green",
+		},
+})
+
+-- Sky blue
+
+minetest.register_craft( {
+       type = "shapeless",
+       output = "unifieddyes:skyblue 2",
+       recipe = {
+               "unifieddyes:cyan",
+               "unifieddyes:blue",
+		},
+})
+
+-- Violet
+
+minetest.register_craft( {
+       type = "shapeless",
+       output = "unifieddyes:violet 2",
+       recipe = {
+               "unifieddyes:blue",
+               "unifieddyes:magenta",
+		},
+})
+
+minetest.register_craft( {
+       type = "shapeless",
+       output = "unifieddyes:violet 3",
+       recipe = {
+               "unifieddyes:blue",
+               "unifieddyes:blue",
+               "unifieddyes:red",
+		},
+})
+
+
+-- Red-violet
+
+minetest.register_craft( {
+       type = "shapeless",
+       output = "unifieddyes:redviolet 2",
+       recipe = {
+               "unifieddyes:red",
+               "unifieddyes:magenta",
+		},
+})
+
+----------------------------
+-- The 5 levels of greyscale
 
 -- White paint
 
@@ -20,40 +190,76 @@ minetest.register_craft({
         recipe = "default:stone",
 })
 
+minetest.register_craft( {
+        type = "shapeless",
+        output = "unifieddyes:white_paint",
+        recipe = {
+                "unifieddyes:titanium_dioxide",
+                "bucket:bucket_water",
+                "default:junglegrass",
+        },
+})
+
 minetest.register_craftitem("unifieddyes:white_paint", {
         description = "White Paint",
         inventory_image = "unifieddyes_white_paint.png",
 })
 
+
+-- Light grey paint
+
 minetest.register_craft( {
-        type = 'shapeless',
-        output = 'unifieddyes:white_paint',
-        recipe = {
-                'unifieddyes:titanium_dioxide',
-                'bucket:bucket_water',
-                'default:junglegrass',
-        },
+       type = "shapeless",
+       output = "unifieddyes:lightgrey_paint 3",
+       recipe = {
+               "unifieddyes:white_paint",
+               "unifieddyes:white_paint",
+               "unifieddyes:black",
+		},
 })
 
--- Green (cactus)
-
-minetest.register_craftitem("unifieddyes:green", {
-        description = "Green Dye",
-        inventory_image = "unifieddyes_green.png",
+minetest.register_craftitem("unifieddyes:lightgrey_paint", {
+        description = "Light grey paint",
+        inventory_image = "unifieddyes_lightgrey_paint.png",
 })
 
-minetest.register_craft({
-        type = "cooking",
-        output = "unifieddyes:green 2",
-        recipe = "default:cactus",
+
+-- Medium grey paint
+
+minetest.register_craft( {
+       type = "shapeless",
+       output = "unifieddyes:grey_paint 2",
+       recipe = {
+               "unifieddyes:white_paint",
+               "unifieddyes:black",
+		},
 })
 
--- Black (coal)
-
-minetest.register_craftitem("unifieddyes:black", {
-	description = "Black Dye",
-	inventory_image = "unifieddyes_black.png",
+minetest.register_craftitem("unifieddyes:grey_paint", {
+        description = "Medium grey paint",
+        inventory_image = "unifieddyes_grey_paint.png",
 })
+
+
+-- Dark grey paint
+
+minetest.register_craft( {
+       type = "shapeless",
+       output = "unifieddyes:darkgrey_paint 3",
+       recipe = {
+               "unifieddyes:white_paint",
+               "unifieddyes:black",
+               "unifieddyes:black",
+		},
+})
+
+minetest.register_craftitem("unifieddyes:darkgrey_paint", {
+        description = "Dark grey paint",
+        inventory_image = "unifieddyes_darkgrey_paint.png",
+})
+
+
+-- Black dye (coal)
 
 minetest.register_craft({
         type = "cooking",
@@ -61,93 +267,151 @@ minetest.register_craft({
         recipe = "default:coal_lump",
 })
 
---	Red (rose)
-
-minetest.register_craftitem("unifieddyes:red", {
-	description = "Red Dye",
-	inventory_image = "unifieddyes_red.png",
+minetest.register_craftitem("unifieddyes:black", {
+	description = "Black Dye",
+	inventory_image = "unifieddyes_black.png",
 })
 
-minetest.register_craft({
-        type = "cooking",
-        output = "unifieddyes:red 2",
-        recipe = "flowers:flower_rose",
-})
 
---	Orange (tulip)
 
-minetest.register_craftitem("unifieddyes:orange", {
-	description = "Orange Dye",
-	inventory_image = "unifieddyes_orange.png",
-})
+-- =================================================================
 
-minetest.register_craft({
-        type = "cooking",
-        output = "unifieddyes:orange 2",
-        recipe = "flowers:flower_tulip",
-})
+-- Finally, generate all of additional variants of hue, saturation, and
+-- brightness from the above 12 base colors.
 
--- 	Yellow (yellow dandelion)
+-- "s50" in a file/item name means "saturation: 50%".
+-- Brightness levels in the textures are 100%, 66%
+-- ("medium"), and 33% ("dark").
 
-minetest.register_craftitem("unifieddyes:yellow", {
-	description = "Yellow Dye",
-	inventory_image = "unifieddyes_yellow.png",
-})
+HUES = {
+	"red",
+	"orange",
+	"yellow",
+	"lime",
+	"green",
+	"aqua",
+	"cyan",
+	"skyblue",
+	"blue",
+	"violet",
+	"magenta",
+	"redviolet"
+}
 
-minetest.register_craft({
-        type = "cooking",
-        output = "unifieddyes:yellow 2",
-        recipe = "flowers:flower_dandelion_yellow",
-})
+for i = 1, 12 do
 
---	Blue (Viola)
+	hue = HUES[i]
 
-minetest.register_craftitem("unifieddyes:blue", {
-	description = "Blue Dye",
-	inventory_image = "unifieddyes_blue.png",
-})
-
-minetest.register_craft({
-        type = "cooking",
-        output = "unifieddyes:blue 2",
-        recipe = "flowers:flower_viola",
-})
-
--- Violet (craft Blue and Red dyes together)
-
-minetest.register_craftitem("unifieddyes:violet", {
-	description = "Violet Dye",
-	inventory_image = "unifieddyes_violet.png",
-})
-
-minetest.register_craft( {
-	type = 'shapeless',
-        output = 'unifieddyes:violet 2',
+	minetest.register_craft( {
+        type = "shapeless",
+        output = "unifieddyes:dark_" .. hue .. "_s50 2",
         recipe = {
-		'unifieddyes:blue',
-		'unifieddyes:red',
-        },
-})
+                "unifieddyes:" .. hue,
+                "unifieddyes:darkgrey_paint",
+	        },
+	})
 
--- Alternate crafts for other non-primary colors
-
-minetest.register_craft( {
-        type = 'shapeless',
-        output = 'unifieddyes:orange 2',
+	minetest.register_craft( {
+        type = "shapeless",
+        output = "unifieddyes:dark_" .. hue .. "_s50 4",
         recipe = {
-                'unifieddyes:red',
-                'unifieddyes:yellow'
-        },
-})
+                "unifieddyes:" .. hue,
+                "unifieddyes:black",
+                "unifieddyes:black",
+		"unifieddyes:white_paint"
+	        },
+	})
 
-minetest.register_craft( {
-        type = 'shapeless',
-        output = 'unifieddyes:green 2',
+	minetest.register_craft( {
+        type = "shapeless",
+        output = "unifieddyes:dark_" .. hue .. " 3",
         recipe = {
-                'unifieddyes:yellow',
-                'unifieddyes:blue'
-        },
-})
+                "unifieddyes:" .. hue,
+                "unifieddyes:black",
+                "unifieddyes:black",
+	        },
+	})
+
+	minetest.register_craft( {
+        type = "shapeless",
+        output = "unifieddyes:medium_" .. hue .. "_s50 2",
+        recipe = {
+                "unifieddyes:" .. hue,
+                "unifieddyes:grey_paint",
+	        },
+	})
+
+	minetest.register_craft( {
+        type = "shapeless",
+        output = "unifieddyes:medium_" .. hue .. "_s50 3",
+        recipe = {
+                "unifieddyes:" .. hue,
+		"unifieddyes:black",
+                "unifieddyes:white_paint",
+	        },
+	})
+
+	minetest.register_craft( {
+        type = "shapeless",
+        output = "unifieddyes:medium_" .. hue .. " 2",
+        recipe = {
+                "unifieddyes:" .. hue,
+                "unifieddyes:black",
+	        },
+	})
+
+	minetest.register_craft( {
+        type = "shapeless",
+        output = "unifieddyes:" .. hue .. "_s50 2",
+        recipe = {
+                "unifieddyes:" .. hue,
+                "unifieddyes:lightgrey_paint",
+	        },
+	})
+
+	minetest.register_craft( {
+        type = "shapeless",
+        output = "unifieddyes:" .. hue .. "_s50 4",
+        recipe = {
+                "unifieddyes:" .. hue,
+                "unifieddyes:white_paint",
+                "unifieddyes:white_paint",
+                "unifieddyes:black",
+	        },
+	})
+
+	minetest.register_craftitem("unifieddyes:dark_" .. hue .. "_s50", {
+		description = "Dark " .. hue .. " (low saturation)",
+		inventory_image = "unifieddyes_dark_" .. hue .. "_s50.png"
+	})
+
+	minetest.register_craftitem("unifieddyes:dark_" .. hue, {
+		description = "Dark " .. hue,
+		inventory_image = "unifieddyes_dark_" .. hue .. ".png"
+	})
+
+	minetest.register_craftitem("unifieddyes:medium_" .. hue .. "_s50", {
+		description = "Medium " .. hue .. " (low saturation)",
+		inventory_image = "unifieddyes_medium_" .. hue .. "_s50.png",
+	})
+
+	minetest.register_craftitem("unifieddyes:medium_" .. hue, {
+		description = "Medium " .. hue,
+		inventory_image = "unifieddyes_medium_" .. hue .. ".png"
+	})
+
+	minetest.register_craftitem("unifieddyes:" .. hue .. "_s50", {
+		description = "Bright " .. hue .. " (low saturation)",
+		inventory_image = "unifieddyes_" .. hue .. "_s50.png"
+	})
+
+	minetest.register_craftitem("unifieddyes:" .. hue, {
+		description = "Bright " .. hue,
+		inventory_image = "unifieddyes_" .. hue .. ".png"
+	})
+
+end
+
 
 print("[UnifiedDyes] Loaded!")
 

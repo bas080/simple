@@ -41,8 +41,8 @@ local TOP = {
 for i, node in ipairs(NODE) do
     minetest.register_abm(
     {nodenames = {NODE[i]},
-    interval = math.floor(math.random(100)),
-    chance = 1,
+    interval = 30,
+    chance = 3,
     action = function(pos)
         
         local bottom = {x=pos.x, y=pos.y-1, z=pos.z}
@@ -51,8 +51,10 @@ for i, node in ipairs(NODE) do
         
         if (node.name==BOTTOM_NODE[i]) then
             if TOP[i] == "false" then
+                minetest.env:remove_node(bottom)
                 minetest.env:add_node(bottom, {name=NEW[i]})
             else
+                minetest.env:remove_node(pos)
                 minetest.env:add_node(pos, {name=NEW[i]})
             end
         end

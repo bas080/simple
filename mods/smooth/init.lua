@@ -51,8 +51,10 @@ for i, node in ipairs(NODE) do
         
         if (node.name==BOTTOM_NODE[i]) then
             if TOP[i] == "false" then
+                minetest.env:remove_node(bottom)
                 minetest.env:add_node(bottom, {name=NEW[i]})
             else
+                minetest.env:remove_node(pos)
                 minetest.env:add_node(pos, {name=NEW[i]})
             end
         end
