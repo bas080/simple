@@ -28,7 +28,7 @@ local MAX_RATIO = 2000
 local GROWING_DELAY = 1200
 
 -- Local Functions
-local dbg = function(s)
+dbg = function(s)
     if DEBUG == 1 then
 	print('[FLOWERS] ' .. s)
     end
@@ -44,7 +44,7 @@ local table_contains = function(t, v)
     return false
 end
 
-local is_node_in_cube = function(nodenames, node_pos, radius)
+is_node_in_cube = function(nodenames, node_pos, radius)
     for x = node_pos.x - radius, node_pos.x + radius do
 	for y = node_pos.y - radius, node_pos.y + radius do
 	    for z = node_pos.z - radius, node_pos.z + radius do
@@ -94,7 +94,6 @@ end
 
 
 function flowers_add_sprite_flower(modname, name, growdelay, surfaces)
-
 	minetest.register_node(modname..':'..name, {
 		drawtype = 'plantlike',
 		visual_scale = 1.0,
@@ -112,17 +111,6 @@ end
 
 
 -- Nodes
-
-for i=-1,1 do
-            for j=-1,1 do
-                for k=-1,1 do
-                    p = {x=pos.x+i, y=pos.y+j, z=pos.z+k}
-                    n = minetest.env:get_node(p)
-                    
-                end
-           end
-end
-
 for i, color in ipairs(FLOWERS) do
 	local fname = 'flower_' .. color
 

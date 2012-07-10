@@ -61,11 +61,6 @@ for i, node in ipairs(NODE) do
     end})
 end
 
---fix previous mods
-
-minetest.register_alias("dirtystone:dirty_stone", "smooth:dirt_stone")
-minetest.register_alias("dirtystone:cobbly_stone", "smooth:cobble_stone")
-
 --define the NEW nodes
 minetest.register_node("smooth:dirt_stone", {
 	description = "Stone",
