@@ -5,8 +5,8 @@ minetest.register_abm(
 interval = 10,
 chance = 30,
 action = function(pos, node, active_object_count, active_object_count_wider)
-    if (math.random(1, 10) > 7) then
-        near_air = false
+
+near_air = false
         near_moss = false
         near_water = false
         for i=-1,1 do
@@ -26,6 +26,8 @@ action = function(pos, node, active_object_count, active_object_count_wider)
                 end
             end
         end
+
+    
         if (near_water) and (near_air) then
             if (math.random(0, 10)<1) then
                 minetest.env:add_node(pos, {name="mossycobble"})
@@ -33,7 +35,6 @@ action = function(pos, node, active_object_count, active_object_count_wider)
         elseif (near_water) and (near_air) and (near_moss) then
             minetest.env:add_node(pos, {name="mossycobble"})
         end
-    end
 end
 })
 
