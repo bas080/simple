@@ -78,7 +78,7 @@ minetest.register_abm({
         
         if node.name == "default:dirt"
         or node.name == "default:dirt_with_grass" then
-            if n.name =="air" and is_node_in_cube({"default:vine"}, p, 2)  then
+            if n.name =="air" and is_node_in_cube({"vines:vine"}, p, 2)  then
                 minetest.env:add_node(p, {name="vines:vine"})
             end
         else
