@@ -6,9 +6,15 @@ minetest.register_node("vines:rope_block", {
     sunlight_propagates = true,
     paramtype = "light",
     drops = "",
-    tile_images = { "default_wood.png" },
+    tile_images = { 
+		"vines_rope_block.png", 
+		"vines_rope_block.png",
+		"default_wood.png", 
+		"default_wood.png", 
+		"vines_rope_block.png", 
+		"vines_rope_block.png" 
+	},
     drawtype = "cube",
-    inventory_image = "vines_rope_wield.png",
     groups = { snappy = 3},
     sounds =  default.node_sound_leaves_defaults(),
     after_place_node = function(pos)
