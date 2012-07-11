@@ -1,4 +1,5 @@
 print("[Vines] v1.0")
+
 -- Nodes
 minetest.register_node("vines:rope", {
     description = "Rope",
@@ -33,8 +34,6 @@ minetest.register_node("vines:ropes", {
         yesh  = {x = pos.x, y= pos.y-1, z=pos.z}
 		minetest.env:add_node(yesh, "vines:ropes")
 	end,
-	
-	
 })
 
 
@@ -68,25 +67,16 @@ minetest.register_node("vines:vine_rotten", {
 
 --ABM
 minetest.register_abm({
-    nodenames = {"default:leaves", "growing_trees:leaves", "default:dirt", "default:dirt_with_grass"},
-    interval = 1800,
-    chance = 2,
-    action = function(pos, node, active_object_count, active_object_count_wider)
+    nodenames = {"default:leaves", "growing_trees:leaves", "default:dirt_with_grass", },
+    interval = 360,
+    chance = 100,
+    action = function(pos, node)
         
         local p = {x=pos.x, y=pos.y-1, z=pos.z}
         local n = minetest.env:get_node(p)
         
-        if node.name == "default:dirt"
-        or node.name == "default:dirt_with_grass" then
-            if n.name =="air" and is_node_in_cube({"vines:vine"}, p, 2)  then
-                minetest.env:add_node(p, {name="vines:vine"})
-            end
-        else
-        
-        
-            if n.name =="air" and is_node_in_cube({"vines:vine", "vines:vine_rotten"}, p, 4)==false then
-                minetest.env:add_node(p, {name="vines:vine"})
-            end
+        if n.name =="air" then
+            minetest.env:add_node(p, {name="vines:vine"})
         end
     end
 })
@@ -95,52 +85,65 @@ minetest.register_abm({
 
 minetest.register_abm({
     nodenames = {"vines:vine"},
-    interval = 10,
-    chance = 2,
-    action = function(pos, node, active_object_count, active_object_count_wider)
-        
-        local p = {x=pos.x, y=pos.y-1, z=pos.z}
-        local n = minetest.env:get_node(p)
-        
-        if minetest.env:get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then 
-            minetest.env:remove_node({x=pos.x, y=pos.y+1, z=pos.z})
-        end
-            if math.random(0,3)<1 then --the five represents the average height
-                minetest.env:add_node(pos, {name="vines:vine_rotten"})
-            else
-                if n.name =="air" then
-                    minetest.env:add_node(p, {name="vines:vine"})
-                end
-            end
-    end
-})
-
-minetest.register_abm({
-    nodenames = {"vines:vine_rotten"},
-    interval = 180,
+    interval = 5,
     chance = 4,
     action = function(pos, node, active_object_count, active_object_count_wider)
         
         local p = {x=pos.x, y=pos.y-1, z=pos.z}
         local n = minetest.env:get_node(p)
         
-        if n.name ~="vines:vine" and n.name ~="vines:vine_rotten" then
+        --remove if top node is removed
+        if minetest.env:get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then 
             minetest.env:remove_node(pos)
+        end
+        
+        --the second argument in the random function represents the average height
+        if math.random(0,3)<1 then 
+            minetest.env:add_node(pos, {name="vines:vine_rotten"})
+        else
+            if n.name =="air" then
+                minetest.env:add_node(p, {name="vines:vine"})
+            end
         end
     end
 })
 
 minetest.register_abm({
     nodenames = {"vines:vine_rotten"},
-    interval = 10,
-    chance = 2,
+    interval = 60,
+    chance = 4,
     action = function(pos, node, active_object_count, active_object_count_wider)
+        
+        local p = {x=pos.x, y=pos.y-1, z=pos.z}
+        local n = minetest.env:get_node(p)
+        
+        -- only remove if nothing is hangin on the bottom of it.
+        if n.name ~="vines:vine" and n.name ~="vines:vine_rotten" then
+            minetest.env:remove_node(pos)
+        end
+        
         if minetest.env:get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "air" then 
             minetest.env:remove_node({x=pos.x, y=pos.y+1, z=pos.z})
         end
-       
+        
     end
-    
+})
+
+minetest.register_abm({
+    nodenames = {"default:dirt", "default:dirt_with_grass"},
+    interval = 36000,
+    chance = 10,
+    action = function(pos, node, active_object_count, active_object_count_wider)
+        
+        local p = {x=pos.x, y=pos.y-1, z=pos.z}
+        local n = minetest.env:get_node(p)
+        
+        --remove if top node is removed
+        if  n.name == "air"
+        and is_node_in_cube ({"vines:vine"}, pos, 3) then
+            minetest.env:add_node(p, {name="vines:vine"})
+        end 
+    end
 })
 
 is_node_in_cube = function(nodenames, node_pos, radius)
