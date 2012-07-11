@@ -1,6 +1,26 @@
 print("[Vines] v1.0")
 
 -- Nodes
+minetest.register_node("vines:rope_block", {
+    description = "Rope",
+    sunlight_propagates = true,
+    paramtype = "light",
+    drops = "",
+    tile_images = { "default_wood.png" },
+    drawtype = "cube",
+    inventory_image = "vines_rope_wield.png",
+    groups = { snappy = 3},
+    sounds =  default.node_sound_leaves_defaults(),
+    after_place_node = function(pos)
+
+        local p = {x=pos.x, y=pos.y-1, z=pos.z}
+        local n = minetest.env:get_node(p)
+        if n.name == "air" then
+		    minetest.env:add_node(p, {name="vines:rope_end"})
+		end
+	end,
+})
+
 minetest.register_node("vines:rope", {
     description = "Rope",
     walkable = false,
@@ -9,16 +29,16 @@ minetest.register_node("vines:rope", {
     paramtype = "light",
     tile_images = { "vines_rope.png" },
     drawtype = "plantlike",
-    inventory_image = "vines_rope_wield.png",
-    groups = { snappy = 3},
+    groups = {},
     sounds =  default.node_sound_leaves_defaults(),
-    on_place_node = function(pos)
-        minetest.env:add_node(pos, "vines:ropes")
-	end,
+	selection_box = {
+		type = "fixed",
+		fixed = {-1/7, -1/2, -1/7, 1/7, 1/2, 1/7},
+	},
     
 })
 
-minetest.register_node("vines:ropes", {
+minetest.register_node("vines:rope_end", {
     description = "Rope",
     walkable = false,
     climbable = true,
@@ -27,13 +47,16 @@ minetest.register_node("vines:ropes", {
     drops = "",
     tile_images = { "vines_rope.png" },
     drawtype = "plantlike",
-    inventory_image = "vines_rope_wield.png",
-    groups = { snappy = 3},
+    groups = {},
     sounds =  default.node_sound_leaves_defaults(),
     after_place_node = function(pos)
         yesh  = {x = pos.x, y= pos.y-1, z=pos.z}
-		minetest.env:add_node(yesh, "vines:ropes")
+		minetest.env:add_node(yesh, "vines:rope")
 	end,
+	selection_box = {
+		type = "fixed",
+		fixed = {-1/7, -1/2, -1/7, 1/7, 1/2, 1/7},
+	},
 })
 
 
@@ -68,7 +91,7 @@ minetest.register_node("vines:vine_rotten", {
 --ABM
 minetest.register_abm({
     nodenames = {"default:leaves", "growing_trees:leaves", "default:dirt_with_grass", },
-    interval = 360,
+    interval = 1,
     chance = 100,
     action = function(pos, node)
         
@@ -146,6 +169,24 @@ minetest.register_abm({
     end
 })
 
+minetest.register_abm({
+    nodenames = {"vines:rope_end"},
+    interval = 1,
+    chance = 1,
+    action = function(pos, node, active_object_count, active_object_count_wider)
+        
+        local p = {x=pos.x, y=pos.y-1, z=pos.z}
+        local n = minetest.env:get_node(p)
+        
+        --remove if top node is removed
+        if  n.name == "air" then
+            minetest.env:remove_node(pos)
+            minetest.env:add_node(pos, {name="vines:rope"})
+            minetest.env:add_node(p, {name="vines:rope_end"})
+        end 
+    end
+})
+
 is_node_in_cube = function(nodenames, node_pos, radius)
     for x = node_pos.x - radius, node_pos.x + radius do
 	for y = node_pos.y - radius, node_pos.y + radius do
@@ -175,11 +216,11 @@ end
 
 -- craft rope
 minetest.register_craft({
-	output = 'vines:rope',
+	output = 'vines:rope_block',
 	recipe = {
-		{'vines:vines', 'vines:vines', 'vines:vines'},
-		{'vines:vines', 'vines:vines', 'vines:vines'},
-		{'vines:vines', 'vines:vines', 'vines:vines'},
+		{'', 'default:wood', ''},
+		{'', 'vines:vines', ''},
+		{'', 'vines:vines', ''},
 	}
 })
 
@@ -188,16 +229,24 @@ minetest.register_craftitem("vines:vines", {
 	inventory_image = "vines_vine.png",
 })
 
+minetest.register_on_dignode(function (pos, node, player)
 
-minetest.register_on_dignode(function(pos, node)
-	if node.name=="vines:rope" then
-		local np={x=pos.x, y=pos.y-1, z=pos.z}
-		while minetest.env:get_node(np).name=="vines:rope" do
-			minetest.env:remove_node(np)
-			np={x=np.x, y=np.y-1, z=np.z}
-		end
+    
+    if ( node.name == 'vines:rope_block' ) then
+    print("bala")
+	    local p = {x=pos.x, y=pos.y, z=pos.z}
+        local n = minetest.env:get_node(p)
+
+
+	repeat
+        
+        p = {x=p.x, y=p.y-1, z=p.z}
+        n = minetest.env:get_node(p)
+        
+        minetest.env:remove_node(p)
+        
+    until n.name == "vines:ropes" or n.name == "vines:rope_end"
+		
 	end
+
 end)
-
-
-
