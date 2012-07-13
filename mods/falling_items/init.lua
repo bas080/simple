@@ -2,8 +2,6 @@ FALLERS = {
     "default:torch",
     "mesecons_torch:mesecon_torch_off",
     "mesecons_torch:mesecon_torch_on",
-    
-    
 }
 
 local dx = {0, 0, 0, 0, 1, -1}
@@ -15,7 +13,7 @@ minetest.register_on_dignode(function (pos, node, player)
     
     for i = 1, 6 do
     local p = {x = pos.x + dx[i], y = pos.y + dy[i] , z = pos.z + dz[i]}
-            n = minetest.env:get_node(p)
+           local n = minetest.env:get_node(p)
 
             if n.name ~= "air" then
                 for ii, faller in ipairs(FALLERS) do
