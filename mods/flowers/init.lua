@@ -25,7 +25,7 @@ local FLOWERS_DESCRIPTION = {
 }
 
 local MAX_RATIO = 2000
-local GROWING_DELAY = 1200
+local GROWING_DELAY = 600
 
 -- Local Functions
 local dbg = function(s)
@@ -66,7 +66,7 @@ grow_blocks_on_surfaces = function(growdelay, grownames, surfaces)
 	minetest.register_abm({
 	    nodenames = { surface.name },
 	    interval = growdelay,
-	    chance = 5,
+	    chance = 30,
 	    action = function(pos, node, active_object_count, active_object_count_wider)
 		local p_top = {
 		    x = pos.x,

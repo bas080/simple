@@ -28,7 +28,7 @@ local MAX_RATIO = 2000
 local GROWING_DELAY = 1200
 
 -- Local Functions
-dbg = function(s)
+local dbg = function(s)
     if DEBUG == 1 then
 	print('[FLOWERS] ' .. s)
     end
@@ -44,7 +44,7 @@ local table_contains = function(t, v)
     return false
 end
 
-is_node_in_cube = function(nodenames, node_pos, radius)
+local is_node_in_cube = function(nodenames, node_pos, radius)
     for x = node_pos.x - radius, node_pos.x + radius do
 	for y = node_pos.y - radius, node_pos.y + radius do
 	    for z = node_pos.z - radius, node_pos.z + radius do
@@ -66,7 +66,7 @@ grow_blocks_on_surfaces = function(growdelay, grownames, surfaces)
 	minetest.register_abm({
 	    nodenames = { surface.name },
 	    interval = growdelay,
-	    chance = 5,
+	    chance = 30,
 	    action = function(pos, node, active_object_count, active_object_count_wider)
 		local p_top = {
 		    x = pos.x,
@@ -94,6 +94,7 @@ end
 
 
 function flowers_add_sprite_flower(modname, name, growdelay, surfaces)
+
 	minetest.register_node(modname..':'..name, {
 		drawtype = 'plantlike',
 		visual_scale = 1.0,
