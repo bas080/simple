@@ -6,7 +6,7 @@ minetest.register_node("vines:rope_block", {
     sunlight_propagates = true,
     paramtype = "light",
     drops = "",
-    tile_images = { 
+    tile_images = {
 		"vines_rope_block.png", 
 		"vines_rope_block.png",
 		"default_wood.png", 
@@ -237,23 +237,17 @@ minetest.register_craftitem("vines:vines", {
 })
 
 minetest.register_on_dignode(function (pos, node, player)
-
-    
     if ( node.name == 'vines:rope_block' ) then
-    print("bala")
+    
 	    local p = {x=pos.x, y=pos.y, z=pos.z}
         local n = minetest.env:get_node(p)
-
-
-	repeat
-        
-        p = {x=p.x, y=p.y-1, z=p.z}
-        n = minetest.env:get_node(p)
-        
-        minetest.env:remove_node(p)
-        
-    until n.name == "vines:ropes" or n.name == "vines:rope_end"
-		
+	
+	    repeat
+            p = {x=p.x, y=p.y-1, z=p.z}
+            n = minetest.env:get_node(p)
+            
+            minetest.env:remove_node(p)
+        until n.name == "vines:rope_end"
 	end
 
 end)
