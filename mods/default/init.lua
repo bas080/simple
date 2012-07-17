@@ -14,6 +14,7 @@ default = {}
 -- Load other files
 dofile(minetest.get_modpath("default").."/mapgen.lua")
 dofile(minetest.get_modpath("default").."/leafdecay.lua")
+dofile(minetest.get_modpath("default").."/register_craft.lua") -- place this line into default/init.lua
 
 --
 -- Tool definition
