@@ -1,6 +1,0 @@
-minetest.register_node("default:wood", {
-	description = "Wooden Planks",
-	tile_images = {"default_wood.png"},
-	is_ground_content = true,
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-})
