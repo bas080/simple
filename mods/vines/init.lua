@@ -97,7 +97,7 @@ minetest.register_node("vines:vine_rotten", {
 --ABM
 minetest.register_abm({
     nodenames = {"default:leaves", "growing_trees:leaves", "default:dirt_with_grass", },
-    interval = 10,
+    interval = 180,
     chance = 1000,
     action = function(pos, node)
         

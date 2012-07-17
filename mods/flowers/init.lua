@@ -94,7 +94,7 @@ for _, color in ipairs(FLOWERS) do
 		sunlight_propagates = true,
 		paramtype = 'light',
 		walkable = false,
-		material = minetest.digprop_constanttime(0.0),
+		groups = {snappy=3, flammable=2},
 		furnace_burntime = 1,
 	})
 end
@@ -106,7 +106,7 @@ minetest.register_node('flowers:flower_waterlily', {
 	sunlight_propagates = true,
 	paramtype = 'light',
 	walkable = false,
-	material = minetest.digprop_constanttime(0.0),
+	groups = {snappy=3, flammable=2},
 })
 
 -- Items
@@ -118,7 +118,7 @@ minetest.register_craftitem('flowers:flower_pot', {
 	sunlight_propagates = true,
 	paramtype = 'light',
 	walkable = true,
-	material = minetest.digprop_constanttime(0.5),
+	groups = {snappy=3, flammable=2},
 })
 
 for _, color in ipairs(FLOWERS) do
@@ -133,7 +133,7 @@ for _, color in ipairs(FLOWERS) do
 		sunlight_propagates = true,
 		paramtype = 'light',
 		walkable = true,
-		material = minetest.digprop_constanttime(1.0),
+		groups = {snappy=3, flammable=2},
 	})
 end
 
