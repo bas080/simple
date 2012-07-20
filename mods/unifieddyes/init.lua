@@ -182,6 +182,7 @@ minetest.register_craft( {
 minetest.register_craftitem("unifieddyes:titanium_dioxide", {
         description = "Titanium Dioxide Powder",
         inventory_image = "unifieddyes_titanium_dioxide.png",
+	groups = {dye=1},
 })
 
 minetest.register_craft({
@@ -203,6 +204,7 @@ minetest.register_craft( {
 minetest.register_craftitem("unifieddyes:white_paint", {
         description = "White Paint",
         inventory_image = "unifieddyes_white_paint.png",
+	groups = {dye=1},
 })
 
 
@@ -221,6 +223,7 @@ minetest.register_craft( {
 minetest.register_craftitem("unifieddyes:lightgrey_paint", {
         description = "Light grey paint",
         inventory_image = "unifieddyes_lightgrey_paint.png",
+	groups = {dye=1},
 })
 
 
@@ -238,6 +241,7 @@ minetest.register_craft( {
 minetest.register_craftitem("unifieddyes:grey_paint", {
         description = "Medium grey paint",
         inventory_image = "unifieddyes_grey_paint.png",
+	groups = {dye=1},
 })
 
 
@@ -256,6 +260,7 @@ minetest.register_craft( {
 minetest.register_craftitem("unifieddyes:darkgrey_paint", {
         description = "Dark grey paint",
         inventory_image = "unifieddyes_darkgrey_paint.png",
+	groups = {dye=1},
 })
 
 
@@ -270,6 +275,7 @@ minetest.register_craft({
 minetest.register_craftitem("unifieddyes:black", {
 	description = "Black Dye",
 	inventory_image = "unifieddyes_black.png",
+	groups = {dye=1},
 })
 
 
@@ -280,8 +286,8 @@ minetest.register_craftitem("unifieddyes:black", {
 -- brightness from the above 12 base colors.
 
 -- "s50" in a file/item name means "saturation: 50%".
--- Brightness levels in the textures are 100%, 66%
--- ("medium"), and 33% ("dark").
+-- Brightness levels in the textures are 33% ("dark"), 66% ("medium"),
+-- 100% ("full" but not so-named), and 150% ("light").
 
 HUES = {
 	"red",
@@ -380,34 +386,55 @@ for i = 1, 12 do
 	        },
 	})
 
+	minetest.register_craft( {
+        type = "shapeless",
+        output = "unifieddyes:light_" .. hue .. " 2",
+        recipe = {
+                "unifieddyes:" .. hue,
+                "unifieddyes:white_paint",
+	        },
+	})
+
 	minetest.register_craftitem("unifieddyes:dark_" .. hue .. "_s50", {
 		description = "Dark " .. hue .. " (low saturation)",
-		inventory_image = "unifieddyes_dark_" .. hue .. "_s50.png"
+		inventory_image = "unifieddyes_dark_" .. hue .. "_s50.png",
+		groups = {dye=1},
 	})
 
 	minetest.register_craftitem("unifieddyes:dark_" .. hue, {
 		description = "Dark " .. hue,
-		inventory_image = "unifieddyes_dark_" .. hue .. ".png"
+		inventory_image = "unifieddyes_dark_" .. hue .. ".png",
+		groups = {dye=1},
 	})
 
 	minetest.register_craftitem("unifieddyes:medium_" .. hue .. "_s50", {
 		description = "Medium " .. hue .. " (low saturation)",
 		inventory_image = "unifieddyes_medium_" .. hue .. "_s50.png",
+		groups = {dye=1},
 	})
 
 	minetest.register_craftitem("unifieddyes:medium_" .. hue, {
 		description = "Medium " .. hue,
-		inventory_image = "unifieddyes_medium_" .. hue .. ".png"
+		inventory_image = "unifieddyes_medium_" .. hue .. ".png",
+		groups = {dye=1},
 	})
 
 	minetest.register_craftitem("unifieddyes:" .. hue .. "_s50", {
-		description = "Bright " .. hue .. " (low saturation)",
-		inventory_image = "unifieddyes_" .. hue .. "_s50.png"
+		description = "Full " .. hue .. " (low saturation)",
+		inventory_image = "unifieddyes_" .. hue .. "_s50.png",
+		groups = {dye=1},
 	})
 
 	minetest.register_craftitem("unifieddyes:" .. hue, {
-		description = "Bright " .. hue,
-		inventory_image = "unifieddyes_" .. hue .. ".png"
+		description = "Full " .. hue,
+		inventory_image = "unifieddyes_" .. hue .. ".png",
+		groups = {dye=1},
+	})
+
+	minetest.register_craftitem("unifieddyes:light_" .. hue, {
+		description = "Light " .. hue,
+		inventory_image = "unifieddyes_light_" .. hue .. ".png",
+		groups = {dye=1},
 	})
 
 end
