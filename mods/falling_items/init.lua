@@ -2,6 +2,7 @@ FALLERS = {
     "default:torch",
     "mesecons_torch:mesecon_torch_off",
     "mesecons_torch:mesecon_torch_on",
+    "default:rail",
 }
 
 local dx = {0, 0, 0, 0, 1, -1}
