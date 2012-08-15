@@ -38,28 +38,28 @@ local TOP = {
 }
 
 --register abm for node changes
-for i, node in ipairs(NODE) do
-    minetest.register_abm(
-    {nodenames = {NODE[i]},
-    interval = 30,
-    chance = 3,
-    action = function(pos)
-        
-        local bottom = {x=pos.x, y=pos.y-1, z=pos.z}
-
-        local node = minetest.env:get_node(bottom)
-        
-        if (node.name==BOTTOM_NODE[i]) then
-            if TOP[i] == "false" then
-                minetest.env:remove_node(bottom)
-                minetest.env:add_node(bottom, {name=NEW[i]})
-            else
-                minetest.env:remove_node(pos)
-                minetest.env:add_node(pos, {name=NEW[i]})
-            end
-        end
-    end})
-end
+--for i, node in ipairs(NODE) do
+--    minetest.register_abm(
+--    {nodenames = {NODE[i]},
+--    interval = 30,
+--    chance = 3,
+--    action = function(pos)
+--        
+--        local bottom = {x=pos.x, y=pos.y-1, z=pos.z}
+--
+--        local node = minetest.env:get_node(bottom)
+--        
+--        if (node.name==BOTTOM_NODE[i]) then
+--            if TOP[i] == "false" then
+--                minetest.env:remove_node(bottom)
+--                minetest.env:add_node(bottom, {name=NEW[i]})
+--            else
+--                minetest.env:remove_node(pos)
+--                minetest.env:add_node(pos, {name=NEW[i]})
+--            end
+--        end
+--    end})
+--end
 
 --fix previous mods
 
