@@ -1,43 +1,61 @@
 -- WALL BUTTON
 minetest.register_node("mesecons_button:button_off", {
     drawtype = "nodebox",
-    tile_images = {"jeija_wall_button_off.png"},
+    tiles = {
+	"jeija_wall_button_sides.png",	
+	"jeija_wall_button_sides.png",
+	"jeija_wall_button_sides.png",
+	"jeija_wall_button_sides.png",
+	"jeija_wall_button_sides.png",
+	"jeija_wall_button_off.png"
+	},
     paramtype = "light",
     paramtype2 = "facedir",
     legacy_wallmounted = true,
     walkable = false,
     selection_box = {
         type = "fixed",
-	fixed = {-0.2, -0.15, 0.3, 0.2, 0.15, 0.5},
+	fixed = { -6/16, -6/16, 5/16, 6/16, 6/16, 8/16 }
     },
     node_box = {
-        type = "fixed",
-	fixed = {-0.2, -0.15, 0.3, 0.2, 0.15, 0.5},
+        type = "fixed",	
+	fixed = {
+		{ -6/16, -6/16, 6/16, 6/16, 6/16, 8/16 },	-- the thin plate behind the button
+		{ -4/16, -2/16, 4/16, 4/16, 2/16, 6/16 }	-- the button itself
+	}
     },
-    groups = {dig_immediate=2},
+    groups = {dig_immediate=2, mesecon = 3, mesecon_needs_receiver = 1},
     description = "Button",
 })
 minetest.register_node("mesecons_button:button_on", {
 	drawtype = "nodebox",
-	tile_images = {"jeija_wall_button_on.png"},
+	tiles = {
+		"jeija_wall_button_sides.png",
+		"jeija_wall_button_sides.png",
+		"jeija_wall_button_sides.png",
+		"jeija_wall_button_sides.png",
+		"jeija_wall_button_sides.png",
+		"jeija_wall_button_on.png"
+		},
 	paramtype = "light",
 	paramtype2 = "facedir",
 	legacy_wallmounted = true,
 	walkable = false,
+	light_source = LIGHT_MAX-7,
     selection_box = {
         type = "fixed",
-	fixed = {-0.2, -0.15, 0.4, 0.2, 0.15, 0.5},
+	fixed = { -6/16, -6/16, 5/16, 6/16, 6/16, 8/16 }
     },
     node_box = {
         type = "fixed",
-	fixed = {-0.2, -0.15, 0.4, 0.2, 0.15, 0.5},
+	fixed = {
+		{ -6/16, -6/16,  6/16, 6/16, 6/16, 8/16 },
+		{ -4/16, -2/16, 11/32, 4/16, 2/16, 6/16 }
+	}
     },
-	groups = {dig_immediate=2},
+	groups = {dig_immediate=2, not_in_creative_inventory=1, mesecon = 3, mesecon_needs_receiver = 1},
 	drop = 'mesecons_button:button_off',
 	description = "Button",
-	after_dig_node = function(pos, oldnode)
-		mesecon:receptor_off(pos, mesecon.button_get_rules(oldnode.param2))
-	end
 })
 
 minetest.register_on_punchnode(function(pos, node, puncher)
@@ -74,27 +92,17 @@ end
 minetest.register_craft({
 	output = '"mesecons_button:button_off" 2',
 	recipe = {
-		{'"mesecons:mesecon_off"','"default:stone"'},
+		{'"group:mesecon_conductor_craftable"','"default:stone"'},
 	}
 })
 
 mesecon:add_rules("button", {
-{x=1,  y=0,  z=0},
-{x=-1, y=0,  z=0},
-{x=0,  y=0,  z=1},
-{x=1,  y=1,  z=0},
-{x=1,  y=-1, z=0},
-{x=-1, y=1,  z=0},
-{x=-1, y=-1, z=0},
-{x=0,  y=1,  z=1},
-{x=0,  y=-1, z=1},
-{x=0,  y=1,  z=-1},
-{x=0,  y=0,  z=-1},
-{x=0,  y=-1, z=-1},
-{x=0,  y=-1, z=0},
-{x=2,  y=0,  z=0},
-{x=1,  y=-1,  z=1},
-{x=1,  y=-1,  z=-1}})
+{x = 1,  y = 0, z = 0},
+{x = 1,  y = 1, z = 0},
+{x = 1,  y =-1, z = 0},
+{x = 1,  y =-1, z = 1},
+{x = 1,  y =-1, z =-1},
+{x = 2,  y = 0, z = 0},})
 
 mesecon:add_receptor_node_off("mesecons_button:button_off", nil, mesecon.button_get_rules)
 mesecon:add_receptor_node("mesecons_button:button_on", nil, mesecon.button_get_rules)

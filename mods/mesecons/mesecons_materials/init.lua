@@ -5,28 +5,24 @@ minetest.register_craftitem("mesecons_materials:glue", {
     	description="Glue",
 })
 
+minetest.register_craftitem("mesecons_materials:fiber", {
+	image = "jeija_fiber.png",
+	on_place_on_ground = minetest.craftitem_place_item,
+    	description="Fiber",
+})
+
 minetest.register_craft({
 	output = '"mesecons_materials:glue" 2',
-	recipe = {
-		{'"default:junglegrass"', '"default:junglegrass"'},
-		{'"default:junglegrass"', '"default:junglegrass"'},
-	}
-})
-
--- IC
-minetest.register_craftitem("mesecons_materials:ic", {
-	image = "jeija_ic.png",
-	on_place_on_ground = minetest.craftitem_place_item,
-    	description="IC",
+	type = "cooking",
+	recipe = "default:sapling",
+	cooktime = 2
 })
 
 minetest.register_craft({
-	output = 'craft "mesecons_materials:ic" 2',
-	recipe = {
-		{'mesecons_materials:silicon', 'mesecons_materials:silicon', 'mesecons:mesecon_off'},
-		{'mesecons_materials:silicon', 'mesecons_materials:silicon', 'mesecons:mesecon_off'},
-		{'mesecons:mesecon_off', 'mesecons:mesecon_off', ''},
-	}
+	output = '"mesecons_materials:fiber" 6',
+	type = "cooking",
+	recipe = "mesecons_materials:glue",
+	cooktime = 4
 })
 
 -- Silicon

@@ -7,16 +7,16 @@ minetest.register_node("mesecons_pressureplates:pressure_plate_wood_off", {
 	wield_image = "jeija_pressure_plate_wood_off.png",
 	paramtype = "light",
 	is_ground_content = true,
-	walkable = false,
+	walkable = true,
 	selection_box = {
 		type = "fixed",
-		fixed = {-0.45, -0.5, -0.45, 0.45, -0.45, 0.45},
+		fixed = { -7/16, -8/16, -7/16, 7/16, -7/16, 7/16 },
 	},
 	node_box = {
 		type = "fixed",
-		fixed = {-0.45, -0.5, -0.45, 0.45, -0.45, 0.45},
+		fixed = { -7/16, -8/16, -7/16, 7/16, -7/16, 7/16 },
 	},
-	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=3},
+	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=3, mesecon = 2},
     	description="Wood Pressure Plate",
 })
 
@@ -25,20 +25,17 @@ minetest.register_node("mesecons_pressureplates:pressure_plate_wood_on", {
 	tile_images = {"jeija_pressure_plate_wood_on.png"},
 	paramtype = "light",
 	is_ground_content = true,
-	walkable = false,
+	walkable = true,
 	selection_box = {
 		type = "fixed",
-		fixed = {-0.45, -0.5, -0.45, 0.45, -0.48, 0.45},
+		fixed = { -7/16, -8/16, -7/16, 7/16, -7/16, 7/16 },
 	},
 	node_box = {
 		type = "fixed",
-		fixed = {-0.45, -0.5, -0.45, 0.45, -0.48, 0.45},
+		fixed = { -7/16, -8/16, -7/16, 7/16, -31/64, 7/16 },
 	},
-	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=3},
+	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=3,not_in_creative_inventory=1, mesecon = 2},
 	drop='"mesecons_pressureplates:pressure_plate_wood_off" 1',
-	after_dig_node = function(pos)
-		mesecon:receptor_off(pos, mesecon:get_rules("pressureplate"))
-	end
 })
 
 minetest.register_craft({
@@ -77,9 +74,6 @@ minetest.register_abm(
 	end,
 })
 
-mesecon:add_receptor_node("mesecons_pressureplates:pressure_plate_wood_on")
-mesecon:add_receptor_node_off("mesecons_pressureplates:pressure_plate_wood_off")
-
 -- PRESSURE PLATE STONE
 
 minetest.register_node("mesecons_pressureplates:pressure_plate_stone_off", {
@@ -89,16 +83,16 @@ minetest.register_node("mesecons_pressureplates:pressure_plate_stone_off", {
 	wield_image = "jeija_pressure_plate_stone_off.png",
 	paramtype = "light",
 	is_ground_content = true,
-	walkable = false,
+	walkable = true,
 	selection_box = {
 		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5, 0.5, -0.45, 0.5},
+		fixed = { -7/16, -8/16, -7/16, 7/16, -7/16, 7/16 },
 	},
 	node_box = {
 		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5, 0.5, -0.45, 0.5},
+		fixed = { -7/16, -8/16, -7/16, 7/16, -7/16, 7/16 },
 	},
-	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=3},
+	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=3, mesecon = 2},
     	description="Stone Pressure Plate",
 })
 
@@ -107,20 +101,17 @@ minetest.register_node("mesecons_pressureplates:pressure_plate_stone_on", {
 	tile_images = {"jeija_pressure_plate_stone_on.png"},
 	paramtype = "light",
 	is_ground_content = true,
-	walkable = false,
+	walkable = true,
 	selection_box = {
 		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5, 0.5, -0.48, 0.5},
+		fixed = { -7/16, -8/16, -7/16, 7/16, -7/16, 7/16 },
 	},
 	node_box = {
 		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5, 0.5, -0.48, 0.5},
+		fixed = { -7/16, -8/16, -7/16, 7/16, -31/64, 7/16 },
 	},
-	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=3},
+	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=3,not_in_creative_inventory=1, mesecon = 2},
 	drop='"mesecons_pressureplates:pressure_plate_stone_off" 1',
-	after_dig_node = function(pos)
-		mesecon:receptor_off(pos, mesecon:get_rules("pressureplate"))
-	end
 })
 
 minetest.register_craft({
@@ -159,9 +150,6 @@ minetest.register_abm(
 	end,
 })
 
-mesecon:add_receptor_node("mesecons_pressureplates:pressure_plate_stone_on")
-mesecon:add_receptor_node_off("mesecons_pressureplates:pressure_plate_stone_off")
-
 mesecon:add_rules("pressureplate", 
 {{x=0,  y=1,  z=-1},
 {x=0,  y=0,  z=-1},
@@ -178,3 +166,9 @@ mesecon:add_rules("pressureplate",
 {x=0, y=-1,  z=0},
 {x=0, y=-2,  z=0},
 {x=0, y=1,  z=0}})
+
+mesecon:add_receptor_node("mesecons_pressureplates:pressure_plate_wood_on", mesecon:get_rules("pressureplate"))
+mesecon:add_receptor_node_off("mesecons_pressureplates:pressure_plate_wood_off", mesecon:get_rules("pressureplate"))
+
+mesecon:add_receptor_node("mesecons_pressureplates:pressure_plate_stone_on", mesecon:get_rules("pressureplate"))
+mesecon:add_receptor_node_off("mesecons_pressureplates:pressure_plate_stone_off", mesecon:get_rules("pressureplate"))

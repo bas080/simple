@@ -42,6 +42,7 @@ minetest.register_node("mesecons_movestones:movestone", {
 	groups = {cracky=3},
     	description="Movestone",
 })
+mesecon:register_effector("mesecons_movestones:movestone", "mesecons_movestones:movestone")
 
 minetest.register_entity("mesecons_movestones:movestone_entity", {
 	physical = false,
@@ -79,7 +80,7 @@ minetest.register_craft({
 	output = '"mesecons_movestones:movestone" 2',
 	recipe = {
 		{'"default:stone"', '"default:stone"', '"default:stone"'},
-		{'"mesecons:mesecon_off"', '"mesecons:mesecon_off"', '"mesecons:mesecon_off"'},
+		{'"group:mesecon_conductor_craftable"', '"group:mesecon_conductor_craftable"', '"group:mesecon_conductor_craftable"'},
 		{'"default:stone"', '"default:stone"', '"default:stone"'},
 	}
 })
@@ -119,6 +120,7 @@ minetest.register_node("mesecons_movestones:sticky_movestone", {
 	groups = {cracky=3},
     	description="Sticky Movestone",
 })
+mesecon:register_effector("mesecons_movestones:sticky_movestone", "mesecons_movestones:sticky_movestone")
 
 minetest.register_craft({
 	output = '"mesecons_movestones:sticky_movestone" 2',
