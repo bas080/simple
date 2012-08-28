@@ -1,6 +1,19 @@
 Changelog
 ---------
 
+2012-08-22: Added outlet grate, made it participate in autoplace algorithm.  
+Extended storage tank to show fill level in 10% steps (0% to 100%).  Added 
+"expansion tank" that appears if the user stacks tanks upwards.  (Downwards is 
+not checked).
+
+2012-08-21: Made storage tank participate in autoplace algorithm.  Tuned API a 
+little to allow for more flexible placement.  Re-organized code a bit to allow 
+for some upcoming rules changes.  Made storage tanks' upper/lower fittins and 
+intake grate participate in autoplace algorithm.
+
+2012-08-20: Added temporary nodes for storage tank and intake grating, but 
+without autoplace.
+
 2012-08-19: Pumps and valves now fully participate in the 
 auto-rotate/auto-place algorithm.
 
