@@ -81,7 +81,7 @@ minetest.register_node("chess:spawn",{
             end
         end
         
-        local alternate = true
+        local alternate = false
         
         if isFree then -- if there is room for a chessboard and pieces, make the chessboard with pieces
             minetest.chat_send_all("Chess board has been placed, let the match begin!")
@@ -114,8 +114,8 @@ minetest.register_node("chess:spawn",{
                             if (i == 2 or i == 9) then minetest.env:add_node(p_top, {name="chess:rook_white"}) end
                             if (i == 3 or i == 8) then minetest.env:add_node(p_top, {name="chess:knight_white"}) end
                             if (i == 4 or i == 7) then minetest.env:add_node(p_top, {name="chess:bishop_white"}) end
-                            if (i == 5) then minetest.env:add_node(p_top, {name="chess:queen_white"}) end
-                            if (i == 6) then minetest.env:add_node(p_top, {name="chess:king_white"}) end
+                            if (i == 6) then minetest.env:add_node(p_top, {name="chess:queen_white"}) end
+                            if (i == 5) then minetest.env:add_node(p_top, {name="chess:king_white"}) end
                         end
                         
                     end

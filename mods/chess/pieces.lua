@@ -21,7 +21,7 @@ for color = 1, 2 do
     {
         description = 'Pawn',
         groups = {snappy = 2},
-        tiles = {"chess_piece_"..colors[color]..".png"},
+        tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",
         sunlight_propagates = true,
         paramtype = 'light',
@@ -51,7 +51,7 @@ for color = 1, 2 do
     {
         description = 'Rook',
         groups = {snappy = 2},
-        tiles = {"chess_piece_"..colors[color]..".png"},
+        tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",
         sunlight_propagates = true,
         paramtype = 'light',
@@ -90,7 +90,7 @@ for color = 1, 2 do
     {
         description = 'Knight',
         groups = {snappy = 2},
-        tiles = {"chess_piece_"..colors[color]..".png"},
+        tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",
         sunlight_propagates = true,
         paramtype = 'light',
@@ -124,7 +124,7 @@ for color = 1, 2 do
     {
         description = 'Bishop',
         groups = {snappy = 2},
-        tiles = {"chess_piece_"..colors[color]..".png"},
+        tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",
         sunlight_propagates = true,
         paramtype = 'light',
@@ -157,7 +157,7 @@ for color = 1, 2 do
     {
         description = 'Queen',
         groups = {snappy = 2},
-        tiles = {"chess_piece_"..colors[color]..".png"},
+        tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",
         sunlight_propagates = true,
         paramtype = 'light',
@@ -196,7 +196,7 @@ for color = 1, 2 do
     {
         description = 'King',
         groups = {snappy = 2},
-        tiles = {"chess_piece_"..colors[color]..".png"},
+        tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",
         sunlight_propagates = true,
         paramtype = 'light',
