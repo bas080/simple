@@ -1,6 +1,0 @@
-[submodule "harvest"]
-	path = simple/mods
-	url = https://github.com/bas080/harvest.git
-[submodule "jungletree"]
-	path = simple/mods
-	url = https://github.com/bas080/jungletree.git
