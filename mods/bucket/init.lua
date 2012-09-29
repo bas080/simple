@@ -56,6 +56,7 @@ function bucket.register_liquid(source, flowing, itemname, inventory_image)
 end
 
 minetest.register_craftitem("bucket:bucket_empty", {
+	description = "Emtpy bucket",
 	inventory_image = "bucket.png",
 	stack_max = 1,
 	liquids_pointable = true,
@@ -90,6 +91,6 @@ bucket.register_liquid(
 
 minetest.register_craft({
 	type = "fuel",
-	recipe = "default:bucket_lava",
+	recipe = "bucket:bucket_lava",
 	burntime = 60,
 })

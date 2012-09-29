@@ -3,7 +3,7 @@
 if NEW_STYLE_WIRES == false then --old wires
 minetest.register_node("mesecons:mesecon_off", {
 	drawtype = "raillike",
-	tile_images = {"jeija_mesecon_off.png", "jeija_mesecon_curved_off.png", "jeija_mesecon_t_junction_off.png", "jeija_mesecon_crossing_off.png"},
+	tiles = {"jeija_mesecon_off.png", "jeija_mesecon_curved_off.png", "jeija_mesecon_t_junction_off.png", "jeija_mesecon_crossing_off.png"},
 	inventory_image = "jeija_mesecon_off.png",
 	wield_image = "jeija_mesecon_off.png",
 	paramtype = "light",
@@ -19,7 +19,7 @@ minetest.register_node("mesecons:mesecon_off", {
 
 minetest.register_node("mesecons:mesecon_on", {
 	drawtype = "raillike",
-	tile_images = {"jeija_mesecon_on.png", "jeija_mesecon_curved_on.png", "jeija_mesecon_t_junction_on.png", "jeija_mesecon_crossing_on.png"},
+	tiles = {"jeija_mesecon_on.png", "jeija_mesecon_curved_on.png", "jeija_mesecon_t_junction_on.png", "jeija_mesecon_crossing_on.png"},
 	paramtype = "light",
 	is_ground_content = true,
 	walkable = false,
@@ -48,10 +48,10 @@ box_zp = {-1/16, -.5, 1/16, 1/16, -.5+1/16, 8/16}
 box_xm = {-8/16, -.5, -1/16, -1/16, -.5+1/16, 1/16}
 box_zm = {-1/16, -.5, -8/16, 1/16, -.5+1/16, -1/16}
 
-box_xpy = {.5-1/16, -.5+1/16, -1/16, .5, .5+1/16, 1/16}
-box_zpy = {-1/16, -.5+1/16, .5-1/16, 1/16, .5+1/16, .5}
-box_xmy = {-.5, -.5+1/16, -1/16, -.5+1/16, .5+1/16, 1/16}
-box_zmy = {-1/16, -.5+1/16, -.5, 1/16, .5+1/16, -.5+1/16}
+box_xpy = {.5-1/16, -.5+1/16, -1/16, .5, .4999+1/16, 1/16}
+box_zpy = {-1/16, -.5+1/16, .5-1/16, 1/16, .4999+1/16, .5}
+box_xmy = {-.5, -.5+1/16, -1/16, -.5+1/16, .4999+1/16, 1/16}
+box_zmy = {-1/16, -.5+1/16, -.5, 1/16, .4999+1/16, -.5+1/16}
 
 for xp=0, 1 do
 for zp=0, 1 do
@@ -141,6 +141,7 @@ for zmy=0, 1 do
 		wield_image = "jeija_mesecon_off.png",
 		paramtype = "light",
 		paramtype2 = "facedir",
+		sunlight_propagates = true,
 		selection_box = {
               		type = "fixed",
 			fixed = {-.5, -.5, -.5, .5, -.5+1/16, .5}
@@ -161,6 +162,7 @@ for zmy=0, 1 do
 		tiles = tiles_on,
 		paramtype = "light",
 		paramtype2 = "facedir",
+		sunlight_propagates = true,
 		selection_box = {
               		type = "fixed",
 			fixed = {-.5, -.5, -.5, .5, -.5+1/16, .5}

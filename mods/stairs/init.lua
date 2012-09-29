@@ -20,7 +20,6 @@ function stairs.register_stair(subname, recipeitem, groups, images, description)
 				{-0.5, 0, 0, 0.5, 0.5, 0.5},
 			},
 		},
-		
 	})
 
 	minetest.register_craft({
@@ -143,11 +142,5 @@ stairs.register_stair_and_slab("brick", "default:brick",
 stairs.register_stair_and_slab("sandstone", "default:sandstone",
 		{crumbly=2,cracky=2},
 		{"default_sandstone.png"},
-		"Sand stone stair",
-		"Sand stone slab")
-		
-stairs.register_stair_and_slab("desert_stone", "default:desert_stone",
-		{crumbly=2,cracky=2},
-		{"default_desert_stone.png"},
-		"Desert stone stair",
-		"Desert stone slab")
+		"Sandstone stair",
+		"Sandstone slab")

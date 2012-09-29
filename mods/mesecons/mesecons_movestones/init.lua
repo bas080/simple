@@ -36,7 +36,7 @@ function mesecon:get_movestone_direction(pos)
 end
 
 minetest.register_node("mesecons_movestones:movestone", {
-	tile_images = {"jeija_movestone_side.png", "jeija_movestone_side.png", "jeija_movestone_side.png", "jeija_movestone_side.png", "jeija_movestone_arrows.png", "jeija_movestone_arrows.png"},
+	tiles = {"jeija_movestone_side.png", "jeija_movestone_side.png", "jeija_movestone_side.png", "jeija_movestone_side.png", "jeija_movestone_arrows.png", "jeija_movestone_arrows.png"},
 	paramtype2 = "facedir",
 	legacy_facedir_simple = true,
 	groups = {cracky=3},
@@ -99,8 +99,7 @@ mesecon:register_on_signal_on(function (pos, node)
 			end
 		until checknode.name=="air"
 		or checknode.name=="ignore" 
-		or checknode.name=="default:water"
-		or checknode.name=="default:water_flowing"
+		or not(minetest.registered_nodes[checknode.name].liquidtype == "none")
 		minetest.env:remove_node(pos)
 		nodeupdate(pos)
 		minetest.env:add_entity(pos, "mesecons_movestones:movestone_entity")
@@ -113,7 +112,7 @@ end)
 -- STICKY_MOVESTONE
 
 minetest.register_node("mesecons_movestones:sticky_movestone", {
-	tile_images = {"jeija_movestone_side.png", "jeija_movestone_side.png", "jeija_movestone_side.png", "jeija_movestone_side.png", "jeija_sticky_movestone.png", "jeija_sticky_movestone.png"},
+	tiles = {"jeija_movestone_side.png", "jeija_movestone_side.png", "jeija_movestone_side.png", "jeija_movestone_side.png", "jeija_sticky_movestone.png", "jeija_sticky_movestone.png"},
 	inventory_image = minetest.inventorycube("jeija_sticky_movestone.png", "jeija_movestone_side.png", "jeija_movestone_side.png"),
 	paramtype2 = "facedir",
 	legacy_facedir_simple = true,
@@ -177,8 +176,7 @@ mesecon:register_on_signal_on(function (pos, node)
 			end
 		until checknode.name=="air"
 		or checknode.name=="ignore" 
-		or checknode.name=="default:water" 
-		or checknode.name=="default:water_flowing" 
+		or not(minetest.registered_nodes[checknode.name].liquidtype == "none")  
 		repeat -- Check if it collides with a stopper (pull direction)
 			collpos={x=collpos.x-direction.x, y=collpos.y-direction.y, z=collpos.z-direction.z}
 			checknode=minetest.env:get_node(collpos)
@@ -187,9 +185,7 @@ mesecon:register_on_signal_on(function (pos, node)
 			end
 		until checknode.name=="air"
 		or checknode.name=="ignore" 
-		or checknode.name=="default:water" 
-		or checknode.name=="default:water_flowing" 
-
+		or not(minetest.registered_nodes[checknode.name].liquidtype == "none")
 		minetest.env:remove_node(pos)
 		nodeupdate(pos)
 		minetest.env:add_entity(pos, "mesecons_movestones:sticky_movestone_entity")
