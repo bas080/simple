@@ -47,7 +47,6 @@ Cisoun's WTFPL texture pack:
   default_tool_mesepick.png
   default_tool_steelpick.png
   default_tool_steelshovel.png
-  default_tool_steelsword.png
   default_tool_stonepick.png
   default_tool_stoneshovel.png
   default_tool_woodpick.png
@@ -68,3 +67,29 @@ VanessaE's animated torches (WTFPL):
   default_torch_on_floor_animated.png
   default_torch_on_floor.png
 
+RealBadAngel's animated water (WTFPL):
+  default_water_source_animated.png
+  default_water_flowing_animated.png
+
+VanessaE:
+  default_nc_back.png
+  default_nc_front.png
+  default_nc_rb.png
+  default_nc_side.png
+
+Calinou's improved default textures (CC BY-SA):
+  default_brick.png
+  default_clay_brick.png
+  default_papyrus.png
+  default_tool_steelsword.png
+
+MirceaKitsune (WTFPL):
+  character.x
+
+Jordach (CC BY-SA 3.0):
+  character.png
+
+Glass breaking sounds (CC BY 3.0):
+  1: http://www.freesound.org/people/cmusounddesign/sounds/71947/
+  2: http://www.freesound.org/people/Tomlija/sounds/97669/
+  3: http://www.freesound.org/people/lsprice/sounds/88808/
