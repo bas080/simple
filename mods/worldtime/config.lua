@@ -1,5 +1,5 @@
 ---
---worldtime 1.01
+--worldtime configuration file
 --Copyright (C) 2012 Bad_Command
 --
 --This library is free software; you can redistribute it and/or
@@ -17,19 +17,9 @@
 --Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 ---
 
---- 
--- To use worldtime, call this method in your mod:
---  worldtime.get()
----
+-- World time persistence interval (default: write time to disk every 10 seconds)
+--  Decrease this is the server frequently loses time
+worldtime.persist_time_interval=10
+-- World time save file name
+worldtime.save_file_name="worldtime.dat"
 
-worldtime={}
-worldtime.version = 1.01
-
--- config.lua contains configuration parameters
-dofile(minetest.get_modpath("worldtime").."/config.lua")
--- worldtime.lua contains the code
-dofile(minetest.get_modpath("worldtime").."/worldtime.lua")
-
-worldtime.intialize()
-worldtime.persist()
-minetest.register_globalstep(worldtime.timechange)

@@ -1,5 +1,5 @@
 ---
---worldtime 1.01
+--Bones Configuration File
 --Copyright (C) 2012 Bad_Command
 --
 --This library is free software; you can redistribute it and/or
@@ -15,21 +15,9 @@
 --You should have received a copy of the GNU Lesser General Public
 --License along with this library; if not, write to the Free Software
 --Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
----
+----
 
---- 
--- To use worldtime, call this method in your mod:
---  worldtime.get()
----
+-- Config option:  Bones become 'old' after this interval, in seconds.
+--  Default:  2 hours (there are 3600 seconds in an hour.)
+bones.age_after = 2 * 3600
 
-worldtime={}
-worldtime.version = 1.01
-
--- config.lua contains configuration parameters
-dofile(minetest.get_modpath("worldtime").."/config.lua")
--- worldtime.lua contains the code
-dofile(minetest.get_modpath("worldtime").."/worldtime.lua")
-
-worldtime.intialize()
-worldtime.persist()
-minetest.register_globalstep(worldtime.timechange)
