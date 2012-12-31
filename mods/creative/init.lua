@@ -14,11 +14,7 @@ minetest.after(0, function()
 			end
 		end,
 		allow_put = function(inv, listname, index, stack, player)
-			if minetest.setting_getbool("creative_mode") then
-				return -1
-			else
-				return 0
-			end
+			return 0
 		end,
 		allow_take = function(inv, listname, index, stack, player)
 			if minetest.setting_getbool("creative_mode") then
@@ -48,20 +44,29 @@ minetest.after(0, function()
 	table.sort(creative_list)
 	inv:set_size("main", #creative_list)
 	for _,itemstring in ipairs(creative_list) do
-		local stack = ItemStack(itemstring)
-		-- Make a stack of the right number of items
-		local stack2 = nil
-		if stack:get_stack_max() == 1 then
-			stack2 = ItemStack(stack:get_name())
-		else
-			-- Insert half full so that a taken stack can be put back
-			stack2 = ItemStack(stack:get_name().." "..(stack:get_stack_max()/2))
-		end
-		inv:add_item("main", stack2)
+		inv:add_item("main", ItemStack(itemstring))
 	end
 	creative_inventory.creative_inventory_size = #creative_list
 	print("creative inventory size: "..dump(creative_inventory.creative_inventory_size))
 end)
+
+-- Create the trash field
+local trash = minetest.create_detached_inventory("creative_trash", {
+	-- Allow the stack to be placed and remove it in on_put()
+	-- This allows the creative inventory to restore the stack
+	allow_put = function(inv, listname, index, stack, player)
+		if minetest.setting_getbool("creative_mode") then
+			return stack:get_count()
+		else
+			return 0
+		end
+	end,
+	on_put = function(inv, listname, index, stack, player)
+		inv:set_stack(listname, index, "")
+	end,
+})
+trash:set_size("main", 1)
+
 
 creative_inventory.set_creative_formspec = function(player, start_i, pagenum)
 	pagenum = math.floor(pagenum)
@@ -74,7 +79,9 @@ creative_inventory.set_creative_formspec = function(player, start_i, pagenum)
 			"list[detached:creative;main;0.3,0.5;4,6;"..tostring(start_i).."]"..
 			"label[2.0,6.55;"..tostring(pagenum).."/"..tostring(pagemax).."]"..
 			"button[0.3,6.5;1.6,1;creative_prev;<<]"..
-			"button[2.7,6.5;1.6,1;creative_next;>>]")
+			"button[2.7,6.5;1.6,1;creative_next;>>]"..
+			"label[5,1.5;Trash:]"..
+			"list[detached:creative_trash;main;5,2;1,1;]")
 end
 minetest.register_on_joinplayer(function(player)
 	-- If in creative mode, modify player's inventory forms
@@ -114,3 +121,42 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	creative_inventory.set_creative_formspec(player, start_i, start_i / (6*4) + 1)
 end)
 
+if minetest.setting_getbool("creative_mode") then
+	
+	minetest.register_item(":", {
+		type = "none",
+		wield_image = "wieldhand.png",
+		wield_scale = {x=1,y=1,z=2.5},
+		tool_capabilities = {
+			full_punch_interval = 0.5,
+			max_drop_level = 3,
+			groupcaps = {
+				crumbly = {times={[1]=0.5, [2]=0.5, [3]=0.5}, uses=0, maxlevel=3},
+				cracky = {times={[1]=0.5, [2]=0.5, [3]=0.5}, uses=0, maxlevel=3},
+				snappy = {times={[1]=0.5, [2]=0.5, [3]=0.5}, uses=0, maxlevel=3},
+				choppy = {times={[1]=0.5, [2]=0.5, [3]=0.5}, uses=0, maxlevel=3},
+				oddly_breakable_by_hand = {times={[1]=0.5, [2]=0.5, [3]=0.5}, uses=0, maxlevel=3},
+			}
+		}
+	})
+	
+	minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack)
+		return true
+	end)
+	
+	function minetest.handle_node_drops(pos, drops, digger)
+		if not digger or not digger:is_player() then
+			return
+		end
+		local inv = digger:get_inventory()
+		if inv then
+			for _,item in ipairs(drops) do
+				item = ItemStack(item):get_name()
+				if not inv:contains_item("main", item) then
+					inv:add_item("main", item)
+				end
+			end
+		end
+	end
+	
+end

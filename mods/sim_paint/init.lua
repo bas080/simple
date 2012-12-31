@@ -83,12 +83,7 @@ local paintings = {
   "paintings_sepia.png",
   "paintings_sugar.png",
   "paintings_expected.png",
-  "paintings_sleeping.png",
-  "painting1.png",
-  "painting2.png",
-  "painting3.png",
-  "painting4.png",
-  "painting1.png"
+  "paintings_sleeping.png"
 }
 
 -- Below is very important code.

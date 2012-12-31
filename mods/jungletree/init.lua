@@ -97,8 +97,8 @@ local function add_tree_branch(pos)
 end
 minetest.register_abm({
 	nodenames = {"jungletree:sapling"},
-	interval = 1,
-	chance = 1,
+	interval = 500,
+	chance = 10,
 	action = function(pos, node)
 		local height = 5 + math.random(15)
 		if height < 10 then

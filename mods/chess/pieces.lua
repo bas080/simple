@@ -19,7 +19,7 @@ for color = 1, 2 do
     --Pawn
     minetest.register_node("chess:pawn_"..colors[color],
     {
-        description = 'Pawn',
+        description = 'Pawn ('..colors[color]..')',
         groups = {snappy = 2},
         tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",
@@ -49,7 +49,7 @@ for color = 1, 2 do
     --Rook
     minetest.register_node("chess:rook_"..colors[color],
     {
-        description = 'Rook',
+        description = 'Rook ('..colors[color]..')',
         groups = {snappy = 2},
         tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",
@@ -88,7 +88,7 @@ for color = 1, 2 do
     --Knight
     minetest.register_node("chess:knight_"..colors[color],
     {
-        description = 'Knight',
+        description = 'Knight ('..colors[color]..')',
         groups = {snappy = 2},
         tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",
@@ -122,7 +122,7 @@ for color = 1, 2 do
     
     minetest.register_node("chess:bishop_"..colors[color],
     {
-        description = 'Bishop',
+        description = 'Bishop ('..colors[color]..')',
         groups = {snappy = 2},
         tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",
@@ -155,7 +155,7 @@ for color = 1, 2 do
     --Queen
     minetest.register_node("chess:queen_"..colors[color],
     {
-        description = 'Queen',
+        description = 'Queen ('..colors[color]..')',
         groups = {snappy = 2},
         tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",
@@ -194,7 +194,7 @@ for color = 1, 2 do
     --King
     minetest.register_node("chess:king_"..colors[color],
     {
-        description = 'King',
+        description = 'King ('..colors[color]..')',
         groups = {snappy = 2},
         tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",

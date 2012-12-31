@@ -62,7 +62,7 @@ local function add_ore(modname, mineral_name, oredef)
 			description = upcase_name .. ' Block',
 			tiles = { img_base..'_block.png' },
 			is_ground_content = true,
-			groups = {snappy=1,bendy=2,cracky=1,melty=2,level=2},
+			groups = {snappy=1,bendy=2,cracky=1,melty=2},
 			sounds = default_stone_sounds
 		})
 		minetest.register_alias(mineral_name..'_block', blockitem)
@@ -125,8 +125,8 @@ local function add_ore(modname, mineral_name, oredef)
 	end
 
 	for toolname, tooldef in pairs(oredef.tools) do
-		local tflet = string.upper(string.sub(toolname, 0, 1))
-		local upcase_toolname = tflet..string.sub(toolname, 1)
+		local tflet = string.upper(string.sub(toolname, 1, 1))
+		local upcase_toolname = tflet..string.sub(toolname, 2)
 		local tdef = {
 			description = upcase_name..' '..upcase_toolname,
 			inventory_image = toolimg_base..toolname..'.png',
@@ -135,6 +135,10 @@ local function add_ore(modname, mineral_name, oredef)
 				groupcaps=tooldef
 			}
 		}
+		
+		if toolname == "pick" then
+			tdef.description = upcase_name.." Pickaxe"
+		end
 
 		if toolname == 'sword' then
 			tdef.full_punch_interval = oredef.punchint
@@ -201,12 +205,12 @@ minetest.register_on_generated(function(minp, maxp, seed)
 		current_seed = current_seed + 1
 		return current_seed
 	end
-	generate_ore("gloopores:mineral_alatro", "default:stone", minp, maxp, get_next_seed(), 1/9/9/9, 6, 0, 256)
-	generate_ore("gloopores:mineral_kalite", "default:stone", minp, maxp, get_next_seed(), 1/12/12/12, 3, -31000, 10)
-	generate_ore("gloopores:mineral_arol", "default:stone", minp, maxp, get_next_seed(), 1/11/11/11, 3, -31000, -20)
-	generate_ore("gloopores:mineral_talinite", "default:stone", minp, maxp, get_next_seed(), 1/13/13/13, 2, -31000, -512)
-	generate_ore("gloopores:mineral_akalin", "default:desert_stone", minp, maxp, get_next_seed(), 1/5/5/5, 6, -31000, 256)
-	generate_ore("gloopores:mineral_desert_coal", "default:desert_stone", minp, maxp, get_next_seed(), 1/6/6/6, 8, -31000, 64)
+	generate_ore("gloopores:mineral_alatro", "default:stone", minp, maxp, get_next_seed(), 1/9/9/9, 3, 0, 256)
+	generate_ore("gloopores:mineral_kalite", "default:stone", minp, maxp, get_next_seed(), 1/12/12/12, 2, -31000, 10)
+	generate_ore("gloopores:mineral_arol", "default:stone", minp, maxp, get_next_seed(), 1/11/11/11, 2, -31000, -20)
+	generate_ore("gloopores:mineral_talinite", "default:stone", minp, maxp, get_next_seed(), 1/13/13/13, 1, -31000, -512)
+	generate_ore("gloopores:mineral_akalin", "default:desert_stone", minp, maxp, get_next_seed(), 1/5/5/5, 3, -31000, 256)
+	generate_ore("gloopores:mineral_desert_coal", "default:desert_stone", minp, maxp, get_next_seed(), 1/6/6/6, 6, -31000, 64)
 	generate_ore("gloopores:mineral_desert_iron", "default:desert_stone", minp, maxp, get_next_seed(), 1/7/7/7, 5, -31000, 15)
 end)
 
