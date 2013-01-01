@@ -25,6 +25,10 @@ local add_plant = function(name_plant) -- register a wild plant
         walkable = false,
         groups = { snappy = 3,flammable=2 },
         sounds = default.node_sound_leaves_defaults(),
+        selection_box = {
+            type = "fixed",
+            fixed = { -0.25, -0.5, -0.25, 0.25, 0.5, 0.25 },
+        },
     })
     
 end

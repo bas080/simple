@@ -11,7 +11,7 @@
 
 local colors = {"black", "white",}
 
-local piece_group = {snappy=3}
+local piece_group = {snappy=3,not_in_creative_inventory=1}
 
 --make a loop which makes the black and white nodes and crafting recipes
 
@@ -20,7 +20,6 @@ for color = 1, 2 do
     minetest.register_node("chess:pawn_"..colors[color],
     {
         description = 'Pawn ('..colors[color]..')',
-        groups = {snappy = 2},
         tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",
         sunlight_propagates = true,
@@ -50,7 +49,6 @@ for color = 1, 2 do
     minetest.register_node("chess:rook_"..colors[color],
     {
         description = 'Rook ('..colors[color]..')',
-        groups = {snappy = 2},
         tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",
         sunlight_propagates = true,
@@ -89,7 +87,6 @@ for color = 1, 2 do
     minetest.register_node("chess:knight_"..colors[color],
     {
         description = 'Knight ('..colors[color]..')',
-        groups = {snappy = 2},
         tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",
         sunlight_propagates = true,
@@ -123,7 +120,6 @@ for color = 1, 2 do
     minetest.register_node("chess:bishop_"..colors[color],
     {
         description = 'Bishop ('..colors[color]..')',
-        groups = {snappy = 2},
         tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",
         sunlight_propagates = true,
@@ -156,7 +152,6 @@ for color = 1, 2 do
     minetest.register_node("chess:queen_"..colors[color],
     {
         description = 'Queen ('..colors[color]..')',
-        groups = {snappy = 2},
         tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",
         sunlight_propagates = true,
@@ -195,7 +190,6 @@ for color = 1, 2 do
     minetest.register_node("chess:king_"..colors[color],
     {
         description = 'King ('..colors[color]..')',
-        groups = {snappy = 2},
         tiles = {"chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color].."_top.png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color]..".png", "chess_piece_"..colors[color].."_side.png", "chess_piece_"..colors[color].."_side.png"},
         drawtype = "nodebox",
         sunlight_propagates = true,
