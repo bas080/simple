@@ -101,7 +101,7 @@ minetest.register_abm({
 	chance = 10,
 	action = function(pos, node)
 		local height = 5 + math.random(15)
-		if height < 10 then
+		if height < 13 then
 			for i = height, -1, -1 do
 				local p = {x=pos.x, y=pos.y+i, z=pos.z}
 				minetest.env:add_node(p, {name="default:jungletree"})

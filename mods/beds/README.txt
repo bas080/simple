@@ -16,13 +16,14 @@ http://wiki.minetest.com/wiki/Installing_Mods
 
 How to use the mod:
 Craft a bed like this:
-wood	wood	wood
-stick			stick
+white wool  white wool   white wool
+stick                    stick
 After placing it anywhere you can go to sleep with a leftklick with your
 hand on the bed. If it is night a chatmessage wishs you "Good night" and
 you sleep until the next morning. To go outside the bed it is recommended
 to hit the bed again with a leftklick (it also works if you just go away
 but its not so safe).
+After dying the player will respawn at the last bed he has slept.
 
 License:
 Sourcecode: WTFPL (see below)

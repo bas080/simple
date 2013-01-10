@@ -2,8 +2,8 @@
 ****
 More Ores
 by Calinou
-Old version; use if the new version does not work for some reason. Outdated.
-Licensed under WTFPL.
+Old and "inefficient" version; use if the new version does not work for some reason. Outdated.
+Licensed under the zlib/libpng license, see LICENSE.txt for info.
 ****
 --]]
 

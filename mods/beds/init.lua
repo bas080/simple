@@ -1,4 +1,3 @@
-local player_ges = 0
 local player_in_bed = 0
 
 minetest.register_node("beds:bed_bottom", {
@@ -7,6 +6,7 @@ minetest.register_node("beds:bed_bottom", {
 	tiles = {"beds_bed_top_bottom.png", "default_wood.png",  "beds_bed_side.png",  "beds_bed_side.png",  "beds_bed_side.png",  "beds_bed_side.png"},
 	paramtype = "light",
 	paramtype2 = "facedir",
+	stack_max = 1,
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
 	sounds = default.node_sound_wood_defaults(),
 	node_box = {
@@ -72,7 +72,7 @@ minetest.register_node("beds:bed_bottom", {
 		if not puncher:is_player() then
 			return
 		end
-		if puncher:get_wielded_item():get_name() == "" then
+		if not puncher:get_player_control().sneak then
 			local meta = minetest.env:get_meta(pos)
 			local param2 = node.param2
 			if param2 == 0 then
@@ -139,28 +139,29 @@ minetest.register_alias("beds:bed", "beds:bed_bottom")
 minetest.register_craft({
 	output = "beds:bed",
 	recipe = {
-		{"default:wood", "default:wood", "default:wood", },
+		{"wool:white", "wool:white", "wool:white", },
 		{"default:stick", "", "default:stick", }
 	}
 })
 
-minetest.register_on_joinplayer(function(pl)
-	player_ges = player_ges+1
-end)
-
-minetest.register_on_leaveplayer(function(pl)
-	player_ges = player_ges-1
-end)
+beds_player_spawns = {}
+local file = io.open(minetest.get_worldpath().."/beds_player_spawns", "r")
+if file then
+	beds_player_spawns = minetest.deserialize(file:read("*all"))
+	file:close()
+end
 
 local timer = 0
 local wait = false
 minetest.register_globalstep(function(dtime)
-	if timer<10 then
+	if timer<2 then
 		timer = timer+dtime
+		return
 	end
 	timer = 0
 	
-	if player_ges == player_in_bed and player_ges ~= 0 then
+	local players = #minetest.get_connected_players()
+	if players == player_in_bed and players ~= 0 then
 		if minetest.env:get_timeofday() < 0.2 or minetest.env:get_timeofday() > 0.805 then
 			if not wait then
 				minetest.chat_send_all("Good night!!!")
@@ -169,8 +170,24 @@ minetest.register_globalstep(function(dtime)
 					wait = false
 				end)
 				wait = true
+				for _,player in ipairs(minetest.get_connected_players()) do
+					beds_player_spawns[player:get_player_name()] = player:getpos()
+				end
+				local file = io.open(minetest.get_worldpath().."/beds_player_spawns", "w")
+				if file then
+					file:write(minetest.serialize(beds_player_spawns))
+					file:close()
+				end
 			end
 		end
+	end
+end)
+
+minetest.register_on_respawnplayer(function(player)
+	local name = player:get_player_name()
+	if beds_player_spawns[name] then
+		player:setpos(beds_player_spawns[name])
+		return true
 	end
 end)
 
@@ -209,3 +226,7 @@ minetest.register_abm({
 		end
 	end
 })
+
+if minetest.setting_get("log_mods") then
+	minetest.log("action", "beds loaded")
+end

@@ -1,3 +1,5 @@
+dofile(minetest.get_modpath("portal").."/cube.lua")
+
 local mod_name="portal"
 local node_group
 --if creative mode make diggable
@@ -9,7 +11,6 @@ end
 --regster nodes
 local solid = {
     'node_acid',
-    'node_companion',
     'node_floor_checker',
     'node_floor_checker_white',
     'node_unbreakable_half',
