@@ -23,7 +23,7 @@ local add_plant = function(name_plant) -- register a wild plant
         sunlight_propagates = true,
         paramtype = "light",
         walkable = false,
-        groups = { snappy = 3,flammable=2 },
+        groups = { snappy = 3,flammable=2, floored=1},
         sounds = default.node_sound_leaves_defaults(),
         selection_box = {
             type = "fixed",
