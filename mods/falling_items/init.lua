@@ -23,7 +23,6 @@ minetest.register_on_dignode(function (pos, node, player)
         local ptwo = {x = p.x + dx[ii], y = p.y + dy[ii] , z = p.z + dz[ii]}
         local ntwo = minetest.env:get_node(ptwo)
         if ntwo.name ~= "air" then
-          print("found attached node")
           return
         end
       end
@@ -36,7 +35,8 @@ minetest.register_on_dignode(function (pos, node, player)
   local p = {x = pos.x, y = pos.y+1, z = pos.z}
   local n = minetest.env:get_node(p)
   if minetest.get_item_group(n.name, "floored") ~= 0 then
-    minetest.env:remove_node(p)
+    minetest.env:dig_node(p)
+    --minetest.env:remove_node(p)
     minetest.env:add_item(p, n.name)
   end
 end)
@@ -45,7 +45,6 @@ end)
 minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack)
   --check if node has floor else fall
   if minetest.get_item_group(newnode.name, "floored") ~= 0 then
-    print("placed floored node")
     local p = {x = pos.x, y = pos.y-1, z = pos.z}
     local n = minetest.env:get_node(p)
     if n.name == "air" or n.name == "default:water_source" or n.name == "default:water_flowing" then

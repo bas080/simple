@@ -12,6 +12,7 @@ minetest.register_node("fire:basic_flame", {
 	groups = {igniter=2,dig_immediate=3},
 	drop = '',
 	walkable = false,
+	buildable_to = true,
 	damage_per_second = 4,
 	
 	after_place_node = function(pos, placer)
@@ -178,6 +179,7 @@ minetest.register_abm({
 					return
 				end
 				minetest.env:remove_node(p)
+				nodeupdate(p)
 			end
 		else
 			-- remove flame

@@ -487,7 +487,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:mese_block',
+	output = 'default:mese',
 	recipe = {
 		{'default:mese_crystal', 'default:mese_crystal', 'default:mese_crystal'},
 		{'default:mese_crystal', 'default:mese_crystal', 'default:mese_crystal'},
@@ -498,7 +498,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'default:mese_crystal 9',
 	recipe = {
-		{'default:mese_block'},
+		{'default:mese'},
 	}
 })
 
@@ -508,16 +508,6 @@ minetest.register_craft({
 		{'default:mese_crystal'},
 	}
 })
-
-minetest.register_craft({
-	type = "shapeless",
-	output = 'default:mese',
-	recipe = {
-		'default:mese_crystal',
-		'default:stone',
-	}
-})
-
 
 --
 -- Crafting (tool repair)
@@ -611,12 +601,6 @@ minetest.register_craft({
 	type = "fuel",
 	recipe = "group:wood",
 	burntime = 7,
-})
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "default:mese_crystal",
-	burntime = 30,
 })
 
 minetest.register_craft({
@@ -794,7 +778,7 @@ minetest.register_node("default:stone_with_iron", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-minetest.register_node("default:mese", {
+minetest.register_node("default:stone_with_mese", {
 	description = "Mese Crystals in Stone",
 	tiles = {"default_stone.png^default_mineral_mese.png"},
 	is_ground_content = true,
@@ -1079,6 +1063,7 @@ minetest.register_node("default:water_flowing", {
 	pointable = false,
 	diggable = false,
 	buildable_to = true,
+	drop = "",
 	liquidtype = "flowing",
 	liquid_alternative_flowing = "default:water_flowing",
 	liquid_alternative_source = "default:water_source",
@@ -1104,6 +1089,7 @@ minetest.register_node("default:water_source", {
 	pointable = false,
 	diggable = false,
 	buildable_to = true,
+	drop = "",
 	liquidtype = "source",
 	liquid_alternative_flowing = "default:water_flowing",
 	liquid_alternative_source = "default:water_source",
@@ -1135,6 +1121,7 @@ minetest.register_node("default:lava_flowing", {
 	pointable = false,
 	diggable = false,
 	buildable_to = true,
+	drop = "",
 	liquidtype = "flowing",
 	liquid_alternative_flowing = "default:lava_flowing",
 	liquid_alternative_source = "default:lava_source",
@@ -1161,6 +1148,7 @@ minetest.register_node("default:lava_source", {
 	pointable = false,
 	diggable = false,
 	buildable_to = true,
+	drop = "",
 	liquidtype = "source",
 	liquid_alternative_flowing = "default:lava_flowing",
 	liquid_alternative_source = "default:lava_source",
@@ -1293,10 +1281,6 @@ minetest.register_node("default:chest_locked", {
 	end,
 	on_construct = function(pos)
 		local meta = minetest.env:get_meta(pos)
-		meta:set_string("formspec",
-				"size[8,9]"..
-				"list[current_name;main;0,0;8,4;]"..
-				"list[current_player;main;0,5;8,4;]")
 		meta:set_string("infotext", "Locked Chest")
 		meta:set_string("owner", "")
 		local inv = meta:get_inventory()
@@ -1351,6 +1335,16 @@ minetest.register_node("default:chest_locked", {
     on_metadata_inventory_take = function(pos, listname, index, stack, player)
 		minetest.log("action", player:get_player_name()..
 				" takes stuff from locked chest at "..minetest.pos_to_string(pos))
+	end,
+	on_rightclick = function(pos, node, clicker)
+		local meta = minetest.env:get_meta(pos)
+		if has_locked_chest_privilege(meta, clicker) then
+			local pos = pos.x .. "," .. pos.y .. "," ..pos.z
+			minetest.show_formspec(clicker:get_player_name(), "default:chest_locked",
+				"size[8,9]"..
+				"list[nodemeta:".. pos .. ";main;0,0;8,4;]"..
+				"list[current_player;main;0,5;8,4;]")
+		end
 	end,
 })
 
@@ -1565,13 +1559,14 @@ minetest.register_node("default:steelblock", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-minetest.register_node("default:mese_block", {
+minetest.register_node("default:mese", {
 	description = "Mese Block",
 	tiles = {"default_mese_block.png"},
 	is_ground_content = true,
 	groups = {cracky=1},
 	sounds = default.node_sound_stone_defaults(),
 })
+minetest.register_alias("default:mese_block", "default:mese")
 
 minetest.register_node("default:nyancat", {
 	description = "Nyan Cat",
