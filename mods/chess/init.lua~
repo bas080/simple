@@ -84,7 +84,7 @@ minetest.register_node("chess:spawn",{
                         local n = minetest.env:get_node(p)
                         
                         if(n.name ~= "air") then
-                            minetest.chat_send("[Chess] cannot place chess board")
+                            minetest.chat_send_all("[Chess] cannot place chess board")
                             return
                         end
                     end

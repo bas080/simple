@@ -33,7 +33,7 @@ local innerSize = 8 --inner width(8) including the coordinate 1,1
 minetest.register_node("chess:spawn",{
     description = "Chess Board",
     tile_images = {"chess_border_spawn.png", "chess_board_black.png", "chess_board_black.png^chess_border_side.png"},
-	  groups = {tree=1,snappy=1,choppy=2,oddly_breakable_by_hand=1,not_in_creative_inventory=1},
+	  groups = {snappy=1,choppy=2,oddly_breakable_by_hand=1,not_in_creative_inventory=1},
 	  can_dig = function(pos, placer)
       local player = placer:get_player_name()
       return is_owner(pos, player)

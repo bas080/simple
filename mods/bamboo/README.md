@@ -1,4 +1,0 @@
-bamboo
-======
-
-Bamboo to minetest
