@@ -217,4 +217,10 @@ plantslib:spawn_on_surfaces({
   spawn_surfaces = {"default:dirt_with_grass"},
 })
 
+minetest.register_craft({
+	type = "cooking",
+	output = "bamboo:item_dry",
+	recipe = "bamboo:item",
+})
+
 print("[Bamboo] Loaded!")

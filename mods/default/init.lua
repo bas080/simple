@@ -829,7 +829,7 @@ minetest.register_node("default:desert_sand", {
 	description = "Desert Sand",
 	tiles = {"default_desert_sand.png"},
 	is_ground_content = true,
-	groups = {sand=1, crumbly=3, falling_node=1, sand=1},
+	groups = {crumbly=3, falling_node=1, sand=1},
 	sounds = default.node_sound_sand_defaults(),
 })
 
@@ -1688,7 +1688,6 @@ minetest.register_craftitem("default:mese_crystal_fragment", {
 
 minetest.register_craftitem("default:clay_brick", {
 	description = "Clay Brick",
-	inventory_image = "default_steel_ingot.png",
 	inventory_image = "default_clay_brick.png",
 })
 
