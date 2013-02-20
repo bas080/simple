@@ -29,6 +29,3 @@ Changelog
 0.1
 * InfinityProject made code layout
 * Chess spawner
-
-Licence
-WTFPL

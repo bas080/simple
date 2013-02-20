@@ -14,10 +14,13 @@ FORUM:          http://forum.minetest.net/viewtopic.php?id=2476
 
 Changelog
 
+1.2
+* Improve light before fire feature
+
 1.1
 * Added Casimir's to light the nodebox before fire
 
-1.0
+0.2
 * Added craft
 
 0.1
