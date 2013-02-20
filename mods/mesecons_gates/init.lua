@@ -98,7 +98,8 @@ gates = {
 {name = "and"  , inputnumber = 2},
 {name = "xor"  , inputnumber = 2}}
 
-for i, gate in ipairs(gates) do
+local onoff, drop, nodename, description, groups
+for _, gate in ipairs(gates) do
 	if gate.inputnumber == 1 then
 		get_rules = gate_get_input_rules_oneinput
 	elseif gate.inputnumber == 2 then
@@ -114,6 +115,7 @@ for i, gate in ipairs(gates) do
 			groups = {dig_immediate=2, not_in_creative_inventory=1}
 		else
 			onoff = "off"
+			drop = nil
 			nodename = nodename.."_"..onoff
 			description = gate.name.." Gate"
 			groups = {dig_immediate=2}

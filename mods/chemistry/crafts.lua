@@ -7,7 +7,8 @@ chemistry:register_reaction({"default:water_source",
 })
 
 chemistry:register_reaction({"default:sand",
-  {"chemistry:Si", "chemistry:Si"},
+  {"chemistry:Si"},
+  {"chemistry:O", "chemistry:O"},
 })
 
 chemistry:register_reaction({"default:stone_with_coal",

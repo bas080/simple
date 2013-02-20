@@ -61,29 +61,14 @@ function register_painting(id, image)
   })
 end
 
--- Paintings can be added by adding to the list below.
---
--- Example:
---   local paintings = {
---     "paintings_fluttershy.png",
---     "paintings_pinkiepie.png"
---   }
---
--- This will register two paintings. Their names start at "sim_paint:id_1",
--- and increment: "sim_paint:id_2" "sim_paint:id_3" and so on.
---
--- The corresponding image filename is used as the texture. Yay? :)
---
-
 local paintings = {
+  "painting1.png",
+  "painting2.png",
+  "painting3.png",
+  "painting4.png",
   "paintings_foresight.png",
   "paintings_apocalypse.png",
   "paintings_memories.png",
-  "paintings_pinkamena.png",
-  "paintings_sepia.png",
-  "paintings_sugar.png",
-  "paintings_expected.png",
-  "paintings_sleeping.png"
 }
 
 -- Below is very important code.

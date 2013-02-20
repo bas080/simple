@@ -6,7 +6,6 @@
 |     |_ |   _   ||   |___  _____| | _____| |
 |_______||__| |__||_______||_______||_______|
 
-
 BY:             bas080
 DESCRIPTION:    Play chess in Minetest
 VERSION:        1.0
@@ -30,3 +29,6 @@ Changelog
 0.1
 * InfinityProject made code layout
 * Chess spawner
+
+Licence
+WTFPL
