@@ -1,7 +1,13 @@
---element format = {"El",<group>,<period>}
 chemistry={}
 chemistry.reaction=0
 chemistry.reactions={}
+
+function chemistry:register_reaction(reaction)
+  chemistry.reaction=chemistry.reaction+1
+  chemistry.reactions[chemistry.reaction]=reaction
+end
+
+dofile(minetest.get_modpath("chemistry").."/crafts.lua")
 
 local groups = {
   {"alkali metals",{
@@ -268,11 +274,6 @@ minetest.register_node("chemistry:and", {
   groups = {snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,chemistry=1},
 })
 
-function chemistry:register_reaction(reaction)
-  chemistry.reaction=chemistry.reaction+1
-  chemistry.reactions[chemistry.reaction]=reaction
-end
-
 function deepcopy(t)
 if type(t) ~= 'table' then return t end
 local mt = getmetatable(t)
@@ -286,31 +287,3 @@ end
 setmetatable(res,mt)
 return res
 end
-
---CHEMICAL CRAFTS
-chemistry:register_reaction({"default:water_source",
-  {"chemistry:O", "chemistry:O"},
-  {"chemistry:and"},
-  {"chemistry:H", "chemistry:H"},
-  {"chemistry:H", "chemistry:H"},
-})
-
-chemistry:register_reaction({"default:sand",
-  {"chemistry:Si", "chemistry:Si"},
-})
-
-chemistry:register_reaction({"default:stone_with_coal",
-  {"chemistry:C", "chemistry:C"},
-})
-
-chemistry:register_reaction({"moreores:gold_block",
-  {"chemistry:Au", "chemistry:Au"},
-})
-
-chemistry:register_reaction({"moreores:silver_block",
-  {"chemistry:Sg", "chemistry:Sg"},
-})
-
-chemistry:register_reaction({"default:stone_with_iron",
-  {"chemistry:Fe", "chemistry:Fe"},
-})

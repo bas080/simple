@@ -1,3 +1,5 @@
+print("[moreores] loaded.")
+
 --[[
 ****
 More Ores
@@ -16,27 +18,27 @@ Licensed under GPLv3 or later for code and zlib/libpng for textures, see: http:/
 ------------------------------------------------------------------------------
 
 -- Chunk sizes for ore generation (bigger = ore deposits are more scattered around)
-moreores_copper_chunk_size = 12
-moreores_tin_chunk_size = 9
+moreores_copper_chunk_size = 8
+moreores_tin_chunk_size = 7
 moreores_silver_chunk_size = 11
-moreores_gold_chunk_size = 13
-moreores_mithril_chunk_size = 7
+moreores_gold_chunk_size = 14
+moreores_mithril_chunk_size = 11
 
 -- Amount of ore per chunk (higher = bigger ore deposits)
-moreores_copper_ore_per_chunk = 12
-moreores_tin_ore_per_chunk = 2
-moreores_silver_ore_per_chunk = 5
-moreores_gold_ore_per_chunk = 5
+moreores_copper_ore_per_chunk = 8
+moreores_tin_ore_per_chunk = 3
+moreores_silver_ore_per_chunk = 4
+moreores_gold_ore_per_chunk = 4
 moreores_mithril_ore_per_chunk = 1
 
--- Minimal depths of ore generation (Y coordinate)
+-- Minimal depths of ore generation (Y coordinate, 0 being sea level by default)
 moreores_copper_min_depth = -31000
 moreores_tin_min_depth = -31000
 moreores_silver_min_depth = -31000
 moreores_gold_min_depth = -31000
 moreores_mithril_min_depth = -31000
 
--- Maximal depths of ore generation (Y coordinate)
+-- Maximal depths of ore generation (Y coordinate, 0 being sea level by default)
 moreores_copper_max_depth = 64
 moreores_tin_max_depth = 8
 moreores_silver_max_depth = -2
@@ -250,11 +252,11 @@ local oredefs = {
 		punchint = 1.0
 	},
 	copper = {
-		makes = {ore=true, block=false, lump=true, ingot=true, chest=false},
+		makes = {ore=true, block=true, lump=true, ingot=true, chest=true},
 		tools = {}
 	},
 	tin = {
-		makes = {ore=true, block=false, lump=true, ingot=true, chest=false},
+		makes = {ore=true, block=true, lump=true, ingot=true, chest=false},
 		tools = {}
 	},
 	bronze = {
@@ -316,7 +318,7 @@ minetest.register_craft({
 	}
 })
 
--- Bronze has some special cases (because it"s made from copper + tin)
+-- Bronze has some special cases, because it is made from copper and tin
 
 minetest.register_craft( {
 	type = "shapeless",
@@ -333,7 +335,7 @@ minetest.register_craft( {
 minetest.register_node("moreores:copper_rail", {
 	description = "Copper Rail",
 	drawtype = "raillike",
-	tile_images = {"moreores_copper_rail.png", "moreores_copper_rail_curved.png", "moreores_copper_rail_t_junction.png", "moreores_copper_rail_crossing.png"},
+	tiles = {"moreores_copper_rail.png", "moreores_copper_rail_curved.png", "moreores_copper_rail_t_junction.png", "moreores_copper_rail_crossing.png"},
 	inventory_image = "moreores_copper_rail.png",
 	wield_image = "moreores_copper_rail.png",
 	paramtype = "light",

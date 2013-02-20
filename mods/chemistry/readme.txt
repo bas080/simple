@@ -8,7 +8,7 @@
 
 BY:             bas080
 DESCRIPTION:    Get to know the world of matter
-VERSION:        0.3
+VERSION:        0.4
 LICENSE:        WTFPL
 FORUM:          http://forum.minetest.net/viewtopic.php?pid=69829
 
@@ -38,10 +38,17 @@ chemistry:register_reaction({"default:water_source",
   {"chemistry:H", "chemistry:H"},
 })
 
-Changelog
-ToDo
-* Craft for extractor and reactor
+Todo
+* More crafts for extractor and reactor
 * Fussion reactor to create rare elements
+* Check and warn if enough space for craft
+
+Changelog
+
+0.4
+* Supports moreores mod (blocks)
+* Supports diamonds mod (blocks)
+* Made seperate crafts lua
 
 0.3
 * Extractor changes nodes into atoms
