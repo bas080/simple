@@ -56,6 +56,26 @@ minetest.register_node("bamboo:bamboo_top", {
       }
     }
   },
+  on_construct = function(pos, placer)
+    local p = {x=pos.x, y=pos.y, z=pos.z}
+    local n = minetest.env:get_node(p)
+    local down=1
+    
+    local height=2+math.random(0,average_height)
+    
+    minetest.env:set_node(p, {name="bamboo:bamboo"})
+    
+    while down < height do
+      local pt = {x = p.x, y= p.y+down, z=p.z}
+      local nt = minetest.env:get_node(pt)
+      if nt.name == "air" then
+        minetest.env:add_node(pt, {name="bamboo:bamboo"})
+        down=down+1
+      else
+        return
+      end
+    end
+  end,
 })
 
 minetest.register_node("bamboo:bamboo", {
@@ -147,6 +167,7 @@ minetest.register_node("bamboo:sapling", {
     type = "fixed",
     fixed = { -0.25, -0.5, -0.25, 0.25, 0.5, 0.25 },
   },
+  
 })
 
 minetest.register_abm({
@@ -206,21 +227,6 @@ minetest.register_node("bamboo:block_dry", {
 	sounds = default.node_sound_wood_defaults(),
 })
 
-plantslib:spawn_on_surfaces({
-  spawn_plants = {"bamboo:bamboo_top"},
-  spawn_delay = 3000,
-  avoid_nodes = {"bamboo:bamboo_dry", "bamboo:bamboo", "group:wood", "group:leafdecay"},
-  avoid_radius = 15,
-  near_nodes_vertical = 4,
-  seed_diff = 420,
-  spawn_chance = 30,
-  spawn_surfaces = {"default:dirt_with_grass"},
-})
-
-minetest.register_craft({
-	type = "cooking",
-	output = "bamboo:item_dry",
-	recipe = "bamboo:item",
-})
+habitat:generate("bamboo:bamboo_top", "default:dirt_with_grass", minp, maxp, 10, 40, 2, 15, {"default:water_source"},5,{"default:tree"})
 
 print("[Bamboo] Loaded!")

@@ -46,7 +46,7 @@ plantslib:register_generate_plant(moretrees.willow_biome, moretrees.willow_model
 
 plantslib:register_generate_plant(moretrees.birch_biome, "moretrees:grow_birch")
 plantslib:register_generate_plant(moretrees.spruce_biome, "moretrees:grow_spruce")
-plantslib:register_generate_plant(moretrees.jungletree_biome, "moretrees:grow_jungletree")
+--plantslib:register_generate_plant(moretrees.jungletree_biome, "moretrees:grow_jungletree")
 plantslib:register_generate_plant(moretrees.fir_biome, "moretrees:grow_fir")
 
 -- These three lines replace default trees with beech

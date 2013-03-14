@@ -10,7 +10,7 @@ BY:             bas080
 DESCRIPTION:    Adds the function to spawn nodes near certain nodes and away from others on world generate
 VERSION:        0.5
 LICENCE:        WTFPL
-FORUM:          https://github.com/bas080/habitat/zipball/master
+FORUM:          http://forum.minetest.net/viewtopic.php?id=4612
 
 Instructions
 

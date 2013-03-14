@@ -8,7 +8,7 @@
 
 BY:             bas080
 DESCRIPTION:    Bamboo that grows in wild and things you can craft with them
-VERSION:        0.1
+VERSION:        0.2
 LICENCE:        WTFPL
 FORUM:          http://forum.minetest.net/viewtopic.php?id=4542
 

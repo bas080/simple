@@ -42,7 +42,8 @@ habitat:generate("plants:brownshroom_wild", "default:stone", minp, maxp, -40, 2,
 habitat:generate("plants:chamomile_wild", "default:dirt_with_grass", minp, maxp, 2, 40, 8, 4, {"default:stone_with_coal"},0,{""})
 habitat:generate("plants:colchicum_wild", "default:dirt_with_grass", minp, maxp, 2, 40, 4, 4, {"default:stone_with_iron"},0,{""})
 habitat:generate("plants:poppy_wild", "defaultw:desert_sand", minp, maxp, 2, 20, 4, 10, {"default:water_source"},0,{""})
-habitat:generate("plants:grasstall_wild", "default:dirt_with_grass", minp, maxp, 2, 20, 3, 3, {"default:water_source"},0,{""})
-habitat:generate("plants:grass_wild", "default:dirt_with_grass", minp, maxp, 2, 20, 3, 3, {"default:water_source"},0,{""})
+
+habitat:generate("plants:grasstall_wild", "default:dirt_with_grass", minp, maxp, 2, 20, 3, 20, {"default:water_source"},0,{""})
+habitat:generate("plants:grass_wild", "default:dirt_with_grass", minp, maxp, 2, 20, 3, 40, {"default:water_source"},0,{""})
 
 print("[Plants] Loaded!")

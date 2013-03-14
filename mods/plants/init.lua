@@ -34,146 +34,16 @@ add_plant("poppy")
 add_plant("grasstall")
 add_plant("grass")
 
+habitat:generate("plants:lavender_wild", "default:dirt_with_grass", minp, maxp, 2, 60, 4, 4, {"default:sand"},0,{""})
+habitat:generate("plants:redshroom_wild", "default:dirt_with_grass", minp, maxp, 2, 60, 20, 8, {"default:leaves"},0,{""})
+habitat:generate("plants:corn_wild", "default:dirt_with_grass", minp, maxp, 2, 60, 8, 10, {"default:water_source"},0,{""})
+habitat:generate("plants:cotton_wild", "default:dirt_with_grass", minp, maxp, 2, 60, 8, 10, {"default:desert_sand"},0,{""})
+habitat:generate("plants:brownshroom_wild", "default:stone", minp, maxp, -40, 2, 2, 10, {"default:water_source"},0,{""})
+habitat:generate("plants:chamomile_wild", "default:dirt_with_grass", minp, maxp, 2, 40, 8, 4, {"default:stone_with_coal"},0,{""})
+habitat:generate("plants:colchicum_wild", "default:dirt_with_grass", minp, maxp, 2, 40, 4, 4, {"default:stone_with_iron"},0,{""})
+habitat:generate("plants:poppy_wild", "defaultw:desert_sand", minp, maxp, 2, 20, 4, 10, {"default:water_source"},0,{""})
 
-plantslib:register_generate_plant({
-    surface = "default:dirt_with_grass",
-    near_nodes = {"default:sand"},
-    near_nodes_size = 4,
-    near_nodes_vertical = 3,
-    min_elevation = 2,
-    max_elevation = 60,
-    rarity = 8,
-    plantlife_limit = -0.9,
-    max_count = 30,
-  }, 
-  "plants:lavender_wild"
-)
-
-
-plantslib:register_generate_plant({
-    surface = "default:dirt_with_grass",
-    near_nodes = {"default:leaves"},
-    near_nodes_size = 8,
-    near_nodes_vertical = 1,
-    min_elevation = 2,
-    max_elevation = 60,
-    rarity = 10,
-    plantlife_limit = -0.8,
-    max_count = 15,
-  }, 
-  "plants:redshroom_wild"
-)
-
-
-plantslib:register_generate_plant({
-    surface = "default:dirt_with_grass",
-    near_nodes = {"default:water_source"},
-    near_nodes_size = 5,
-    near_nodes_vertical = 5,
-    min_elevation = 2,
-    max_elevation = 60,
-    rarity = 2,
-    plantlife_limit = -1,
-    max_count = 5,
-  }, 
-  "plants:corn_wild"
-)
-
-plantslib:register_generate_plant({
-    surface = "default:dirt_with_grass",
-    near_nodes = {"default:desert_sand"},
-    near_nodes_size = 5,
-    near_nodes_vertical = 1,
-    min_elevation = 2,
-    max_elevation = 60,
-    rarity = 8,
-    plantlife_limit = -0.5,
-    max_count = 3,
-  }, 
-  "plants:cotton_wild"
-)
-
-plantslib:register_generate_plant({
-    surface = "default:stone",
-    near_nodes = {"default:water_source"},
-    near_nodes_size = 5,
-    near_nodes_vertical = 2,
-    min_elevation = -40,
-    max_elevation = 2,
-    rarity = 2,
-    plantlife_limit = -0.7,
-    max_count = 10,
-  }, 
-  "plants:brownshroom_wild"
-)
-
-
-
-plantslib:register_generate_plant({
-    surface = "default:dirt_with_grass",
-    near_nodes = {"default:stone_with_coal"},
-    near_nodes_size = 4,
-    near_nodes_vertical = 4,
-    min_elevation = 2,
-    max_elevation = 40,
-    rarity = 8,
-    max_count = 10,
-  }, 
-  "plants:chamomile_wild"
-)
-
-plantslib:register_generate_plant({
-    surface = "default:dirt_with_grass",
-    near_nodes = {"default:stone_with_iron"},
-    near_nodes_size = 4,
-    near_nodes_vertical = 4,
-    min_elevation = 2,
-    max_elevation = 40,
-    rarity = 4,
-  }, 
-  "plants:colchicum_wild"
-)
-
-plantslib:register_generate_plant({
-    surface = "default:desert_sand",
-    near_nodes = {"default:water_source"},
-    near_nodes_size = 4,
-    near_nodes_vertical = 10,
-    min_elevation = 2,
-    max_elevation = 40,
-    rarity = 8,
-  }, 
-  "plants:poppy_wild"
-)
-
-plantslib:register_generate_plant({
-    surface = "default:dirt_with_grass",
-    near_nodes = {"default:water_source"},
-    near_nodes_size = 8,
-    near_nodes_vertical = 2,
-    near_nodes_count = 2,
-    min_elevation = 2,
-    max_elevation = 40,
-    rarity = 4,
-    plantlife_limit = -1,
-    max_count = 40
-  }, 
-  "plants:grasstall_wild"
-)
-
-plantslib:register_generate_plant({
-    surface = "default:dirt_with_grass",
-    near_nodes = {"default:water_source"},
-    near_nodes_size = 16,
-    near_nodes_vertical = 4,
-    near_nodes_count = 2,
-    min_elevation = 2,
-    max_elevation = 60,
-    rarity = 4,
-    plantlife_limit = -1,
-    max_count = 20
-  }, 
-  "plants:grass_wild"
-)
+habitat:generate("plants:grasstall_wild", "default:dirt_with_grass", minp, maxp, 2, 20, 3, 20, {"default:water_source"},0,{""})
+habitat:generate("plants:grass_wild", "default:dirt_with_grass", minp, maxp, 2, 20, 3, 40, {"default:water_source"},0,{""})
 
 print("[Plants] Loaded!")

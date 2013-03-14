@@ -2,9 +2,10 @@ habitat = {}
 
 
 
-function habitat:generate(node, surface, minp, maxp, height_min, height_max, spread, habitat_size, habitat_nodes, antitat_size, antitat_nodes)
+function habitat:generate(node, surface, height_min, height_max, spread, habitat_size, habitat_nodes, antitat_size, antitat_nodes)
   minetest.register_on_generated(function(minp, maxp, seed)
-    if height_min > maxp.y or height_max < minp.y then
+   print(maxp.y)
+if height_min > maxp.y or height_max < minp.y then
       return
     end
     
