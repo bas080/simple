@@ -17,12 +17,15 @@ pp_on_timer = function (pos, elapsed)
 	if not ppspec then return end
 
 	local objs   = minetest.env:get_objects_inside_radius(pos, 1)
+	local two_below = mesecon:addPosRule(pos, {x = 0, y = -2, z = 0})
 
 	if objs[1] == nil and node.name == ppspec.onstate then
 		minetest.env:add_node(pos, {name = ppspec.offstate})
 		mesecon:receptor_off(pos)
 		-- force deactivation of mesecon two blocks below (hacky)
-		mesecon:turnoff(mesecon:addPosRule(pos, {x = 0, y = -2, z = 0}))
+		if not mesecon:connected_to_receptor(two_below) then
+			mesecon:turnoff(two_below)
+		end
 	else
 		for k, obj in pairs(objs) do
 			local objpos = obj:getpos()
@@ -30,7 +33,7 @@ pp_on_timer = function (pos, elapsed)
 				minetest.env:add_node(pos, {name=ppspec.onstate})
 				mesecon:receptor_on(pos)
 				-- force activation of mesecon two blocks below (hacky)
-				mesecon:turnon(mesecon:addPosRule(pos, {x = 0, y = -2, z = 0}))
+				mesecon:turnon(two_below)
 			end
 		end
 	end
@@ -39,12 +42,12 @@ end
 
 -- Register a Pressure Plate
 -- offstate:	name of the pressure plate when inactive
--- onstate:		name of the pressure plate when active
+-- onstate:	name of the pressure plate when active
 -- description:	description displayed in the player's inventory
 -- tiles_off:	textures of the pressure plate when inactive
 -- tiles_on:	textures of the pressure plate when active
--- image:		inventory and wield image of the pressure plate
--- recipe:		crafting recipe of the pressure plate
+-- image:	inventory and wield image of the pressure plate
+-- recipe:	crafting recipe of the pressure plate
 
 function mesecon:register_pressure_plate(offstate, onstate, description, texture_off, texture_on, recipe)
 	local ppspec = {
@@ -82,12 +85,19 @@ function mesecon:register_pressure_plate(offstate, onstate, description, texture
 		drop = offstate,
 		pressureplate = ppspec,
 		on_timer = pp_on_timer,
+		sounds = default.node_sound_wood_defaults(),
 		mesecons = {receptor = {
 			state = mesecon.state.on
 		}},
 		on_construct = function(pos)
 			minetest.env:get_node_timer(pos):start(PRESSURE_PLATE_INTERVAL)
 		end,
+		after_dig_node = function(pos)
+			local two_below = mesecon:addPosRule(pos, {x = 0, y = -2, z = 0})
+			if not mesecon:connected_to_receptor(two_below) then
+				mesecon:turnoff(two_below)
+			end
+		end
 	})
 
 	minetest.register_craft({
