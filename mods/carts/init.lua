@@ -579,7 +579,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "carts:powerrail 2",
 	recipe = {
-		{"default:default:mese_crystal_fragment"},
+		{"default:mese_crystal_fragment"},
 		{"default:rail"},
 	}
 })
@@ -588,14 +588,14 @@ minetest.register_craft({
 	output = "carts:powerrail 2",
 	recipe = {
 		{"default:rail"},
-		{"default:default:mese_crystal_fragment"},
+		{"default:mese_crystal_fragment"},
 	}
 })
 
 minetest.register_craft({
 	output = "carts:brakerail 2",
 	recipe = {
-		{"default:default:default:coal_lump"},
+		{"default:coal_lump"},
 		{"default:rail"},
 	}
 })
@@ -604,6 +604,6 @@ minetest.register_craft({
 	output = "carts:brakerail 2",
 	recipe = {
 		{"default:rail"},
-		{"default:default:default:coal_lump"},
+		{"default:coal_lump"},
 	}
 })
