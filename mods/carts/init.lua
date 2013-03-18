@@ -59,7 +59,14 @@ function cart:on_punch(puncher, time_from_last_punch, tool_capabilities, directi
 	
 	if puncher:get_player_control().sneak then
 		self.object:remove()
-		puncher:get_inventory():add_item("main", "carts:cart")
+		local inv = puncher:get_inventory()
+		if minetest.setting_getbool("creative_mode") then
+			if not inv:contains_item("main", "carts:cart") then
+				inv:add_item("main", "carts:cart")
+			end
+		else
+			inv:add_item("main", "carts:cart")
+		end
 		return
 	end
 	
@@ -225,7 +232,7 @@ function cart:on_step(dtime)
 		if math.abs(self.velocity.x) < 0.1 and  math.abs(self.velocity.z) < 0.1 then
 			-- Start the cart if powered from mesecons
 			local a = tonumber(minetest.env:get_meta(pos):get_string("cart_acceleration"))
-			if a then
+			if a and a ~= 0 then
 				for _,y in ipairs({0,-1,1}) do
 					for _,z in ipairs({1,-1}) do
 						if cart_func.v3:equal(self:get_rail_direction(self.object:getpos(), {x=0, y=y, z=z}), {x=0, y=y, z=z}) then
@@ -419,11 +426,15 @@ minetest.register_craftitem("carts:cart", {
 		end
 		if cart_func:is_rail(pointed_thing.under) then
 			minetest.env:add_entity(pointed_thing.under, "carts:cart")
-			itemstack:take_item()
+			if not minetest.setting_getbool("creative_mode") then
+				itemstack:take_item()
+			end
 			return itemstack
 		elseif cart_func:is_rail(pointed_thing.above) then
 			minetest.env:add_entity(pointed_thing.above, "carts:cart")
-			itemstack:take_item()
+			if not minetest.setting_getbool("creative_mode") then
+				itemstack:take_item()
+			end
 			return itemstack
 		end
 	end,
@@ -453,10 +464,33 @@ minetest.register_node(":default:rail", {
 	walkable = false,
 	selection_box = {
 		type = "fixed",
-                -- but how to specify the dimensions for curved and sideways rails?
-                fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
+		-- but how to specify the dimensions for curved and sideways rails?
+		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
 	},
 	groups = {bendy=2,snappy=1,dig_immediate=2,attached_node=1,rail=1},
+})
+
+minetest.register_node("carts:powerrail", {
+	description = "Powered Rail",
+	drawtype = "raillike",
+	tiles = {"carts_rail_pwr.png", "carts_rail_curved_pwr.png", "carts_rail_t_junction_pwr.png", "carts_rail_crossing_pwr.png"},
+	inventory_image = "carts_rail_pwr.png",
+	wield_image = "carts_rail_pwr.png",
+	paramtype = "light",
+	is_ground_content = true,
+	walkable = false,
+	selection_box = {
+		type = "fixed",
+		-- but how to specify the dimensions for curved and sideways rails?
+		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
+	},
+	groups = {bendy=2,snappy=1,dig_immediate=2,attached_node=1,rail=1},
+	
+	after_place_node = function(pos, placer, itemstack)
+		if not mesecon then
+			minetest.env:get_meta(pos):set_string("cart_acceleration", "0.5")
+		end
+	end,
 	
 	mesecons = {
 		effector = {
@@ -469,4 +503,75 @@ minetest.register_node(":default:rail", {
 			end,
 		},
 	},
+})
+
+minetest.register_node("carts:brakerail", {
+	description = "Brake Rail",
+	drawtype = "raillike",
+	tiles = {"carts_rail_brk.png", "carts_rail_curved_brk.png", "carts_rail_t_junction_brk.png", "carts_rail_crossing_brk.png"},
+	inventory_image = "carts_rail_brk.png",
+	wield_image = "carts_rail_brk.png",
+	paramtype = "light",
+	is_ground_content = true,
+	walkable = false,
+	selection_box = {
+		type = "fixed",
+		-- but how to specify the dimensions for curved and sideways rails?
+		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
+	},
+	groups = {bendy=2,snappy=1,dig_immediate=2,attached_node=1,rail=1},
+	
+	after_place_node = function(pos, placer, itemstack)
+		if not mesecon then
+			minetest.env:get_meta(pos):set_string("cart_acceleration", "-0.2")
+		end
+	end,
+	
+	mesecons = {
+		effector = {
+			action_on = function(pos, node)
+				minetest.env:get_meta(pos):set_string("cart_acceleration", "-0.2")
+			end,
+			
+			action_off = function(pos, node)
+				minetest.env:get_meta(pos):set_string("cart_acceleration", "0")
+			end,
+		},
+	},
+})
+
+minetest.register_craft({
+	output = "carts:powerrail 2",
+	recipe = {
+		{"default:steel_ingot", "default:mese_crystal_fragment", "default:steel_ingot"},
+		{"default:steel_ingot", "default:stick", "default:steel_ingot"},
+		{"default:steel_ingot", "", "default:steel_ingot"},
+	}
+})
+
+minetest.register_craft({
+	output = "carts:powerrail 2",
+	recipe = {
+		{"default:steel_ingot", "", "default:steel_ingot"},
+		{"default:steel_ingot", "default:stick", "default:steel_ingot"},
+		{"default:steel_ingot", "default:mese_crystal_fragment", "default:steel_ingot"},
+	}
+})
+
+minetest.register_craft({
+	output = "carts:brakerail 2",
+	recipe = {
+		{"default:steel_ingot", "default:coal_lump", "default:steel_ingot"},
+		{"default:steel_ingot", "default:stick", "default:steel_ingot"},
+		{"default:steel_ingot", "", "default:steel_ingot"},
+	}
+})
+
+minetest.register_craft({
+	output = "carts:brakerail 2",
+	recipe = {
+		{"default:steel_ingot", "", "default:steel_ingot"},
+		{"default:steel_ingot", "default:stick", "default:steel_ingot"},
+		{"default:steel_ingot", "default:coal_lump", "default:steel_ingot"},
+	}
 })
