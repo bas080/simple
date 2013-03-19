@@ -1,5 +1,3 @@
-local seeds = {"farming:wheat_seed", "farming:cotton_seed", "farming:pumpkin_seed"}
-
 local function create_soil(pos, inv, p)
 	if pos == nil then
 		return false
@@ -11,8 +9,12 @@ local function create_soil(pos, inv, p)
 		if above.name == "air" then
 			node.name = "farming:soil"
 			minetest.env:set_node(pos, node)
-			if inv and p and name == "default:dirt_with_grass" and math.random(1, p) == 1 then
-				inv:add_item("main", ItemStack(seeds[math.random(1, #seeds)]))
+			if inv and p and name == "default:dirt_with_grass" then
+				for name,rarity in pairs(farming.seeds) do
+					if math.random(1, rarity-p) == 1 then
+						inv:add_item("main", ItemStack(name))
+					end
+				end
 			end
 			return true
 		end
@@ -24,8 +26,10 @@ minetest.register_tool("farming:hoe_wood", {
 	description = "Wood Hoe",
 	inventory_image = "farming_hoe_wood.png",
 	on_use = function(itemstack, user, pointed_thing)
-		if create_soil(pointed_thing.under, user:get_inventory(), 20) then
-			itemstack:add_wear(65535/30)
+		if create_soil(pointed_thing.under, user:get_inventory(), 0) then
+			if not minetest.setting_getbool("creative_mode") then
+				itemstack:add_wear(65535/30)
+			end
 			return itemstack
 		end
 	end
@@ -44,8 +48,10 @@ minetest.register_tool("farming:hoe_stone", {
 	description = "Stone Hoe",
 	inventory_image = "farming_hoe_stone.png",
 	on_use = function(itemstack, user, pointed_thing)
-		if create_soil(pointed_thing.under, user:get_inventory(), 15) then
-			itemstack:add_wear(65535/50)
+		if create_soil(pointed_thing.under, user:get_inventory(), 5) then
+			if not minetest.setting_getbool("creative_mode") then
+				itemstack:add_wear(65535/50)
+			end
 			return itemstack
 		end
 	end
@@ -65,7 +71,9 @@ minetest.register_tool("farming:hoe_steel", {
 	inventory_image = "farming_hoe_steel.png",
 	on_use = function(itemstack, user, pointed_thing)
 		if create_soil(pointed_thing.under, user:get_inventory(), 10) then
-			itemstack:add_wear(65535/80)
+			if not minetest.setting_getbool("creative_mode") then
+				itemstack:add_wear(65535/80)
+			end
 			return itemstack
 		end
 	end

@@ -12,15 +12,13 @@ VERSION:        1.0
 LICENCE:        WTFPL
 FORUM:          http://forum.minetest.net/viewtopic.php?id=2619
 
-Todo
-
-3.0
-* Seeds for PilzAdam's farming mod
-* Add more plants
-  - mese-flower
-  - glow-shroom
-
 Changelog
+---------
+3.0
+* Drops nodes PilzAdam's farming mod
+* Reverted to habitat mod
+* Retextured (fits the default textures better)
+
 2.0
 * Uses plants_lib
 

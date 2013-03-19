@@ -103,7 +103,7 @@ minetest.register_node("dualport:dualport", {
   tiles = {"teleporters_base.png"},
   groups = {cracky=3},
   light_source = 10,
-  on_punch = function(pos)
+  on_punch = function(pos, puncher)
   
     local meta = minetest.env:get_meta(pos)
     local link = meta:get_string("link")
@@ -114,7 +114,7 @@ minetest.register_node("dualport:dualport", {
       local objs = minetest.env:get_objects_inside_radius(pos, .5)
       pos.y = pos.y -.5
       for _, obj in pairs(objs) do
-        minetest.sound_play("dualport_teleport",{pos=newpos,gain=0.4,max_hear_distance=32})
+        minetest.sound_play("dualport_teleport",{to_player = puncher, gain = 1.0})
         newpos.y = newpos.y -1
         teleporters.teleport({obj=obj,pos=newpos})
         newpos.y = newpos.y +1.7

@@ -1,6 +1,7 @@
 minetest.register_node("farming:weed", {
 	description = "Weed",
 	paramtype = "light",
+	sunlight_propagates = true,
 	walkable = false,
 	drawtype = "plantlike",
 	tiles = {"farming_weed.png"},
@@ -20,6 +21,9 @@ minetest.register_abm({
 	interval = 50,
 	chance = 10,
 	action = function(pos, node)
+		if minetest.env:find_node_near(pos, 4, {"farming:scarecrow", "farming:scarecrow_light"}) ~= nil then
+			return
+		end
 		pos.y = pos.y+1
 		if minetest.env:get_node(pos).name == "air" then
 			node.name = "farming:weed"

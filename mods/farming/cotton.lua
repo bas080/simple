@@ -14,6 +14,7 @@ minetest.register_craftitem("farming:cotton_seed", {
 
 minetest.register_node("farming:cotton_1", {
 	paramtype = "light",
+	sunlight_propagates = true,
 	walkable = false,
 	drawtype = "plantlike",
 	drop = "",
@@ -30,6 +31,7 @@ minetest.register_node("farming:cotton_1", {
 
 minetest.register_node("farming:cotton_2", {
 	paramtype = "light",
+	sunlight_propagates = true,
 	walkable = false,
 	drawtype = "plantlike",
 	drop = "",
@@ -46,6 +48,7 @@ minetest.register_node("farming:cotton_2", {
 
 minetest.register_node("farming:cotton", {
 	paramtype = "light",
+	sunlight_propagates = true,
 	walkable = false,
 	drawtype = "plantlike",
 	tiles = {"farming_cotton.png"},
@@ -64,28 +67,7 @@ minetest.register_node("farming:cotton", {
 	sounds = default.node_sound_leaves_defaults(),
 })
 
-minetest.register_abm({
-	nodenames = {"farming:cotton_1", "farming:cotton_2"},
-	interval = 30,
-	chance = 15,
-	action = function(pos, node)
-		pos.y = pos.y-1
-		if minetest.env:get_node(pos).name ~= "farming:soil_wet" then
-			return
-		end
-		pos.y = pos.y+1
-		if minetest.env:get_node_light(pos) < 8 then
-			return
-		end
-		if node.name == "farming:cotton_1" then
-			node.name = "farming:cotton_2"
-			minetest.env:set_node(pos, node)
-		elseif node.name == "farming:cotton_2" then
-			node.name = "farming:cotton"
-			minetest.env:set_node(pos, node)
-		end
-	end
-})
+farming:add_plant("farming:cotton", {"farming:cotton_1", "farming:cotton_2"}, 50, 20)
 
 minetest.register_craftitem("farming:string", {
 	description = "String",

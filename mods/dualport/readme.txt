@@ -14,6 +14,9 @@ FORUM:          http://forum.minetest.net/viewtopic.php?pid=76281
 
 Changelog
 
+1.1
+* Improvedsound play on (punch) use
+
 1.0
 * Improved infotext
 * Added linked soundeffect

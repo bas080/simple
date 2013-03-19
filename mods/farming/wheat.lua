@@ -14,6 +14,7 @@ minetest.register_craftitem("farming:wheat_seed", {
 
 minetest.register_node("farming:wheat_1", {
 	paramtype = "light",
+	sunlight_propagates = true,
 	walkable = false,
 	drawtype = "plantlike",
 	drop = "",
@@ -29,6 +30,7 @@ minetest.register_node("farming:wheat_1", {
 })
 
 minetest.register_node("farming:wheat_2", {
+	sunlight_propagates = true,
 	paramtype = "light",
 	walkable = false,
 	drawtype = "plantlike",
@@ -45,6 +47,7 @@ minetest.register_node("farming:wheat_2", {
 })
 
 minetest.register_node("farming:wheat_3", {
+	sunlight_propagates = true,
 	paramtype = "light",
 	walkable = false,
 	drawtype = "plantlike",
@@ -61,6 +64,7 @@ minetest.register_node("farming:wheat_3", {
 })
 
 minetest.register_node("farming:wheat", {
+	sunlight_propagates = true,
 	paramtype = "light",
 	walkable = false,
 	drawtype = "plantlike",
@@ -78,31 +82,7 @@ minetest.register_node("farming:wheat", {
 	sounds = default.node_sound_leaves_defaults(),
 })
 
-minetest.register_abm({
-	nodenames = {"farming:wheat_1", "farming:wheat_2", "farming:wheat_3"},
-	interval = 30,
-	chance = 15,
-	action = function(pos, node)
-		pos.y = pos.y-1
-		if minetest.env:get_node(pos).name ~= "farming:soil_wet" then
-			return
-		end
-		pos.y = pos.y+1
-		if minetest.env:get_node_light(pos) < 8 then
-			return
-		end
-		if node.name == "farming:wheat_1" then
-			node.name = "farming:wheat_2"
-			minetest.env:set_node(pos, node)
-		elseif node.name == "farming:wheat_2" then
-			node.name = "farming:wheat_3"
-			minetest.env:set_node(pos, node)
-		elseif node.name == "farming:wheat_3" then
-			node.name = "farming:wheat"
-			minetest.env:set_node(pos, node)
-		end
-	end
-})
+farming:add_plant("farming:wheat", {"farming:wheat_1", "farming:wheat_2", "farming:wheat_3"}, 50, 20)
 
 minetest.register_craftitem("farming:wheat_harvested", {
 	description = "Harvested Wheat",
@@ -122,28 +102,30 @@ minetest.register_craftitem("farming:flour", {
 })
 
 minetest.register_craft({
-	output = "farming:cake_mix",
+	output = "farming:dough",
 	type = "shapeless",
 	recipe = {"farming:flour", "farming:flour", "farming:flour", "farming:flour", "bucket:bucket_water"},
 	replacements = {{"bucket:bucket_water", "bucket:bucket_empty"}}
 })
 
-minetest.register_craftitem("farming:cake_mix", {
-	description = "Cake Mix",
+minetest.register_alias("farming:cake_mix","farming:dough")
+
+minetest.register_craftitem("farming:dough", {
+	description = "Bread Dough",
 	inventory_image = "farming_cake_mix.png",
 })
 
 minetest.register_craft({
 	type = "cooking",
 	output = "farming:bread",
-	recipe = "farming:cake_mix",
+	recipe = "farming:dough",
 	cooktime = 10
 })
 
 minetest.register_craftitem("farming:bread", {
 	description = "Bread",
 	inventory_image = "farming_bread.png",
-	stack_max = 1,
+	groups = {food=2},
 	on_use = minetest.item_eat(10)
 })
 
