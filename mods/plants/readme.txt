@@ -15,7 +15,8 @@ FORUM:          http://forum.minetest.net/viewtopic.php?id=2619
 Changelog
 ---------
 3.0
-* Drops nodes PilzAdam's farming mod
+* Plant can only be gathered if it does not drop something
+* Drops nodes for PilzAdam's farming mod (depend)
 * Reverted to habitat mod
 * Retextured (fits the default textures better)
 

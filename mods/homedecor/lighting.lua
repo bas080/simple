@@ -1,10 +1,19 @@
 
 -- This file supplies glowlights
 
+-- Boilerplate to support localized strings if intllib mod is installed.
+local S
+if (minetest.get_modpath("intllib")) then
+    dofile(minetest.get_modpath("intllib").."/intllib.lua")
+    S = intllib.Getter(minetest.get_current_modname())
+else
+    S = function ( s ) return s end
+end
+
 -- Yellow
 
 minetest.register_node('homedecor:glowlight_thick_yellow', {
-	description = "Yellow Glowlight (thick)",
+	description = S("Yellow Glowlight (thick)"),
 	drawtype = "nodebox",
 	tiles = {
 		'homedecor_glowlight_yellow_tb.png',
@@ -28,11 +37,11 @@ minetest.register_node('homedecor:glowlight_thick_yellow', {
 	walkable = true,
 	groups = { snappy = 3 },
 	light_source = LIGHT_MAX,
-	sounds = default.node_sound_leaves_defaults(),
+	sounds = default.node_sound_wood_defaults(),
 })
 
 minetest.register_node('homedecor:glowlight_thick_yellow_wall', {
-	description = "Yellow Glowlight (thick, on wall)",
+	description = S("Yellow Glowlight (thick, on wall)"),
 	drawtype = "nodebox",
 	tiles = {
 		'homedecor_glowlight_thick_yellow_sides.png',
@@ -56,11 +65,11 @@ minetest.register_node('homedecor:glowlight_thick_yellow_wall', {
 	walkable = true,
 	groups = { snappy = 3 },
 	light_source = LIGHT_MAX,
-	sounds = default.node_sound_leaves_defaults(),
+	sounds = default.node_sound_wood_defaults(),
 })
 
 minetest.register_node('homedecor:glowlight_thin_yellow', {
-	description = "Yellow Glowlight (thin)",
+	description = S("Yellow Glowlight (thin)"),
 	drawtype = "nodebox",
 	tiles = {
 		'homedecor_glowlight_yellow_tb.png',
@@ -84,11 +93,11 @@ minetest.register_node('homedecor:glowlight_thin_yellow', {
 	walkable = true,
 	groups = { snappy = 3 },
 	light_source = LIGHT_MAX-1,
-	sounds = default.node_sound_leaves_defaults(),
+	sounds = default.node_sound_wood_defaults(),
 })
 
 minetest.register_node('homedecor:glowlight_thin_yellow_wall', {
-	description = "Yellow Glowlight (thin, on wall)",
+	description = S("Yellow Glowlight (thin, on wall)"),
 	drawtype = "nodebox",
 	tiles = {
 		'homedecor_glowlight_thin_yellow_sides.png',
@@ -112,11 +121,11 @@ minetest.register_node('homedecor:glowlight_thin_yellow_wall', {
 	walkable = true,
 	groups = { snappy = 3 },
 	light_source = LIGHT_MAX-1,
-	sounds = default.node_sound_leaves_defaults(),
+	sounds = default.node_sound_wood_defaults(),
 })
 
 minetest.register_node('homedecor:glowlight_small_cube_yellow', {
-	description = "Yellow Glowlight (small cube)",
+	description = S("Yellow Glowlight (small cube)"),
 	drawtype = "nodebox",
 	tiles = {
 		'homedecor_glowlight_cube_yellow_tb.png',
@@ -140,11 +149,11 @@ minetest.register_node('homedecor:glowlight_small_cube_yellow', {
 	walkable = true,
 	groups = { snappy = 3 },
 	light_source = LIGHT_MAX-1,
-	sounds = default.node_sound_leaves_defaults(),
+	sounds = default.node_sound_wood_defaults(),
 })
 
 minetest.register_node('homedecor:glowlight_small_cube_yellow_ceiling', {
-	description = "Yellow Glowlight (small cube, on ceiling)",
+	description = S("Yellow Glowlight (small cube, on ceiling)"),
 	drawtype = "nodebox",
 	tiles = {
 		'homedecor_glowlight_cube_yellow_tb.png',
@@ -168,13 +177,13 @@ minetest.register_node('homedecor:glowlight_small_cube_yellow_ceiling', {
 	walkable = true,
 	groups = { snappy = 3 },
 	light_source = LIGHT_MAX-1,
-	sounds = default.node_sound_leaves_defaults(),
+	sounds = default.node_sound_wood_defaults(),
 })
 
 -- White
 
 minetest.register_node('homedecor:glowlight_thick_white', {
-	description = "White Glowlight (thick)",
+	description = S("White Glowlight (thick)"),
 	drawtype = "nodebox",
 	tiles = {
 		'homedecor_glowlight_white_tb.png',
@@ -198,11 +207,11 @@ minetest.register_node('homedecor:glowlight_thick_white', {
 	walkable = true,
 	groups = { snappy = 3 },
 	light_source = LIGHT_MAX,
-	sounds = default.node_sound_leaves_defaults(),
+	sounds = default.node_sound_wood_defaults(),
 })
 
 minetest.register_node('homedecor:glowlight_thick_white_wall', {
-	description = "White Glowlight (thick, on wall)",
+	description = S("White Glowlight (thick, on wall)"),
 	drawtype = "nodebox",
 	tiles = {
 		'homedecor_glowlight_thick_white_sides.png',
@@ -226,11 +235,11 @@ minetest.register_node('homedecor:glowlight_thick_white_wall', {
 	walkable = true,
 	groups = { snappy = 3 },
 	light_source = LIGHT_MAX,
-	sounds = default.node_sound_leaves_defaults(),
+	sounds = default.node_sound_wood_defaults(),
 })
 
 minetest.register_node('homedecor:glowlight_thin_white', {
-	description = "White Glowlight (thin)",
+	description = S("White Glowlight (thin)"),
 	drawtype = "nodebox",
 	tiles = {
 		'homedecor_glowlight_white_tb.png',
@@ -254,11 +263,11 @@ minetest.register_node('homedecor:glowlight_thin_white', {
 	walkable = true,
 	groups = { snappy = 3 },
 	light_source = LIGHT_MAX-1,
-	sounds = default.node_sound_leaves_defaults(),
+	sounds = default.node_sound_wood_defaults(),
 })
 
 minetest.register_node('homedecor:glowlight_thin_white_wall', {
-	description = "White Glowlight (thin, on wall)",
+	description = S("White Glowlight (thin, on wall)"),
 	drawtype = "nodebox",
 	tiles = {
 		'homedecor_glowlight_thin_white_sides.png',
@@ -282,11 +291,11 @@ minetest.register_node('homedecor:glowlight_thin_white_wall', {
 	walkable = true,
 	groups = { snappy = 3 },
 	light_source = LIGHT_MAX-1,
-	sounds = default.node_sound_leaves_defaults(),
+	sounds = default.node_sound_wood_defaults(),
 })
 
 minetest.register_node('homedecor:glowlight_small_cube_white', {
-	description = "White Glowlight (small cube)",
+	description = S("White Glowlight (small cube)"),
 	drawtype = "nodebox",
 	tiles = {
 		'homedecor_glowlight_cube_white_tb.png',
@@ -310,11 +319,11 @@ minetest.register_node('homedecor:glowlight_small_cube_white', {
 	walkable = true,
 	groups = { snappy = 3 },
 	light_source = LIGHT_MAX-1,
-	sounds = default.node_sound_leaves_defaults(),
+	sounds = default.node_sound_wood_defaults(),
 })
 
 minetest.register_node('homedecor:glowlight_small_cube_white_ceiling', {
-	description = "White Glowlight (small cube, on ceiling)",
+	description = S("White Glowlight (small cube, on ceiling)"),
 	drawtype = "nodebox",
 	tiles = {
 		'homedecor_glowlight_cube_white_tb.png',
@@ -338,5 +347,5 @@ minetest.register_node('homedecor:glowlight_small_cube_white_ceiling', {
 	walkable = true,
 	groups = { snappy = 3 },
 	light_source = LIGHT_MAX-1,
-	sounds = default.node_sound_leaves_defaults(),
+	sounds = default.node_sound_wood_defaults(),
 })

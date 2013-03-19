@@ -40,7 +40,7 @@ add_plant("chamomile")
 add_plant("colchicum")
 add_plant("poppy")
 add_plant("grasstall",{max_items = 1,items = {{ items = {'farming:wheat_seed'}, rarity = 40}}})
-add_plant("grass")
+add_plant("grass",{max_items = 1,items = {{ items = {'farming:wheat_seed'}, rarity = 60}}})
 
 --habitat:generate(node, surface, minp, maxp, height_min, height_max, spread, habitat_size, habitat_nodes, antitat_size, antitat_nodes)
 habitat:generate("plants:lavender_wild", "default:dirt_with_grass", minp, maxp, 2, 60, 4, 4, {"default:sand"},0,{""})

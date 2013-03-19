@@ -6,6 +6,15 @@
 -- License: GPL
 --
 
+-- Boilerplate to support localized strings if intllib mod is installed.
+local S
+if (minetest.get_modpath("intllib")) then
+    dofile(minetest.get_modpath("intllib").."/intllib.lua")
+    S = intllib.Getter(minetest.get_current_modname())
+else
+    S = function ( s ) return s end
+end
+
 -- Some recipes need white paint.  If Unified Dyes isn't present,
 -- implement the standard white paint production method here instead,
 -- plus some alternate recipes in the event of material shorages.
@@ -13,7 +22,7 @@
 if ( minetest.get_modpath("unifieddyes") ) == nil then
 
 	minetest.register_craftitem(":unifieddyes:titanium_dioxide", {
-		description = "Titanium Dioxide",
+		description = S("Titanium Dioxide"),
 		inventory_image = "homedecor_titanium_dioxide.png",
 	})
 
@@ -24,7 +33,7 @@ if ( minetest.get_modpath("unifieddyes") ) == nil then
 	})
 
 	minetest.register_craftitem(":unifieddyes:white_paint", {
-		description = "Bucket of white paint",
+		description = S("Bucket of white paint"),
 		inventory_image = "homedecor_white_paint.png",
 	})
 
@@ -66,7 +75,7 @@ end
 -- misc stuff :D
 
 minetest.register_craftitem("homedecor:terracotta_base", {
-        description = "Uncooked Terracotta Base",
+        description = S("Uncooked Terracotta Base"),
         inventory_image = "homedecor_terracotta_base.png",
 })
 
@@ -82,7 +91,7 @@ minetest.register_craft( {
 })
 
 minetest.register_craftitem("homedecor:roof_tile_terracotta", {
-        description = "Terracotta Roof Tile",
+        description = S("Terracotta Roof Tile"),
         inventory_image = "homedecor_roof_tile_terracotta.png",
 })
 
@@ -111,12 +120,12 @@ minetest.register_craft( {
 --
 
 minetest.register_craftitem("homedecor:plastic_sheeting", {
-        description = "Plastic sheet",
+        description = S("Plastic sheet"),
         inventory_image = "homedecor_plastic_sheeting.png",
 })
 
 minetest.register_craftitem("homedecor:plastic_base", {
-        description = "Unprocessed Plastic base",
+        description = S("Unprocessed Plastic base"),
         wield_image = "homedecor_plastic_base.png",
         inventory_image = "homedecor_plastic_base_inv.png",
 })
@@ -680,7 +689,7 @@ minetest.register_craft({
 --
 
 minetest.register_craftitem("homedecor:drawer_small", {
-        description = "Small Wooden Drawer",
+        description = S("Small Wooden Drawer"),
         inventory_image = "homedecor_drawer_small.png",
 })
 
@@ -792,7 +801,7 @@ minetest.register_craft({
 })
 
 minetest.register_craftitem("homedecor:brass_ingot", {
-        description = "Brass Ingot",
+        description = S("Brass Ingot"),
         inventory_image = "homedecor_brass_ingot.png",
 })
 
@@ -823,11 +832,6 @@ minetest.register_craft( {
 		{ '', 'homedecor:brass_ingot', '' },
 		{ 'homedecor:brass_ingot', 'homedecor:brass_ingot', 'homedecor:brass_ingot' }
 	},
-})
-
-minetest.register_craftitem("homedecor:utility_table_legs", {
-        description = "Legs for Small Utility table",
-        inventory_image = "homedecor_utility_table_legs.png",
 })
 
 minetest.register_craft( {
@@ -870,7 +874,7 @@ minetest.register_craft( {
 if ( minetest.get_modpath("mesecons") ) == nil then
 
 	minetest.register_craftitem(":mesecons_materials:silicon", {
-		description = "Silicon lump",
+		description = S("Silicon lump"),
 		inventory_image = "homedecor_silicon.png",
 	})
 
@@ -888,12 +892,12 @@ minetest.register_craft( {
 	output = "homedecor:ic 4",
 	recipe = {
 		{ "mesecons_materials:silicon", "mesecons_materials:silicon" },
-		{ "mesecons_materials:silicon", "default:steel_ingot" },
+		{ "mesecons_materials:silicon", "moreores:copper_ingot" },
 	},
 })
 
 minetest.register_craftitem("homedecor:ic", {
-	description = "Simple Integrated Circuit",
+	description = S("Simple Integrated Circuit"),
 	inventory_image = "homedecor_ic.png",
 })
 
@@ -1153,7 +1157,7 @@ minetest.register_craft({
 minetest.register_craft({
         output = "homedecor:glowlight_thick_yellow 6",
         recipe = {
-		{"moreblocks:superglowglass", "moreblocks:superglowglass", "moreblocks:superglowglass", },
+		{"moreblocks:superglowglass", "moreblocks:glowglass", "moreblocks:superglowglass", },
 	}
 })
 
@@ -1197,9 +1201,9 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-        output = "homedecor:glowlight_small_cube_yellow 8",
+        output = "homedecor:glowlight_small_cube_yellow 16",
         recipe = {
-		{"default:stick" },
+		{"moreblocks:glowglass" },
 		{"moreblocks:superglowglass" },
 	}
 })
@@ -1220,13 +1224,29 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+        output = "homedecor:glowlight_thick_yellow",
+        recipe = {
+		{"homedecor:glowlight_small_cube_yellow","homedecor:glowlight_small_cube_yellow"},
+		{"homedecor:glowlight_small_cube_yellow","homedecor:glowlight_small_cube_yellow"}
+	}
+})
+
+minetest.register_craft({
+        output = "homedecor:glowlight_thick_yellow",
+        recipe = {
+		{"homedecor:glowlight_small_cube_yellow_ceiling","homedecor:glowlight_small_cube_yellow_ceiling"},
+		{"homedecor:glowlight_small_cube_yellow_ceiling","homedecor:glowlight_small_cube_yellow_ceiling"}
+	}
+})
+
 -- white
 
 minetest.register_craft({
         output = "homedecor:glowlight_thick_white 6",
         recipe = {
 		{ "wool:white", "wool:white", "wool:white" },
-		{"moreblocks:superglowglass", "moreblocks:superglowglass", "moreblocks:superglowglass", },
+		{"moreblocks:superglowglass", "moreblocks:glowglass", "moreblocks:superglowglass", },
 	}
 })
 
@@ -1303,6 +1323,22 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+        output = "homedecor:glowlight_thick_white",
+        recipe = {
+		{"homedecor:glowlight_small_cube_white","homedecor:glowlight_small_cube_white"},
+		{"homedecor:glowlight_small_cube_white","homedecor:glowlight_small_cube_white"}
+	}
+})
+
+minetest.register_craft({
+        output = "homedecor:glowlight_thick_white",
+        recipe = {
+		{"homedecor:glowlight_small_cube_white_ceiling","homedecor:glowlight_small_cube_white_ceiling"},
+		{"homedecor:glowlight_small_cube_white_ceiling","homedecor:glowlight_small_cube_white_ceiling"}
+	}
+})
+
 -- Fences and gates
 
 minetest.register_craft( {
@@ -1320,6 +1356,8 @@ minetest.register_craft( {
                 { 'default:iron_lump','default:iron_lump','default:iron_lump' },
         },
 })
+
+-- other types of fences/gates
 
 minetest.register_craft( {
         output = "homedecor:fence_picket 6",
@@ -1365,6 +1403,18 @@ minetest.register_craft( {
                 { "default:steel_ingot", "default:iron_lump", "default:steel_ingot" },
                 { "default:steel_ingot", "default:iron_lump", "default:steel_ingot" }
         },
+})
+
+minetest.register_craft( {
+	type = "shapeless",
+	output = "homedecor:fence_chainlink_corner",
+	recipe = { "homedecor:fence_chainlink", "homedecor:fence_chainlink" },
+})
+
+minetest.register_craft( {
+	type = "shapeless",
+	output = "homedecor:fence_chainlink 2",
+	recipe = { "homedecor:fence_chainlink_corner" },
 })
 
 minetest.register_craft( {
@@ -1498,6 +1548,15 @@ minetest.register_craft( {
 		{ "default:glass", "default:wood" },
 		{ "default:wood", "default:glass" },
 		{ "default:glass", "default:wood" },
+        },
+})
+
+minetest.register_craft( {
+        output = "homedecor:door_wood_glass_bottom_left 2",
+        recipe = {
+		{ "default:wood", "default:glass" },
+		{ "default:glass", "default:wood" },
+		{ "default:wood", "default:glass" },
         },
 })
 
