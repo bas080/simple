@@ -5,7 +5,7 @@ minetest.register_abm({
 	action = function(pos, node)
 		pos.y = pos.y-1
 		local name = minetest.env:get_node(pos).name
-		if name == "farming:soil" then
+		if name == "default:desert_sand" or name == "default:sand" then
 			pos.y = pos.y+1
 			local height = 0
 			while minetest.env:get_node(pos).name == "default:cactus" do

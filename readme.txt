@@ -6,10 +6,12 @@
  _____| ||   | | ||_|| ||   |    |       ||   |___ 
 |_______||___| |_|   |_||___|    |_______||_______|
 
-MOD PACK BY bas080
+Author:
+-------
+bas080
 
 Mods:
-
+-----
 bamboo
 basblocks
 beds
@@ -30,9 +32,11 @@ darkage
 default
 doors
 drowning
+dualport
 dye
 falling_items
 farming
+fences
 fire
 firestone
 flags
@@ -98,6 +102,7 @@ snow
 stairs
 stairsplus
 steel
+tbm
 throwing
 unifieddyes
 vessels
@@ -107,4 +112,3 @@ woolcraft
 worldtime
 xdoors
 xpanes
-

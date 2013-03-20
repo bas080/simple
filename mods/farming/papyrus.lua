@@ -5,7 +5,7 @@ minetest.register_abm({
 	action = function(pos, node)
 		pos.y = pos.y-1
 		local name = minetest.env:get_node(pos).name
-		if name == "farming:soil_wet" then
+		if name == "default:dirt" or name == "default:dirt_with_grass" then
 			if minetest.env:find_node_near(pos, 3, {"default:water_source", "default:water_flowing"}) == nil then
 				return
 			end
