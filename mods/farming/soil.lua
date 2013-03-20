@@ -28,6 +28,19 @@ minetest.register_abm({
 	end,
 })
 
+minetest.register_abm({
+	nodenames = {"farming:soil"},
+	interval = 45,
+	chance = 3,
+	action = function(pos, node)
+		if minetest.env:find_node_near(pos, 4, {"default:water_source", "default:water_flowing"}) == nil then
+			node.name = "farming:soil"
+			minetest.env:set_node(pos, node)
+		end
+	end,
+})
+
+
 -- ========= EXPERIMENTAL =========
 -- This will turn soil to dirt when walking over it
 --[[minetest.register_abm({

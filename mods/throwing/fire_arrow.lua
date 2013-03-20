@@ -9,20 +9,14 @@ minetest.register_node("throwing:arrow_fire_box", {
 		type = "fixed",
 		fixed = {
 			-- Shaft
-			{-6.5/17, -1.5/17, -1.5/17, 6.5/17, 1.5/17, 1.5/17},
+			{-6/16, -1/16, -1/16, 7/16, 1/16, 1/16},
 			--Spitze
-			{-4.5/17, 2.5/17, 2.5/17, -3.5/17, -2.5/17, -2.5/17},
-			{-8.5/17, 0.5/17, 0.5/17, -6.5/17, -0.5/17, -0.5/17},
+			{-7/16, -1/16, -1/16, -6/16, 1/16, 1/16},
 			--Federn
-			{6.5/17, 1.5/17, 1.5/17, 7.5/17, 2.5/17, 2.5/17},
-			{7.5/17, -2.5/17, 2.5/17, 6.5/17, -1.5/17, 1.5/17},
-			{7.5/17, 2.5/17, -2.5/17, 6.5/17, 1.5/17, -1.5/17},
-			{6.5/17, -1.5/17, -1.5/17, 7.5/17, -2.5/17, -2.5/17},
-			
-			{7.5/17, 2.5/17, 2.5/17, 8.5/17, 3.5/17, 3.5/17},
-			{8.5/17, -3.5/17, 3.5/17, 7.5/17, -2.5/17, 2.5/17},
-			{8.5/17, 3.5/17, -3.5/17, 7.5/17, 2.5/17, -2.5/17},
-			{7.5/17, -2.5/17, -2.5/17, 8.5/17, -3.5/17, -3.5/17},
+			{7/16, 0/16, 1/16, 8/16, 0/16, 2/16},
+			{7/16, 0/16, -1/16, 8/16, 0/16, -2/16},
+			{7/16, 1/16, 0/16, 8/16, 2/16, 0/16},
+			{7/16, -1/16, 0/16, 8/16, -2/16, 0/16},
 		}
 	},
 	tiles = {"throwing_arrow_fire.png", "throwing_arrow_fire.png", "throwing_arrow_fire_back.png", "throwing_arrow_fire_front.png", "throwing_arrow_fire_2.png", "throwing_arrow_fire.png"},
@@ -49,14 +43,25 @@ THROWING_ARROW_ENTITY.on_step = function(self, dtime)
 		for k, obj in pairs(objs) do
 			if obj:get_luaentity() ~= nil then
 				if obj:get_luaentity().name ~= "throwing:arrow_fire_entity" and obj:get_luaentity().name ~= "__builtin:item" then
-					obj:set_hp(obj:get_hp()-3)
-					if obj:get_hp() <= 0 then
-						obj:remove()
-					end
+					local damage = 5
+					obj:punch(self.object, 1.0, {
+						full_punch_interval=1.0,
+						groupcaps={
+							fleshy={times={[1]=1/(damage-2), [2]=1/(damage-1), [3]=1/damage}},
+							snappy={times={[1]=1/(damage-2), [2]=1/(damage-1), [3]=1/damage}},
+						}
+					}, nil)
 					self.object:remove()
 				end
 			else
-				obj:set_hp(obj:get_hp()-3)
+				local damage = 5
+				obj:punch(self.object, 1.0, {
+					full_punch_interval=1.0,
+					groupcaps={
+						fleshy={times={[1]=1/(damage-2), [2]=1/(damage-1), [3]=1/damage}},
+						snappy={times={[1]=1/(damage-2), [2]=1/(damage-1), [3]=1/damage}},
+					}
+				}, nil)
 				self.object:remove()
 			end
 		end
@@ -92,7 +97,9 @@ minetest.register_craft({
 })
 
 minetest.register_node("throwing:light", {
-	drawtype = "glasslike",
+	drawtype = "airlike",
+	paramtype = "light",
+	sunlight_propagates = true,
 	tiles = {"throwing_empty.png"},
 	light_source = LIGHT_MAX-4,
 	selection_box = {

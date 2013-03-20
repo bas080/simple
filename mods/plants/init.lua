@@ -29,6 +29,7 @@ local add_plant = function(name_plant, drop) -- register a wild plant
   })
 end
 
+add_plant("aloe")
 add_plant("cotton",{max_items = 1,items = {{ items = {'farming:cotton_seed'}, rarity = 10}}})
 add_plant("corn")
 add_plant("lavender")
@@ -51,7 +52,7 @@ habitat:generate("plants:brownshroom_wild", "default:stone", minp, maxp, -40, 2,
 habitat:generate("plants:chamomile_wild", "default:dirt_with_grass", minp, maxp, 2, 40, 8, 4, {"default:stone_with_coal"},0,{""})
 habitat:generate("plants:colchicum_wild", "default:dirt_with_grass", minp, maxp, 2, 40, 4, 4, {"default:stone_with_iron"},0,{""})
 habitat:generate("plants:poppy_wild", "default:desert_sand", minp, maxp, 2, 20, 4, 10, {"default:water_source"},0,{""})
-
+habitat:generate("plants:aloe_wild", "default:desert_sand", minp, maxp, 5, 40, 12, 20, {"default:water_source", "default:cactus", "default:dirt_with_grass"},0,{""})
 habitat:generate("plants:grasstall_wild", "default:dirt_with_grass", minp, maxp, 2, 20, 3, 20, {"default:water_source"},0,{""})
 habitat:generate("plants:grass_wild", "default:dirt_with_grass", minp, maxp, 2, 20, 3, 40, {"default:water_source"},0,{""})
 
