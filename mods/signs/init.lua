@@ -3,7 +3,6 @@
 -- load characters map
 local chars_file = io.open(minetest.get_modpath("signs").."/characters", "r")
 local charmap = {}
-local charwidth = {}
 local max_chars = 16
 if not chars_file then
     print("[signs] E: character map file not found")
@@ -14,14 +13,11 @@ else
             break
         end
         local img = chars_file:read("*l")
-        local width = chars_file:read("*n")
         chars_file:read("*l")
         charmap[char] = img
-        charwidth[img] = width
     end
 end
 
---local metas = {"line1", "line2", "line3", "line4", "line5", "line6", "line7"}
 local signs = {
     {delta = {x = 0, y = 0, z = 0.399}, yaw = 0},
     {delta = {x = 0.399, y = 0, z = 0}, yaw = math.pi / -2},
@@ -96,7 +92,6 @@ minetest.register_node(":default:sign_wall", {
     node_box = {type = "fixed", fixed = {-0.45, -0.15, 0.4, 0.45, 0.45, 0.498}},
     selection_box = {type = "fixed", fixed = {-0.45, -0.15, 0.4, 0.45, 0.45, 0.498}},
     tiles = {"signs_top.png", "signs_bottom.png", "signs_side.png", "signs_side.png", "signs_back.png", "signs_front.png"},
-    walkable = false,
     groups = sign_groups,
 
     on_place = function(itemstack, placer, pointed_thing)
@@ -166,7 +161,6 @@ minetest.register_node("signs:sign_yard", {
     }},
     selection_box = {type = "fixed", fixed = {-0.45, -0.15, -0.049, 0.45, 0.45, 0.049}},
     tiles = {"signs_top.png", "signs_bottom.png", "signs_side.png", "signs_side.png", "signs_back.png", "signs_front.png"},
-    walkable = false,
     groups = {choppy=2, dig_immediate=2},
     drop = "default:sign_wall",
 
@@ -196,8 +190,15 @@ minetest.register_entity("signs:text", {
     end
 })
 
-local sign_width = 110
-local sign_padding = 8
+-- CONSTANTS
+local SIGN_WITH = 110
+local SIGN_PADDING = 8
+
+local LINE_LENGTH = 16
+local NUMBER_OF_LINES = 4
+
+local LINE_HEIGHT = 14
+local CHAR_WIDTH = 5
 
 string_to_array = function(str)
 	local tab = {}
@@ -221,9 +222,6 @@ string_to_word_array = function(str)
 	end
 	return tab
 end
-
-LINE_LENGTH = 16
-NUMBER_OF_LINES = 7
 
 create_lines = function(text)
 	local line = ""
@@ -254,11 +252,11 @@ create_lines = function(text)
 end
 
 generate_texture = function(lines)
-    local texture = "[combine:"..sign_width.."x"..sign_width
+    local texture = "[combine:"..SIGN_WITH.."x"..SIGN_WITH
     local ypos = 12
     for i = 1, #lines do
         texture = texture..generate_line(lines[i], ypos)
-        ypos = ypos + 8
+        ypos = ypos + LINE_HEIGHT
     end
     return texture
 end
@@ -281,7 +279,7 @@ generate_line = function(s, ypos)
             i = i + 1
         end
         if file ~= nil then
-            width = width + charwidth[file] + 1
+            width = width + CHAR_WIDTH
             table.insert(parsed, file)
             chars = chars + 1
         end
@@ -289,10 +287,10 @@ generate_line = function(s, ypos)
     width = width - 1
 
     local texture = ""
-    local xpos = math.floor((sign_width - 2 * sign_padding - width) / 2 + sign_padding)
+    local xpos = math.floor((SIGN_WITH - 2 * SIGN_PADDING - width) / 2 + SIGN_PADDING)
     for i = 1, #parsed do
         texture = texture..":"..xpos..","..ypos.."="..parsed[i]..".png"
-        xpos = xpos + charwidth[parsed[i]] + 1
+        xpos = xpos + CHAR_WIDTH + 1
     end
     return texture
 end
