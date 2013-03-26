@@ -14,6 +14,9 @@ FORUM:          http://forum.minetest.net/viewtopic.php?pid=76281
 
 Changelog
 
+1.2
+* Made sound audible to only a certain distance (better for multiplayer)
+
 1.1
 * Improvedsound play on (punch) use
 

@@ -8,14 +8,19 @@
 
 BY:             bas080
 DESCRIPTION:    Color the landscape with plants
-VERSION:        1.0
+VERSION:        3.5
 LICENCE:        WTFPL
 FORUM:          http://forum.minetest.net/viewtopic.php?id=2619
 
 Changelog
 ---------
+3.5
+* lava-shroom spawn near lava lakes
+* glow-shroom spawn near entrances of caves or in/on mountains
+* aloe that spawns in deserts
+* Plant can only be gathered if it does not drop something (fixed)
+
 3.0
-* Plant can only be gathered if it does not drop something
 * Drops nodes for PilzAdam's farming mod (depend)
 * Reverted to habitat mod
 * Retextured (fits the default textures better)

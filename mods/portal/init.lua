@@ -6,7 +6,7 @@ local node_group
 if minetest.setting_getbool("creative_mode") then
     node_group = {dig_immediate=3}
 else
-    node_group = {cracky=3}
+    node_group = {indestructable}
 end
 --regster nodes
 local solid = {
