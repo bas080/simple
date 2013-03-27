@@ -1,21 +1,21 @@
--- flolands 0.2.0 by paramat.
+-- flolands 0.2.1 by paramat.
 -- License WTFPL, see license.txt.
 
 -- Editable parameters.
 
-local FLOYMIN = 50 -- 768 -- Approximate minimum altitude, lowest level of islands will generate in chunks that contain this altitude.
+local FLOLANDS = true -- Enable floating island generation (true/false).
+local FLOYMIN = 768 -- 768 -- Approximate minimum altitude, lowest level of islands will generate in chunks that contain this altitude.
 local FLOLEV = 3 -- 3 -- Number of island levels.
 local FLOXMIN = -16384 -- -16384 -- Approximate edges of island area.
 local FLOXMAX = 16384 -- 16384
 local FLOZMIN = -16384 -- -16384
 local FLOZMAX = 16384 -- 16384
-local RAR = 0.7 -- 0.4 -- Island rarity in chunk layer. -0.4 = thick layer with holes, 0 = 50%, 0.2 isolated islands, 0.4 = desert rarity, 0.7 = very rare.
+local RAR = 0.4 -- 0.4 -- Island rarity in chunk layer. -0.4 = thick layer with holes, 0 = 50%, 0.4 = desert rarity, 0.7 = very rare.
 local AMPY = 24 -- 24 -- Amplitude of island centre y variation.
 local TGRAD = 24 -- 24 -- Noise gradient to create top surface. Tallness of island top.
 local BGRAD = 24 -- 24 -- Noise gradient to create bottom surface. Tallness of island bottom.
 local MATCHA = 2197 -- 2197 = 13^3 -- 1/x chance of rare material.
 local FLOCHA = 23 -- 23 -- 1/x chance rare material is floatcrystalblock.
-local FLOLANDS = true -- Enable floating island generation (true/false).
 local DEBUG = true
 
 local SEEDDIFF1 = 3683 -- 3D perlin1 for island generation.
@@ -49,32 +49,58 @@ minetest.register_node("flolands:floatstone", {
 })
 
 minetest.register_node("flolands:floatsand", {
-	description = "Turqoise Sand",
+	description = "Turquoise Sand",
 	tiles = {"flolands_floatsand.png"},
 	groups = {crumbly=3, falling_node=1},
 	sounds = default.node_sound_sand_defaults(),
 })
 
+minetest.register_node("flolands:floatsandstone", {
+	description = "Turquoise Sandstone",
+	tiles = {"flolands_floatsandstone.png"},
+	groups = {crumbly=2, cracky=2},
+	sounds = default.node_sound_stone_defaults(),
+})
+
 minetest.register_node("flolands:floatcrystalblock", {
-	description = "Floatcrystal Block",
+	description = "Floc Block",
 	tiles = {"flolands_floatcrystalblock.png"}, 
 	groups = {cracky=1},
 	sounds = default.node_sound_defaults(),
 })
 
+minetest.register_node("flolands:floatglass", {
+	description = "High Quality Glass",
+	drawtype = "glasslike",
+	tiles = {"flolands_floatglass.png"},
+	inventory_image = minetest.inventorycube("flolands_floatglass.png"),
+	paramtype = "light",
+	sunlight_propagates = true,
+	groups = {snappy=2,cracky=3,oddly_breakable_by_hand=3},
+	sounds = default.node_sound_glass_defaults(),
+})
+
 -- Item.
 
 minetest.register_craftitem("flolands:floatcrystal", {
-	description = "Float Crystal",
+	description = "Floc Crystal",
 	inventory_image = "flolands_floatcrystal.png",
 })
 
 -- Crafting.
 
 minetest.register_craft({
-	output = "flolands:floatcrystal 9",
+	output = "flolands:floatsandstone",
 	recipe = {
-		{"flolands:floatcrystalblock"},
+		{"flolands:floatsand", "flolands:floatsand"},
+		{"flolands:floatsand", "flolands:floatsand"},
+	}
+})
+
+minetest.register_craft({
+	output = "flolands:floatsand 4",
+	recipe = {
+		{"flolands:floatsandstone"},
 	}
 })
 
@@ -85,6 +111,21 @@ minetest.register_craft({
 		{"flolands:floatcrystal", "flolands:floatcrystal", "flolands:floatcrystal"},
 		{"flolands:floatcrystal", "flolands:floatcrystal", "flolands:floatcrystal"},
 	}
+})
+
+minetest.register_craft({
+	output = "flolands:floatcrystal 9",
+	recipe = {
+		{"flolands:floatcrystalblock"},
+	}
+})
+
+-- Cooking.
+
+minetest.register_craft({
+	type = "cooking",
+	output = "flolands:floatglass",
+	recipe = "flolands:floatsand",
 })
 
 -- On generated function.
