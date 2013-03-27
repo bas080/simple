@@ -53,6 +53,34 @@ function plantslib:dbg(msg)
 	end
 end
 
+function plantslib:set_defaults(biome)
+	biome.seed_diff = biome.seed_diff or 0
+	biome.min_elevation = biome.min_elevation or -31000
+	biome.max_elevation = biome.max_elevation or 31000
+	biome.temp_min = biome.temp_min or 1
+	biome.temp_max = biome.temp_max or -1
+	biome.humidity_min = biome.humidity_min or 1
+	biome.humidity_max = biome.humidity_max or -1
+	biome.plantlife_limit = biome.plantlife_limit or 0.1
+	biome.near_nodes_vertical = biome.near_nodes_vertical or 1
+
+-- specific to on-generate
+
+	biome.neighbors = biome.neighbors or biome.surface
+	biome.near_nodes_size = biome.near_nodes_size or 0
+	biome.near_nodes_count = biome.near_nodes_count or 1
+	biome.rarity = biome.rarity or 50
+	biome.max_count = biome.max_count or 5
+	if biome.check_air ~= false then biome.check_air = true end
+
+-- specific to abm spawner
+	biome.seed_diff = biome.seed_diff or 0
+	biome.light_min = biome.light_min or 0
+	biome.light_max = biome.light_max or 15
+	biome.depth_max = biome.depth_max or 1
+	biome.facedir = biome.facedir or 0
+end
+
 -- Spawn plants using the map generator
 
 function plantslib:register_generate_plant(biomedef, node_or_function_or_model)
@@ -66,22 +94,7 @@ function plantslib:search_for_surfaces(minp, maxp, biomedef, node_or_function_or
 	return function(minp, maxp, blockseed)
 
 		local biome = biomedef
-
-		if not biome.seed_diff then biome.seed_diff = 0 end
-		if not biome.neighbors then biome.neighbors = biome.surface end
-		if not biome.min_elevation then biome.min_elevation = -31000 end
-		if not biome.max_elevation then biome.max_elevation = 31000 end
-		if not biome.near_nodes_size then biome.near_nodes_size = 0 end
-		if not biome.near_nodes_count then biome.near_nodes_count = 1 end
-		if not biome.temp_min then biome.temp_min = 1 end
-		if not biome.temp_max then biome.temp_max = -1 end
-		if not biome.rarity then biome.rarity = 50 end
-		if not biome.max_count then biome.max_count = 5 end
-		if not biome.plantlife_limit then biome.plantlife_limit = 0.1 end
-		if not biome.near_nodes_vertical then biome.near_nodes_vertical = 1 end
-		if not biome.humidity_min then biome.humidity_min = 1 end
-		if not biome.humidity_max then biome.humidity_max = -1 end
-		if biome.check_air ~= false then biome.check_air = true end
+		plantslib:set_defaults(biome)
 
 		plantslib:dbg("Started checking generated mapblock volume...")
 		local searchnodes = minetest.env:find_nodes_in_area(minp, maxp, biome.surface)
@@ -193,20 +206,7 @@ function plantslib:spawn_on_surfaces(sd,sp,sr,sc,ss,sa)
 		biome = sd
 	end
 
-	if not biome.seed_diff then biome.seed_diff = 0 end
-	if not biome.light_min then biome.light_min = 0 end
-	if not biome.light_max then biome.light_max = 15 end
-	if not biome.depth_max then biome.depth_max = 1 end
-	if not biome.min_elevation then biome.min_elevation = -31000 end
-	if not biome.max_elevation then biome.max_elevation = 31000 end
-	if not biome.temp_min then biome.temp_min = 1 end
-	if not biome.temp_max then biome.temp_max = -1 end
-	if not biome.humidity_min then biome.humidity_min = 1 end
-	if not biome.humidity_max then biome.humidity_max = -1 end
-	if not biome.plantlife_limit then biome.plantlife_limit = 0.1 end
-	if not biome.near_nodes_vertical then biome.near_nodes_vertical = 1 end
-	if not biome.facedir then biome.facedir = 0 end
-
+	plantslib:set_defaults(biome)
 	biome.spawn_plants_count = table.getn(biome.spawn_plants)
 
 	plantslib:dbg("Registered spawning ABM:")
@@ -255,28 +255,21 @@ function plantslib:spawn_on_surfaces(sd,sp,sr,sc,ss,sa)
 							local rnd = math.random(1, biome.spawn_plants_count)
 							local plant_to_spawn = biome.spawn_plants[rnd]
 							plantslib:dbg("Chose entry number "..rnd.." of "..biome.spawn_plants_count)
-
+							local fdir = biome.facedir
+							if biome.random_facedir then
+								fdir = math.random(biome.random_facedir[1],biome.random_facedir[2])
+								plantslib:dbg("Gave it a random facedir: "..fdir)
+							end
 							if type(spawn_plants) == "string" then
 								plantslib:dbg("Call function: "..spawn_plants.."("..dump(pos)..")")
 								assert(loadstring(spawn_plants.."("..dump(pos)..")"))()
-
 							elseif not biome.spawn_on_side and not biome.spawn_on_bottom and not biome.spawn_replace_node then
-								local fdir = biome.facedir
-								if biome.random_facedir then
-									fdir = math.random(biome.random_facedir[1],biome.random_facedir[2])
-									plantslib:dbg("Gave it a random facedir: "..fdir)
-								end
 								if n_top.name == "air" then
-									plantslib:dbg("Spawn: "..plant_to_spawn.." on top of ("..dump(pos)..")")
+									plantslib:dbg("Spawn: "..plant_to_spawn.." on top of ("..dump(pos).."); facedir="..fdir)
 									minetest.env:add_node(p_top, { name = plant_to_spawn, param2 = fdir })
 								end
-
 							elseif biome.spawn_replace_node then
-								local fdir = biome.facedir
-								if biome.random_facedir then
-									fdir = math.random(biome.random_facedir[1],biome.random_facedir[2])
-									plantslib:dbg("Gave it a random facedir: "..fdir)
-								end
+						
 								plantslib:dbg("Spawn: "..plant_to_spawn.." to replace "..minetest.env:get_node(pos).name.." at ("..dump(pos)..")")
 								minetest.env:add_node(pos, { name = plant_to_spawn, param2 = fdir })
 
@@ -286,14 +279,8 @@ function plantslib:spawn_on_surfaces(sd,sp,sr,sc,ss,sa)
 									plantslib:dbg("Spawn: "..plant_to_spawn.." at side of ("..dump(pos).."), facedir "..onside.facedir.."")
 									minetest.env:add_node(onside.newpos, { name = plant_to_spawn, param2 = onside.facedir })
 								end
-
 							elseif biome.spawn_on_bottom then
 								if minetest.env:get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "air" then
-									local fdir = biome.facedir
-									if biome.random_facedir then
-										fdir = math.random(biome.random_facedir[1],biome.random_facedir[2])
-										plantslib:dbg("Gave it a random facedir: "..fdir)
-									end
 									plantslib:dbg("Spawn: "..plant_to_spawn.." on bottom of ("..dump(pos)..")")
 									minetest.env:add_node({x=pos.x, y=pos.y-1, z=pos.z}, { name = plant_to_spawn, param2 = fdir} )
 								end
@@ -312,10 +299,10 @@ function plantslib:grow_plants(opts)
 
 	local options = opts
 
-	if not options.height_limit then options.height_limit = 5 end
-	if not options.ground_nodes then options.ground_nodes = { "default:dirt_with_grass" } end
-	if not options.grow_nodes then options.grow_nodes = { "default:dirt_with_grass" } end
-	if not options.seed_diff then options.seed_diff = 0 end
+	options.height_limit = options.height_limit or 5
+	options.ground_nodes = options.ground_nodes or { "default:dirt_with_grass" }
+	options.grow_nodes = options.grow_nodes or { "default:dirt_with_grass" }
+	options.seed_diff = options.seed_diff or 0
 
 	plantslib:dbg("Registered growing ABM:")
 	plantslib:dbg(dump(options))
@@ -373,19 +360,14 @@ function plantslib:replace_object(pos, replacement, grow_function, walldir, seed
 		return
 	elseif growtype == "string" then
 		local perlin1 = minetest.env:get_perlin(seeddiff, perlin_octaves, perlin_persistence, perlin_scale)
-		local noise1 = perlin1:get2d({x=p_top.x, y=p_top.z})
-		local noise2 = plantslib.perlin_temperature:get2d({x=p_top.x, y=p_top.z})
+		local noise1 = perlin1:get2d({x=pos.x, y=pos.z})
+		local noise2 = plantslib.perlin_temperature:get2d({x=pos.x, y=pos.z})
 		plantslib:dbg("Grow: call function "..grow_function.."("..dump(pos)..","..noise1..","..noise2..","..dump(walldir)..")")
 		assert(loadstring(grow_function.."("..dump(pos)..","..noise1..","..noise2..","..dump(walldir)..")"))()
 		return
 	elseif growtype == "nil" then
-		if walldir then
-			plantslib:dbg("Grow: place "..replacement.." at ("..dump(pos)..") on wall "..walldir)
-			minetest.env:add_node(pos, { name = replacement, param2 = walldir})
-		else
-			plantslib:dbg("Grow: place "..replacement.." at ("..dump(pos)..")")
-			minetest.env:add_node(pos, { name = replacement})
-		end
+		plantslib:dbg("Grow: place "..replacement.." at ("..dump(pos)..") on wall "..dump(walldir))
+		minetest.env:add_node(pos, { name = replacement, param2 = walldir})
 		return
 	elseif growtype ~= "nil" and growtype ~= "string" and growtype ~= "table" then
 		error("Invalid grow function "..dump(grow_function).." used on object at ("..dump(pos)..")")
@@ -445,5 +427,7 @@ end
 function plantslib:grow_tree(pos, node_or_function_or_model)
 	minetest.env:spawn_tree(pos, node_or_function_or_model)
 end
+
+
 
 print("[Plantlife Library] Loaded")

@@ -1,6 +1,6 @@
 Minetest mod "Fences"
 =======================
-version: 0.2
+version: 1.0
 
 License of source code and textures:
 ------------------------------------
@@ -21,4 +21,7 @@ http://sam.zoy.org/wtfpl/COPYING for more details.
 This mod "overrides" the recipe for the default fence, so if you want craft a fance, it crafts THIS fence.
 
 If you want replace already placed default fences open the "init.lua" (in this directory) and change
-the first line to "local override_original = true". Then all placed default fences will be replaced with this fence.
+the first line to "local override_original = true". Then all placed default fences will be replaced with
+this fence.
+
+It is not possible to jump over the Fence or the closed Fencegate. Only exception is when you "sneak" and "jump".
