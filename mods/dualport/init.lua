@@ -1,7 +1,5 @@
 local teleporters = {}
 
-teleporters.file = minetest.get_worldpath()..'/teleporters'
-
 if minetest.get_modpath("flolands") then
   minetest.register_craft({
     output = 'dualport:dualport',
@@ -10,11 +8,27 @@ if minetest.get_modpath("flolands") then
       {'default:cactus','default:desert_sand'},
     }
   })
+  
+  minetest.register_craft({
+    output = 'dualport:buildport',
+    recipe = {
+      {'flolands:floatsand','default:sand'},
+      {'default:tree','default:desert_sand'},
+    }
+  })
 else
   minetest.register_craft({
     output = 'dualport:dualport',
     recipe = {
       {'default:glass','default:mese_crystal'},
+      {'default:cactus','default:desert_sand'},
+    }
+  })
+  
+  minetest.register_craft({
+    output = 'dualport:buildport',
+    recipe = {
+      {'default:glass','default:steel_ingot'},
       {'default:cactus','default:desert_sand'},
     }
   })
@@ -30,6 +44,14 @@ local function is_owner(pos, placer)
 end
 
 teleporters.reset = function()
+  teleporters.file = minetest.get_worldpath()..'/teleporters'
+  
+  local save_contents = ""
+  local f = io.open(teleporters.file, "w")
+  f:write(save_contents)
+  io.close(f)
+  
+  teleporters.file = minetest.get_worldpath()..'/build_teleporters'
   local save_contents = ""
   local f = io.open(teleporters.file, "w")
   f:write(save_contents)
@@ -37,19 +59,28 @@ teleporters.reset = function()
 end
 
 teleporters.link = function(pos)
+  local node_name = ""
+  if minetest.env:get_node(pos).name == "dualport:dualport" then
+    teleporters.file = minetest.get_worldpath()..'/teleporters'
+    node_name = "Dualport"
+  else
+    teleporters.file = minetest.get_worldpath()..'/build_teleporters'
+    node_name = "Buildport"
+  end
+
   local save_contents
-  --print("check if file exists")
+  print("check if file exists")
   local f = io.open(teleporters.file, "r")
   if f then
-    --print("file exists")
+    print("file exists")
     local contents = f:read()
     io.close(f)
     if contents == "" or contents == nil then
-      --print("nothing to pair with saving coordinates")
+      print("nothing to pair with saving coordinates")
       save_contents = tostring(pos.x..","..pos.y..","..pos.z)
       --print(save_contents)
     else
-      --print("linking with uneven node")
+      print("linking with uneven node")
       local p = {}
       p.x, p.y, p.z = string.match(contents, "^([%d.-]+)[, ] *([%d.-]+)[, ] *([%d.-]+)$")
       if p.x and p.y and p.z then
@@ -61,19 +92,16 @@ teleporters.link = function(pos)
         local name_one = meta:get_string("name")
         --set node infotext and link
         local meta = minetest.env:get_meta(coordinates)
+        print(pos.x..","..pos.y..","..pos.z)
         meta:set_string("link", pos.x..","..pos.y..","..pos.z)
         meta:set_string("infotext", name_two.." > "..name_one)
-        --notify
         minetest.sound_play("dualport_linked",{pos=pos,gain=0.7,max_hear_distance=32})
-        minetest.chat_send_all("Dualport linked to "..meta:get_string("infotext"))
-        meta:set_string("infotext", meta:get_string("infotext"))
-        
         local name = meta:get_string("name")
         local meta = minetest.env:get_meta(pos)
+        print(contents)
         meta:set_string("link", contents)
         meta:set_string("infotext", name_one.." > "..name_two)
         save_contents = ""
-        
       else
         teleporters.reset()
       end
@@ -98,13 +126,85 @@ teleporters.formspec = function (meta)
   return formspec
 end
 
+minetest.register_node("dualport:buildport", {
+  description = "Dualport builder",
+  tiles = {"buildporters_base.png"},
+  groups = {cracky=3},
+  light_source = 10,
+  after_place_node = function(pos, placer)
+    local dx = {0, 0, 0, 0, 1, -1}
+    local dy = {0, 0, 1, -1, 0, 0}
+    local dz = {1, -1, 0, 0, 0, 0}
+    local p
+    for i = 1, 6 do
+      local side = {x=pos.x + dx[i], y=pos.y + dy[i] , z=pos.z + dz[i]}
+      if minetest.env:get_node(side).name == "dualport:buildport" then
+        local meta = minetest.env:get_meta(side)
+        local link = meta:get_string("link")
+        local p = {}
+        p.x, p.y, p.z = string.match(link, "^([%d.-]+)[, ] *([%d.-]+)[, ] *([%d.-]+)$")
+        if p.x and p.y and p.z then
+          partner = {x = tonumber(p.x),y= tonumber(p.y),z = tonumber(p.z)}
+        else
+          return
+        end
+        local depth = -1
+        while true do
+          p = {x=tonumber(partner.x) + (dx[i] * depth), y=tonumber(partner.y) + (dy[i] * depth), z=tonumber(partner.z) + (dz[i] * depth)}
+          if minetest.env:get_node(p).name == "air" then
+            minetest.env:add_node(p, {name="dualport:buildport"})
+            minetest.sound_play("dualport_teleport",{pos=p,gain=0.7,max_hear_distance=32})
+            minetest.sound_play("dualport_teleport",{pos=pos,gain=0.7,max_hear_distance=32})
+            minetest.env:remove_node(pos)
+            local meta = minetest.env:get_meta(p)
+            local player = placer:get_player_name()
+            meta:set_string("infotext", "unnamed")
+            meta:set_string("link", "")
+            meta:set_string("name", "unnamed")
+            meta:set_string("owner", player)
+            teleporters.link(p)
+            meta:set_string("infotext", "")
+            return
+          else
+            if depth > -50 then
+              depth = depth - 1
+            else
+              return
+            end
+          end
+        end
+      end
+    end
+    local meta = minetest.env:get_meta(pos)
+    local player = placer:get_player_name()
+    meta:set_string("link", "")
+    meta:set_string("name", "unnamed")
+    meta:set_string("owner", player)
+    teleporters.link(pos)
+    meta:set_string("infotext", "")
+    
+  end,
+  on_destruct = function(pos, node, digger)
+    local meta = minetest.env:get_meta(pos)
+    local link = meta:get_string("link")
+    if link == "" then
+      teleporters.reset()
+    else
+      local p = {}
+      p.x, p.y, p.z = string.match(link, "^([%d.-]+)[, ] *([%d.-]+)[, ] *([%d.-]+)$")
+      local meta = minetest.env:get_meta(p)
+      meta:set_string("link", "")
+      minetest.env:remove_node(p)
+    end
+  end,
+})
+
 minetest.register_node("dualport:dualport", {
   description = "Dualport teleporter",
   tiles = {"teleporters_base.png"},
   groups = {cracky=3},
   light_source = 10,
   on_punch = function(pos, puncher)
-  
     local meta = minetest.env:get_meta(pos)
     local link = meta:get_string("link")
     local newpos = {}
@@ -174,6 +274,7 @@ minetest.register_node("dualport:dualport", {
       local meta = minetest.env:get_meta(p)
       meta:set_string("link", "")
       meta:set_string("infotext", meta:get_string("name"))
+      minetest.env:remove_node(p)
     end
   end,
 })
@@ -182,13 +283,47 @@ teleporters.teleport = function (params)
 	params.obj:setpos(params.pos)
 end
 
-minetest.register_abm({
-  nodenames = {"dualport:teleporter"},
-  interval = 5,
-  chance = 1,
-  action = function(pos, node)
-    
-  end,
-})
-
-
+minetest.register_on_placenode(function(pos, newnode, placer, oldnode)
+  
+  if newnode.name == "dualport:buildport" then
+    return
+  end
+  
+  local dx = {0, 0, 0, 0, 1, -1}
+  local dy = {0, 0, 1, -1, 0, 0}
+  local dz = {1, -1, 0, 0, 0, 0}
+  local partner
+  
+  for i = 1, 6 do
+    local side = {x=pos.x + dx[i], y=pos.y + dy[i] , z=pos.z + dz[i]}
+    if minetest.env:get_node(side).name == "dualport:buildport" then
+      local meta = minetest.env:get_meta(side)
+      local link = meta:get_string("link")
+      local p = {}
+      p.x, p.y, p.z = string.match(link, "^([%d.-]+)[, ] *([%d.-]+)[, ] *([%d.-]+)$")
+      if p.x and p.y and p.z then
+        partner = {x = tonumber(p.x),y= tonumber(p.y),z = tonumber(p.z)}
+      else
+        return
+      end
+      
+      local depth = -1
+      while true do
+        local p = {x=tonumber(partner.x) + (dx[i] * depth), y=tonumber(partner.y) + (dy[i] * depth), z=tonumber(partner.z) + (dz[i] * depth)}
+        if minetest.env:get_node(p).name == "air" then
+          minetest.env:add_node(p, {name=newnode.name})
+          minetest.sound_play("dualport_teleport",{pos=p,gain=0.7,max_hear_distance=32})
+          minetest.sound_play("dualport_teleport",{pos=pos,gain=0.7,max_hear_distance=32})
+          minetest.env:remove_node(pos)
+          return
+        else
+          if depth > -50 then
+            depth = depth - 1
+          else
+            return
+          end
+        end
+      end
+    end
+  end
+end)
