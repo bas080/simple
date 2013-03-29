@@ -49,7 +49,7 @@ for i = 1, 12 do
     sunlight_propagates = true,
     walkable = false,
     visual_scale = 1.3,
-    groups = { snappy = 3,flammable=2, floored=1},
+    groups = { snappy = 3,flammable=2, floored=1, flower=1},
     sounds = default.node_sound_leaves_defaults(),
     selection_box = {
       type = "fixed",
@@ -108,10 +108,10 @@ end
 
 --spawning
 plantslib:spawn_on_surfaces({
-  spawn_delay = 1800,
+  spawn_delay = 36000,
   spawn_plants = tulips_table,
   avoid_radius = 10,
-  spawn_chance = 30,
+  spawn_chance = 300,
   spawn_surfaces = {"default:dirt_with_grass"},
   avoid_nodes = {"group:flower"},
   seed_diff = tulips_seed_diff,
