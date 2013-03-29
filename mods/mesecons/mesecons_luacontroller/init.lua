@@ -187,7 +187,8 @@ local create_environment = function(pos, mem, event)
 	vports = {a = vports.a, b = vports.b, c = vports.c, d = vports.d}
 	local rports = get_real_portstates(pos)
 
-	return {	print = safeprint,
+	return {
+			print = safeprint,
 			pin = merge_portstates(vports, rports),
 			port = vports,
 			interrupt = getinterrupt(pos),
@@ -195,8 +196,59 @@ local create_environment = function(pos, mem, event)
 			mem = mem,
 			tostring = tostring,
 			tonumber = tonumber,
-			string = string,
-			event = event}
+			string = {
+				byte = string.byte,
+				char = string.char,
+				find = string.find,
+				format = string.format,
+				gmatch = string.gmatch,
+				gsub = string.gsub,
+				len = string.len,
+				lower = string.lower,
+				match = string.match,
+				rep = string.rep,
+				reverse = string.reverse,
+				sub = string.sub,
+			},
+			math = {
+				abs = math.abs,
+				acos = math.acos,
+				asin = math.asin,
+				atan = math.atan,
+				atan2 = math.atan2,
+				ceil = math.ceil,
+				cos = math.cos,
+				cosh = math.cosh,
+				deg = math.deg,
+				exp = math.exp,
+				floor = math.floor,
+				fmod = math.fmod,
+				frexp = math.frexp,
+				huge = math.huge,
+				ldexp = math.ldexp,
+				log = math.log,
+				log10 = math.log10,
+				max = math.max,
+				min = math.min,
+				modf = math.modf,
+				pi = math.pi,
+				pow = math.pow,
+				rad = math.rad,
+				random = math.random,
+				sin = math.sin,
+				sinh = math.sinh,
+				sqrt = math.sqrt,
+				tan = math.tan,
+				tanh = math.tanh,
+			},
+			table = {
+				insert = table.insert,
+				maxn = table.maxn,
+				remove = table.remove,
+				sort = table.sort
+			},
+			event = event,
+	}
 end
 
 local create_sandbox = function (code, env)
