@@ -415,10 +415,10 @@ vendor.find_chest_inv = function(owner, pos, dx, dy, dz, nodename, amount, remov
 	if ( node == nil ) then
 		return nil
 	end
-	--node.name == "default:chest" or
-	if ( node.name == "default:chest_locked") then
+	
+	if ( node.name == "default:chest_locked" or node.name == "default:chest") then
 		local meta = minetest.env:get_meta(pos)
-		if ( node.name == "default:chest_locked" and owner ~= meta:get_string("owner") ) then
+		if ( node.name == "default:chest_locked" and owner ~= meta:get_string("owner")) then
 			return nil
 		end
 		local inv = meta:get_inventory()
