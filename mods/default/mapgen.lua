@@ -8,6 +8,8 @@ minetest.register_alias("mapgen_air", "air")
 minetest.register_alias("mapgen_stone", "default:stone")
 minetest.register_alias("mapgen_tree", "default:tree")
 minetest.register_alias("mapgen_leaves", "default:leaves")
+minetest.register_alias("mapgen_jungletree", "default:jungletree")
+minetest.register_alias("mapgen_jungleleaves", "default:jungleleaves")
 minetest.register_alias("mapgen_apple", "default:apple")
 minetest.register_alias("mapgen_water_source", "default:water_source")
 minetest.register_alias("mapgen_dirt", "default:dirt")
@@ -29,12 +31,182 @@ minetest.register_alias("mapgen_desert_stone", "default:desert_stone")
 -- Ore generation
 --
 
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_coal",
+	wherein        = "default:stone",
+	clust_scarcity = 8*8*8,
+	clust_num_ores = 8,
+	clust_size     = 3,
+	height_min     = -31000,
+	height_max     = 64,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_coal",
+	wherein        = "default:stone",
+	clust_scarcity = 24*24*24,
+	clust_num_ores = 27,
+	clust_size     = 6,
+	height_min     = -31000,
+	height_max     = 0,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_iron",
+	wherein        = "default:stone",
+	clust_scarcity = 12*12*12,
+	clust_num_ores = 3,
+	clust_size     = 2,
+	height_min     = -15,
+	height_max     = 2,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_iron",
+	wherein        = "default:stone",
+	clust_scarcity = 9*9*9,
+	clust_num_ores = 5,
+	clust_size     = 3,
+	height_min     = -63,
+	height_max     = -16,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_iron",
+	wherein        = "default:stone",
+	clust_scarcity = 7*7*7,
+	clust_num_ores = 5,
+	clust_size     = 3,
+	height_min     = -31000,
+	height_max     = -64,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_iron",
+	wherein        = "default:stone",
+	clust_scarcity = 24*24*24,
+	clust_num_ores = 27,
+	clust_size     = 6,
+	height_min     = -31000,
+	height_max     = -64,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_mese",
+	wherein        = "default:stone",
+	clust_scarcity = 18*18*18,
+	clust_num_ores = 3,
+	clust_size     = 2,
+	height_min     = -255,
+	height_max     = -64,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_mese",
+	wherein        = "default:stone",
+	clust_scarcity = 14*14*14,
+	clust_num_ores = 5,
+	clust_size     = 3,
+	height_min     = -31000,
+	height_max     = -256,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:mese",
+	wherein        = "default:stone",
+	clust_scarcity = 36*36*36,
+	clust_num_ores = 3,
+	clust_size     = 2,
+	height_min     = -31000,
+	height_max     = -1024,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_gold",
+	wherein        = "default:stone",
+	clust_scarcity = 15*15*15,
+	clust_num_ores = 3,
+	clust_size     = 2,
+	height_min     = -255,
+	height_max     = -64,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_gold",
+	wherein        = "default:stone",
+	clust_scarcity = 13*13*13,
+	clust_num_ores = 5,
+	clust_size     = 3,
+	height_min     = -31000,
+	height_max     = -256,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_diamond",
+	wherein        = "default:stone",
+	clust_scarcity = 17*17*17,
+	clust_num_ores = 4,
+	clust_size     = 3,
+	height_min     = -255,
+	height_max     = -128,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_diamond",
+	wherein        = "default:stone",
+	clust_scarcity = 15*15*15,
+	clust_num_ores = 4,
+	clust_size     = 3,
+	height_min     = -31000,
+	height_max     = -256,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_copper",
+	wherein        = "default:stone",
+	clust_scarcity = 12*12*12,
+	clust_num_ores = 4,
+	clust_size     = 3,
+	height_min     = -63,
+	height_max     = -16,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_copper",
+	wherein        = "default:stone",
+	clust_scarcity = 9*9*9,
+	clust_num_ores = 5,
+	clust_size     = 3,
+	height_min     = -31000,
+	height_max     = -64,
+})
+
 function default.generate_ore(name, wherein, minp, maxp, seed, chunks_per_volume, chunk_size, ore_per_chunk, height_min, height_max)
+	minetest.log('action', "WARNING: default.generate_ore is deprecated")
+
 	if maxp.y < height_min or minp.y > height_max then
 		return
 	end
 	local y_min = math.max(minp.y, height_min)
 	local y_max = math.min(maxp.y, height_max)
+	if chunk_size >= y_max - y_min + 1 then
+		return
+	end
 	local volume = (maxp.x-minp.x+1)*(y_max-y_min+1)*(maxp.z-minp.z+1)
 	local pr = PseudoRandom(seed)
 	local num_chunks = math.floor(chunks_per_volume * volume)
@@ -141,19 +313,6 @@ function generate_nyancats(seed, minp, maxp)
 end
 
 minetest.register_on_generated(function(minp, maxp, seed)
-	-- Generate regular ores
-	default.generate_ore("default:stone_with_coal", "default:stone", minp, maxp, seed+0, 1/8/8/8,    3, 8, -31000,  64)
-	default.generate_ore("default:stone_with_iron", "default:stone", minp, maxp, seed+1, 1/12/12/12, 2, 3,    -15,   2)
-	default.generate_ore("default:stone_with_iron", "default:stone", minp, maxp, seed+2, 1/9/9/9,    3, 5,    -63, -16)
-	default.generate_ore("default:stone_with_iron", "default:stone", minp, maxp, seed+3, 1/7/7/7,    3, 5, -31000, -64)
-	
-	default.generate_ore("default:stone_with_mese", "default:stone", minp, maxp, seed+4, 1/16/16/16, 2, 3,   -127,  -64)
-	default.generate_ore("default:stone_with_mese", "default:stone", minp, maxp, seed+5, 1/9/9/9,    3, 5, -31000, -128)
-	default.generate_ore("default:mese",            "default:stone", minp, maxp, seed+8, 1/16/16/16, 2, 3, -31000,-1024)
-	
-	default.generate_ore("default:stone_with_coal", "default:stone", minp, maxp, seed+7, 1/24/24/24, 6,27, -31000,  0)
-	default.generate_ore("default:stone_with_iron", "default:stone", minp, maxp, seed+6, 1/24/24/24, 6,27, -31000, -64)
-
 	if maxp.y >= 2 and minp.y <= 0 then
 		-- Generate clay
 		-- Assume X and Z lengths are equal
@@ -260,7 +419,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 			local x1 = minp.x + math.floor((divx+1)*divlen)
 			local z1 = minp.z + math.floor((divz+1)*divlen)
 			-- Determine grass amount from perlin noise
-			local grass_amount = math.floor(perlin1:get2d({x=x0, y=z0}) * 5 + 0)
+			local grass_amount = math.floor(perlin1:get2d({x=x0, y=z0}) ^ 3 * 9)
 			-- Find random positions for grass based on this random
 			local pr = PseudoRandom(seed+1)
 			for i=0,grass_amount do
@@ -282,13 +441,13 @@ minetest.register_on_generated(function(minp, maxp, seed)
 					if minetest.registered_nodes[nn] and
 						minetest.registered_nodes[nn].buildable_to then
 						nn = minetest.env:get_node({x=x,y=ground_y,z=z}).name
-						-- If desert sand, make dry shrub
+						-- If desert sand, add dry shrub
 						if nn == "default:desert_sand" then
 							minetest.env:set_node(p,{name="default:dry_shrub"})
 							
-						-- If grass, make junglegrass
+						-- If dirt with grass, add grass
 						elseif nn == "default:dirt_with_grass" then
-							minetest.env:set_node(p,{name="default:junglegrass"})
+							minetest.env:set_node(p,{name="default:grass_"..pr:next(1, 5)})
 						end
 					end
 				end
