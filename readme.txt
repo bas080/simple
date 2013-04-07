@@ -6,9 +6,9 @@
  _____| ||   | | ||_|| ||   |    |       ||   |___ 
 |_______||___| |_|   |_||___|    |_______||_______|
 
-Author:
--------
-bas080
+Type:       Modpack/Game
+Author:     bas080
+License:    WTFPL
 
 Mods:
 -----
