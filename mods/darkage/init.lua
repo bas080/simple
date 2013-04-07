@@ -3,8 +3,9 @@ print (" ---- Dark Age is Loading! ---- ")
 dofile(minetest.get_modpath("darkage").."/mapgen.lua")
 dofile(minetest.get_modpath("darkage").."/building.lua")
 dofile(minetest.get_modpath("darkage").."/furniture.lua")
-dofile(minetest.get_modpath("darkage").."/stairs.lua")
-
+dofile(minetest.get_modpath("darkage").."/compatibility.lua")
+--dofile(minetest.get_modpath("darkage").."/stairs.lua")
+dofile(minetest.get_modpath("darkage").."/stairsplus.lua")
 ----------
 -- Items
 ----------
@@ -256,13 +257,13 @@ minetest.register_node("darkage:marble", {
 	sounds = default.node_sound_stone_defaults()
 })
 
-minetest.register_node("darkage:marble_tile", {
-  description = "Marble Tile",
-	tiles = {"darkage_marble_tile.png"},
-	is_ground_content = true,
-	groups = {cracky=2},
-	sounds = default.node_sound_stone_defaults()
-})
+--minetest.register_node("darkage:marble_tile", { --disabled because texture not found
+--  description = "Marble Tile",
+--	tiles = {"darkage_marble_tile.png"},
+--	is_ground_content = true,
+--	groups = {cracky=2},
+--	sounds = default.node_sound_stone_defaults()
+--})
 
 ---------------
 -- Overrides
@@ -299,6 +300,12 @@ minetest.register_craftitem("darkage:silt_lump", {
 	description = "Silt Lump",
 	inventory_image = "darkage_silt_lump.png",
 })
+
+minetest.register_craftitem("darkage:iron_stick", {
+	description = "Iron Stick",
+	inventory_image = "darkage_iron_stick.png",
+})
+
 
 ----------
 -- Crafts
@@ -404,10 +411,11 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'darkage:stone_brick 3',
+	output = 'darkage:stone_brick 9',--changed bacause conflicts with moreblocks
 	recipe = {
-    {'default:cobble','default:cobble'},
-		{'default:cobble','default:cobble'},
+    {'default:cobble','default:cobble','default:cobble'},--changed bacause conflicts with moreblocks
+	{'default:cobble','default:cobble','default:cobble'},--changed bacause conflicts with moreblocks
+	{'default:cobble','default:cobble','default:cobble'},--changed bacause conflicts with moreblocks
 	}
 })
 
@@ -435,6 +443,12 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = 'darkage:iron_stick 4',
+	recipe = {
+    {'default:steel_ingot'},
+	}
+})
 
 -- Cookings
 minetest.register_craft({
