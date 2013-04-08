@@ -118,4 +118,4 @@ plantslib:spawn_on_surfaces({
   light_min = 9
 })
 
-print([mod] Loaded!)
+print("["..mod.."] Loaded!")
