@@ -25,7 +25,6 @@ for i = 1, 12 do
   local hue = HUES[i]
   local hue2 = HUES2[i]
   local img = mod.."_"..hue..".png"
-  print(hue)
   --farming
   farming:add_plant(mod..":"..hue, {"tulips:"..hue.."_seeds",mod..":"..hue.."_sprout"}, 60, 2)
   tulips_table[i] = mod..":"..hue
