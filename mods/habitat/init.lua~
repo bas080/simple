@@ -1,14 +1,25 @@
 habitat = {}
 
-
-
-function habitat:generate(node, surface, height_min, height_max, spread, habitat_size, habitat_nodes, antitat_size, antitat_nodes)
+function habitat:generate(node, surface, minp, maxp, height_min, height_max, spread, habitat_size, habitat_nodes, antitat_size, antitat_nodes)
+  --[[regenerate with abm
+  minetest.register_abm({
+    nodenames = {surface},
+    interval = 10,
+    chance = spread,
+    action = function(pos, node, active_object_count, active_object_count_wider)
+      local p_top = {x=pos.x, y=pos.y+1, z=pos.z}
+      if minetest.env:find_node_near(p_top, habitat_size, habitat_nodes) ~= nil and minetest.env:find_node_near(p_top, antitat_size, antitat_nodes) == nil and minetest.env:find_node_near(p_top, spread/2, node) == nil  then
+        minetest.env:add_node(p_top, {name=node})
+      end
+    end
+  })
+  ]]
+  --spawn on generate
   minetest.register_on_generated(function(minp, maxp, seed)
-   print(maxp.y)
-if height_min > maxp.y or height_max < minp.y then
+    print(minp.x.." - "..min.y.." - "..min.z)
+    if height_min > maxp.y or height_max < minp.y then
       return
     end
-    
     local height_min_max = math.max(height_min,minp.y)
     local height_max_min = math.min(height_max,maxp.y)
     local width   = maxp.x-minp.x
