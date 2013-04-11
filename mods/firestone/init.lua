@@ -21,7 +21,7 @@ minetest.register_craft({
 minetest.register_node("firestone:firestone", {
   description = "Fire node",
   tile_images = {"default_cobble.png^firestone_top.png", "default_cobble.png", "default_cobble.png^default_coal_lump.png"},
-  groups = {igniter=2, crumbly=3},
+  groups = {igniter=2, cracky=3, stone=2},
   damage_per_second = 4,
   after_place_node = function(pos)
     local t = {x=pos.x, y=pos.y+1, z=pos.z}

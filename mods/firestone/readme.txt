@@ -8,14 +8,19 @@
 
 BY:             bas080
 DESCRIPTION:    Build fireplaces or big fire torches
-VERSION:        1.1.5
+VERSION:        1.1.7
 LICENSE:        WTFPL
-FORUM:          http://forum.minetest.net/viewtopic.php?id=2476
+FORUM:          http://forum.minetest.net/viewtopic.php?id=4265
 
 Changelog
 
 1.2
 * Improve light before fire feature
+
+1.1.7
+* Made firestone look like it is made out of stone
+* Changed crafting recipe to cobble, coal and torch
+* Changed group to act like stone but still ignites nodes nearby
 
 1.1.5
 * Chimney nodes with smoke thnx to aximx51v
