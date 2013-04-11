@@ -12,15 +12,15 @@ minetest.register_alias("firestone", "firestone:firestone")
 minetest.register_craft({
   output = '"firestone:firestone" 1',
   recipe = {
-    {'default:coal_lump', 'default:coal_lump', 'default:coal_lump'},
-    {'default:coal_lump', 'default:torch', 'default:coal_lump'},
-    {'default:coal_lump', 'default:coal_lump', 'default:coal_lump'},
+    {'default:cobble', 'default:torch', 'default:cobble'},
+    {'default:cobble', 'default:coal_lump', 'default:cobble'},
+    {'default:cobble', 'default:cobble', 'default:cobble'},
   }
 })
 
 minetest.register_node("firestone:firestone", {
   description = "Fire node",
-  tile_images = {"firestone_firestone_top.png^firestone_embers.png", "firestone_firestone_bottom.png", "firestone_firestone.png"},
+  tile_images = {"default_cobble.png^firestone_top.png", "default_cobble.png", "default_cobble.png^default_coal_lump.png"},
   groups = {igniter=2, crumbly=3},
   damage_per_second = 4,
   after_place_node = function(pos)
