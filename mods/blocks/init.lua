@@ -44,7 +44,7 @@ minetest.register_node("blocks:chain_steel", {
   tiles = {"blocks_chain_steel.png"},
   visual_scale = 1,
   paramtype = 'light',
-  walkable = false;
+  walkable = false,
   sunlight_propagates = true,
   groups = {choppy=2,oddly_breakable_by_hand=3, hanging_node=1},
   selection_box = {
@@ -59,7 +59,7 @@ minetest.register_node("blocks:chain_bronze", {
   tiles = {"blocks_chain_bronze.png"},
   visual_scale = 1,
   paramtype = 'light',
-  walkable = false;
+  walkable = false,
   sunlight_propagates = true,
   groups = {choppy=2,oddly_breakable_by_hand=3, hanging_node=1},
   selection_box = {
@@ -73,6 +73,7 @@ minetest.register_node("blocks:chain_gold", {
   drawtype = "plantlike",
   tiles = {"blocks_chain_gold.png"},
   visual_scale = 1,
+  walkable = false,
   paramtype = 'light',
   sunlight_propagates = true,
   groups = {choppy=2,oddly_breakable_by_hand=3, hanging_node=1},
