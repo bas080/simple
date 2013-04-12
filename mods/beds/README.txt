@@ -1,5 +1,5 @@
 ===BEDS MOD for MINETEST-C55===
-by PilzAdam
+by PilzAdam & thefamilygrog66
 
 Introduction:
 This mods brings beds to Minetest. You can use them to sleep at night

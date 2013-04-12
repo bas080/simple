@@ -1,5 +1,6 @@
 --nodes and crafts
 local hue = "white"
+local hue2 = "White"
 
 minetest.register_craft( {
   output = "flags:white 16",
@@ -34,10 +35,7 @@ minetest.register_node("flags:"..hue, {
   sounds = default.node_sound_defaults(),
 })
 
-for i = 1, 12 do
-  local hue = HUES[i]
-  local hue2 = HUES2[i]
-  
+local function register_flag(hue, hue2)
   minetest.register_craft( {
     type = "shapeless",
     output = "flags:" .. hue,
@@ -71,6 +69,14 @@ for i = 1, 12 do
     legacy_wallmounted = true,
     sounds = default.node_sound_defaults(),
   })
+end
+
+register_flag("black", "Black")
+
+for i = 1, 12 do
+  local hue = HUES[i]
+  local hue2 = HUES2[i]
+  register_flag(hue, hue2)
 end
 
 print("[flags] Loaded!")
