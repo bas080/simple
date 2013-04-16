@@ -1630,3 +1630,13 @@ stairsplus.register_stair_and_slab_and_panel_and_micro("stairsplus", "jungletree
 		"Jungle Tree Panel",
 		"Jungle Tree Microblock",
 		"jungletree")
+
+stairsplus.register_stair_and_slab_and_panel_and_micro("stairsplus", "junglewood", "default:junglewood",
+		{snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3, not_in_creative_inventory=1},
+		{"default_junglewood.png"},
+		"Wooden Stairs",
+		"Wooden Slab",
+		"Wooden Panel",
+		"Wooden Microblock",
+		"wood")
+
