@@ -14,19 +14,23 @@ FORUM:          http://forum.minetest.net/viewtopic.php?id=2484
 
 Changelog
 
+1.1
+* Added black flag
+* Fixed white flag description
+
 1.0
-* made compatible with latest mod of unified dyes
-* redifined craft for white flag
-* added crafts for coloured flags.
-* only contains hues
-* improved textures by using "shades" on flag
+* Made compatible with latest mod of unified dyes
+* Redifined craft for white flag
+* Added crafts for coloured flags.
+* Only contains hues
+* Improved textures by using "shades" on flag
 
 0.2
-* coloured flags using unified dyes
-* craft for making white flag
+* Coloured flags using unified dyes
+* Craft for making white flag
 
 0.1
-* white flag texture
+* White flag texture
 
 Licence
 WTFPL

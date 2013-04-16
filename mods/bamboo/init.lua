@@ -38,7 +38,7 @@ minetest.register_node("bamboo:bamboo_top", {
   visual_scale = 1.7,
   paramtype = "light",
   walkable = false,
-  groups = { snappy = 3,flammable=2, floored=1},
+  groups = { snappy = 3,flammable=2, attached_node=1},
   sounds = default.node_sound_leaves_defaults(),
   selection_box = {
     type = "fixed",
@@ -99,7 +99,7 @@ minetest.register_node("bamboo:bamboo", {
   sunlight_propagates = true,
   paramtype = "light",
   walkable = true,
-  groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3,wood=1, floored=1},
+  groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3,wood=1, attached_node=1},
   sounds = default.node_sound_wood_defaults(),
   drop = {
   max_items = 2,
@@ -136,7 +136,7 @@ minetest.register_node("bamboo:bamboo_dry", {
   sunlight_propagates = true,
   paramtype = "light",
   walkable = true,
-  groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3,wood=1, floored=1},
+  groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3,wood=1, attached_node=1},
   sounds = default.node_sound_wood_defaults(),
   drop = {
   max_items = 2,
@@ -161,7 +161,7 @@ minetest.register_node("bamboo:sapling", {
   visual_scale = 0.9,
   paramtype = "light",
   walkable = false,
-  groups = { snappy = 3,flammable=2, floored=1},
+  groups = { snappy = 3,flammable=2, attached_node=1},
   sounds = default.node_sound_leaves_defaults(),
   selection_box = {
     type = "fixed",

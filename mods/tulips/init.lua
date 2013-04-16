@@ -12,7 +12,7 @@ minetest.register_node(mod..":plant", {--register wild plant
   sunlight_propagates = true,
   walkable = false,
   visual_scale = 1.3,
-  groups = { snappy = 3,flammable=2, floored=1},
+  groups = { snappy = 3,flammable=2, attached_node=1},
   sounds = default.node_sound_leaves_defaults(),
   selection_box = {
     type = "fixed",
@@ -48,7 +48,7 @@ for i = 1, 12 do
     sunlight_propagates = true,
     walkable = false,
     visual_scale = 1.3,
-    groups = { snappy = 3,flammable=2, floored=1, flower=1, not_in_creative_inventory=1},
+    groups = { snappy = 3,flammable=2, attached_node=1, flower=1, not_in_creative_inventory=1},
     sounds = default.node_sound_leaves_defaults(),
     selection_box = {
       type = "fixed",
@@ -67,7 +67,7 @@ for i = 1, 12 do
     sunlight_propagates = true,
     walkable = false,
     visual_scale = 1.3,
-    groups = { snappy = 3,flammable=2, floored=1, not_in_creative_inventory=1},
+    groups = { snappy = 3,flammable=2, attached_node=1, not_in_creative_inventory=1},
     sounds = default.node_sound_leaves_defaults(),
     selection_box = {
       type = "fixed",
@@ -86,7 +86,7 @@ for i = 1, 12 do
     sunlight_propagates = true,
     walkable = false,
     visual_scale = 1.3,
-    groups = { snappy = 3,flammable=2, floored=1, not_in_creative_inventory=1},
+    groups = { snappy = 3,flammable=2, attached_node=1, not_in_creative_inventory=1},
     sounds = default.node_sound_leaves_defaults(),
     node_box = {
     type = "fixed",

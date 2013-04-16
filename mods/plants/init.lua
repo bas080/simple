@@ -14,7 +14,7 @@ plants.default_node_def = {--register wild plant
   sunlight_propagates = true,
   walkable = false,
   visual_scale = 1.3,
-  groups = { snappy = 3,flammable=2, floored=1},
+  groups = { snappy = 3,flammable=2, attached_node=1},
   sounds = default.node_sound_leaves_defaults(),
   selection_box = {
     type = "fixed",
@@ -44,7 +44,7 @@ local add_plant = function(name_plant, drop) -- register a wild plant
     sunlight_propagates = true,
     walkable = false,
     visual_scale = 1.3,
-    groups = { snappy = 3,flammable=2, floored=1},
+    groups = { snappy = 3,flammable=2, attached_node=1},
     sounds = default.node_sound_leaves_defaults(),
     selection_box = {
       type = "fixed",
@@ -53,7 +53,7 @@ local add_plant = function(name_plant, drop) -- register a wild plant
     after_destruct = function(pos,node)
       
       --regenerate plant only if exact location is not compromized
-      minetest.after(1, function()
+      minetest.after(5, function()
         local n = minetest.env:get_node({x=pos.x,y=pos.y,z=pos.z}).name
         local b = minetest.env:get_node({x=pos.x,y=pos.y-1,z=pos.z}).name
         print(n..b)
@@ -94,7 +94,7 @@ minetest.register_node(name, {
   walkable = false,
   visual_scale = 1.3,
   light_source = 11,
-  groups = { snappy = 3,flammable=2, floored=1},
+  groups = { snappy = 3,flammable=2, attached_node=1},
   sounds = default.node_sound_leaves_defaults(),
   selection_box = {
     type = "fixed",
@@ -116,7 +116,7 @@ minetest.register_node(name, {
   walkable = false,
   light_source = 7,
   visual_scale = 1.3,
-  groups = { snappy = 3,flammable=2, floored=1},
+  groups = { snappy = 3,flammable=2, attached_node=1},
   sounds = default.node_sound_leaves_defaults(),
   selection_box = {
     type = "fixed",
