@@ -1,9 +1,19 @@
 paint = {}
 paint.loopmax=50
 paint.loops=0
+
+minetest.register_alias("pencil", "mtpaint:pencil")
+minetest.register_alias("fill", "mtpaint:fill")
+minetest.register_alias("bucket", "mtpaint:fill")
+minetest.register_alias("eraser", "mtpaint:eraser")
+minetest.register_alias("gum", "mtpaint:eraser")
+minetest.register_alias("picker", "mtpaint:picker")
+minetest.register_alias("colorpicker", "mtpaint:picker")
+minetest.register_alias("nodepicker", "mtpaint:picker")
+
 --function
 paint.replace = function(user, position, replace, replacer)
-  
+
   if paint.loops > 2000 then return end
   paint.loops = paint.loops + 1
 	local node = replacer
@@ -44,7 +54,7 @@ minetest.register_tool("mtpaint:eraser", {
 	description = "Eraser",
 	inventory_image = "paint_eraser.png",
 	on_use = function(itemstack, user, pointed_thing)
-		if pointed_thing.under then
+		if pointed_thing.type == "node" then
 			minetest.env:remove_node(pointed_thing.under)
 		end
 	end,
@@ -54,7 +64,7 @@ minetest.register_tool("mtpaint:pencil", {
 	description = "Pencil",
 	inventory_image = "paint_pencil.png",
 	on_use = function(itemstack, user, pointed_thing)
-		if pointed_thing.under then
+		if pointed_thing.type == "node" then
 			local node = user:get_inventory():get_stack("main", 1):get_name()
 			if user:get_player_control().sneak then
 			  minetest.env:set_node(pointed_thing.under,{name=node})
@@ -62,9 +72,10 @@ minetest.register_tool("mtpaint:pencil", {
 			  minetest.env:set_node(pointed_thing.above,{name=node})
 			end
 		end
+		return
 	end,
 	on_place = function(self, user, pointed_thing)
-		if pointed_thing.above then
+		if pointed_thing.type == "node" then
 			local node = user:get_inventory():get_stack("main", 2):get_name()
 			if user:get_player_control().sneak then
 			  minetest.env:set_node(pointed_thing.under,{name=node})
@@ -72,6 +83,7 @@ minetest.register_tool("mtpaint:pencil", {
 			  minetest.env:set_node(pointed_thing.above,{name=node})
 			end
 		end
+		return
 	end,
 })
 
@@ -79,7 +91,7 @@ minetest.register_tool("mtpaint:picker", {
 	description = "Picker",
 	inventory_image = "paint_picker.png",
 	on_use = function(itemstack, user, pointed_thing)
-		if pointed_thing then
+		if pointed_thing.type == "node" then
 			local node = minetest.env:get_node(pointed_thing.under).name
 			if node == nil or node == "ignore" then return end
 			local oldnode = user:get_inventory():get_stack("main", 1):get_name()
@@ -93,9 +105,10 @@ minetest.register_tool("mtpaint:picker", {
 				end
 			end
 		end
+		return
 	end,
 	on_place = function(self, user, pointed_thing)
-		if pointed_thing then
+		if pointed_thing.type == "node" then
 			local node = minetest.env:get_node(pointed_thing.under).name
 			if node == nil or node == "ignore" then return end
 			local oldnode = user:get_inventory():get_stack("main", 2):get_name()
@@ -109,6 +122,7 @@ minetest.register_tool("mtpaint:picker", {
 				end
 			end
 		end
+		return
 	end,
 })
 
@@ -116,22 +130,24 @@ minetest.register_tool("mtpaint:fill", {
 	description = "Fill",
 	inventory_image = "paint_fill.png",
 	on_use = function(itemstack, user, pointed_thing)
-		if pointed_thing.under then
+		if pointed_thing.type == "node" then
 		  local pos = pointed_thing.under
 		  local replace = minetest.env:get_node(pos).name
 		  local replacer = user:get_inventory():get_stack("main", 1):get_name()
 		  paint.loops = 0
 			paint.replace(user, pos, replace, replacer)
 		end
+		return
 	end,
 	on_place = function(itemstack, user, pointed_thing)
-		if pointed_thing.under then
+		if pointed_thing.type == "node" then
 		  local pos = pointed_thing.under
 		  local replace = minetest.env:get_node(pos).name
 		  local replacer = user:get_inventory():get_stack("main", 2):get_name()
 		  paint.loops = 0
 			paint.replace(user, pos, replace, replacer)
 		end
+		return
 	end,
 	
 })

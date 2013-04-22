@@ -8,7 +8,7 @@
 
 BY:             bas080
 DESCRIPTION:    Image editor style world editing
-VERSION:        0.1
+VERSION:        0.2
 LICENCE:        WTFPL
 FORUM:          http://forum.minetest.net/viewtopic.php?pid=85190
 
@@ -21,6 +21,9 @@ Future Features
 
 Changelog
 ---------
+0.2
+* Fixed check if pointed thing is a node (bug)
+
 0.1
 * Eraser for removing all nodes that can be pointed at
 * Set node #1 with the picker on left click or set node #2 on right click

@@ -36,19 +36,6 @@ dofile(minetest.get_modpath("moretrees").."/crafts.lua")
 
 -- tree spawning setup
 
-plantslib:register_generate_plant(moretrees.apple_tree_biome, moretrees.apple_tree_model)
-plantslib:register_generate_plant(moretrees.oak_biome, moretrees.oak_model)
-plantslib:register_generate_plant(moretrees.sequoia_biome, moretrees.sequoia_model)
-plantslib:register_generate_plant(moretrees.palm_biome, moretrees.palm_model)
-plantslib:register_generate_plant(moretrees.pine_biome, moretrees.pine_model)
-plantslib:register_generate_plant(moretrees.rubber_tree_biome, moretrees.rubber_tree_model)
-plantslib:register_generate_plant(moretrees.willow_biome, moretrees.willow_model)
-
-plantslib:register_generate_plant(moretrees.birch_biome, "moretrees:grow_birch")
-plantslib:register_generate_plant(moretrees.spruce_biome, "moretrees:grow_spruce")
---plantslib:register_generate_plant(moretrees.jungletree_biome, "moretrees:grow_jungletree")
-plantslib:register_generate_plant(moretrees.fir_biome, "moretrees:grow_fir")
-
 -- These three lines replace default trees with beech
 -- Enable them if you want but be warned - due to serious bugs in the speed
 -- of the engine's map generator/loader, doing so will slow it WAY down.
@@ -59,58 +46,6 @@ minetest.register_alias("mapgen_leaves", "air")
 plantslib:register_generate_plant(moretrees.beech_biome, moretrees.beech_model)
 ]]--
 
--- sapling growth
-
-local sapling_interval = 1
-local sapling_chance = 1
-
-for i in ipairs(simple_trees) do
-	local tree_name = trees[i][1]
-	local tree_model = tree_name.."_model"
-	local tree_biome = tree_name.."_biome"
-
-	plantslib:dbg(dump(moretrees[tree_biome].surface))
-	
-	plantslib:grow_plants({
-		grow_delay = sapling_interval,
-		grow_chance = sapling_chance,
-		grow_plant = "moretrees:"..tree_name.."_sapling",
-		grow_nodes = moretrees[tree_biome].surface,
-		grow_function = moretrees[tree_model],
-	})
-end
-
-plantslib:grow_plants({
-	grow_delay = sapling_interval,
-	grow_chance = sapling_chance,
-	grow_plant = "moretrees:birch_sapling",
-	grow_nodes = moretrees.birch_biome.surface,
-	grow_function = "moretrees:grow_birch"
-})
-
-plantslib:grow_plants({
-	grow_delay = sapling_interval,
-	grow_chance = sapling_chance,
-	grow_plant = "moretrees:spruce_sapling",
-	grow_nodes = moretrees.spruce_biome.surface,
-	grow_function = "moretrees:grow_spruce"
-})
-
-plantslib:grow_plants({
-	grow_delay = sapling_interval,
-	grow_chance = sapling_chance,
-	grow_plant = "moretrees:fir_sapling",
-	grow_nodes = moretrees.fir_biome.surface,
-	grow_function = "moretrees:grow_fir"
-})
-
-plantslib:grow_plants({
-	grow_delay = sapling_interval,
-	grow_chance = sapling_chance,
-	grow_plant = "moretrees:jungletree_sapling",
-	grow_nodes = moretrees.jungletree_biome.surface,
-	grow_function = "moretrees:grow_jungletree"
-})
 
 -- Code to spawn a birch tree
 

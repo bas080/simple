@@ -44,7 +44,7 @@ function habitat:generate(node, surface, minp, maxp, height_min, height_max, spr
           count = count + 1
           p = {x=minp.x+x_current+x_deviation, y=y_current, z=minp.z+z_current+z_deviation}
           n = minetest.env:get_node(p).name
-          if surface == n and n_top == "air" then
+          if surface == n and n_top == "air"then
             p_top = {x=p.x, y=p.y+1, z=p.z}
             if minetest.env:find_node_near(p_top, habitat_size, habitat_nodes) ~= nil and minetest.env:find_node_near(p_top, antitat_size, antitat_nodes) == nil  then
               minetest.env:add_node(p_top, {name=node})

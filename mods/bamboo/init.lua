@@ -99,7 +99,7 @@ minetest.register_node("bamboo:bamboo", {
   sunlight_propagates = true,
   paramtype = "light",
   walkable = true,
-  groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3,wood=1, attached_node=1},
+  groups = {tree=1, snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3,wood=1, attached_node=1},
   sounds = default.node_sound_wood_defaults(),
   drop = {
   max_items = 2,
@@ -136,7 +136,7 @@ minetest.register_node("bamboo:bamboo_dry", {
   sunlight_propagates = true,
   paramtype = "light",
   walkable = true,
-  groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3,wood=1, attached_node=1},
+  groups = {tree=1, snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3,wood=1, attached_node=1},
   sounds = default.node_sound_wood_defaults(),
   drop = {
   max_items = 2,
@@ -227,6 +227,23 @@ minetest.register_node("bamboo:block_dry", {
 	sounds = default.node_sound_wood_defaults(),
 })
 
-habitat:generate("bamboo:bamboo_top", "default:dirt_with_grass", minp, maxp, 10, 40, 2, 15, {"default:water_source"},5,{"default:tree"})
+--spawn
+plantslib:register_generate_plant({
+    surface = "default:dirt_with_grass",
+    max_count = 20,
+    avoid_nodes = {"group:tree"},
+    avoid_radius = 2,
+    rarity = 40,
+    seed_diff = 456,
+    min_elevation = 10,
+    max_elevation = 80,
+    plantlife_limit = -0.4,
+    humidity_max = -0.4,
+    humidity_min = 0.4,
+    temp_max = -0.6,
+    temp_min = 0.2,
+  },
+  "bamboo:bamboo_top"
+)
 
 print("[Bamboo] Loaded!")

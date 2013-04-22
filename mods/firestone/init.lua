@@ -153,7 +153,7 @@ minetest.register_craft({
 })
 
 minetest.register_node("firestone:chimney", {
-  description = "WIP",
+  description = "Chimney",
   drawtype = "nodebox",
   node_box = {type = "fixed",
     fixed = {
