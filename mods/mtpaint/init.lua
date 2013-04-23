@@ -13,12 +13,11 @@ minetest.register_alias("nodepicker", "mtpaint:picker")
 
 --function
 paint.replace = function(user, position, replace, replacer)
-
+  if replace == replacer then return end
   if paint.loops > 2000 then return end
   paint.loops = paint.loops + 1
 	local node = replacer
 	local pos = position
-	
 	minetest.env:set_node(pos,{name=node})
 	
 	for i=-1,1,2 do
