@@ -8,19 +8,23 @@
 
 BY:             bas080
 DESCRIPTION:    Image editor style world editing
-VERSION:        0.2
+VERSION:        0.3
 LICENCE:        WTFPL
 FORUM:          http://forum.minetest.net/viewtopic.php?pid=85190
 
 Future Features
 ---------------
 * Selection tools
-* Improved bucket function to fill selection
 * Paint box that contains all tools
 * Paint box craft
 
 Changelog
 ---------
+0.3
+* Primary bucket function to only fill the top(visible) nodes
+* Holding shift while using bucket fills nodes that also are not visible
+* Bugfix that checks if replacer node is really a node
+
 0.2
 * Fixed check if pointed thing is a node (bug)
 

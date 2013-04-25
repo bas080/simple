@@ -3,7 +3,7 @@ abstract_trees = {}
 dofile(minetest.get_modpath("trees").."/jungletree.lua")
 dofile(minetest.get_modpath("trees").."/mangrovetree.lua")
 dofile(minetest.get_modpath("trees").."/palmtree.lua")
-dofile(minetest.get_modpath("trees").."/conifertree.lua")
+--dofile(minetest.get_modpath("trees").."/conifertree.lua")
 
 --testing tool
 minetest.register_tool("trees:drawer", {
