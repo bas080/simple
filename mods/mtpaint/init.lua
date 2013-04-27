@@ -1,7 +1,7 @@
 paint = {}
 paint.loopmax=50
 paint.loops=0
-
+--aliases
 minetest.register_alias("pencil", "mtpaint:pencil")
 minetest.register_alias("fill", "mtpaint:fill")
 minetest.register_alias("bucket", "mtpaint:fill")
@@ -10,15 +10,11 @@ minetest.register_alias("gum", "mtpaint:eraser")
 minetest.register_alias("picker", "mtpaint:picker")
 minetest.register_alias("colorpicker", "mtpaint:picker")
 minetest.register_alias("nodepicker", "mtpaint:picker")
-
 --function
-
 paint.has_air = function(pos)
-  print("check for air")
   for i=-1,1,2 do
     local p = {x=pos.x+i, y=pos.y, z=pos.z}
     local n = minetest.env:get_node(p).name
-    print(n)
     if minetest.registered_nodes[n].walkable == false then
       return true
     end
@@ -26,7 +22,6 @@ paint.has_air = function(pos)
   for i=-1,1,2 do
     local p = {x=pos.x, y=pos.y+i, z=pos.z}
     local n = minetest.env:get_node(p).name
-    print(n)
     if minetest.registered_nodes[n].walkable == false then
       return true
     end
@@ -34,17 +29,14 @@ paint.has_air = function(pos)
   for i=-1,1,2 do
     local p = {x=pos.x, y=pos.y, z=pos.z+i}
     local n = minetest.env:get_node(p).name
-    print(n)
     if minetest.registered_nodes[n].walkable == false then
       return true
     end
   end
-  print("doesnothaveair")
   return false
 end
-
+--functions
 paint.replace = function(user, position, replace, replacer, full)
-  
   if not minetest.registered_nodes[replacer] then return end
   if replace == replacer then return end
   if paint.loops > 2000 then return end
@@ -53,11 +45,8 @@ paint.replace = function(user, position, replace, replacer, full)
    if paint.has_air(pos) == false then return end
   end
   paint.loops = paint.loops + 1
-
   local node = replacer
-  
   minetest.env:set_node(pos,{name=node})
-    
   for i=-1,1,2 do
     local p = {x=pos.x+i, y=pos.y, z=pos.z}
     local n = minetest.env:get_node(p).name
@@ -66,7 +55,6 @@ paint.replace = function(user, position, replace, replacer, full)
       paint.replace(user,p, replace, replacer, full)
     end
   end
-
   for i=-1,1,2 do
     local p = {x=pos.x, y=pos.y+i, z=pos.z}
     local n = minetest.env:get_node(p).name
@@ -84,7 +72,6 @@ paint.replace = function(user, position, replace, replacer, full)
     end
   end
 end
-
 --tools
 minetest.register_tool("mtpaint:eraser", {
   description = "Eraser",
@@ -193,9 +180,7 @@ minetest.register_tool("mtpaint:fill", {
     end
     return
   end,
-  
 })
-
 --[[WIP
 minetest.register_tool("mtpaint:select_square", {
   description = "Square selection",
