@@ -1,30 +1,29 @@
-[MOD] NonCubicBlocks 1.1 - for Minetest v0.4 or later
---------------------------------------by yves_de_beck
+NONCUBIC
 
+BY:             yves_de_beck
+DESCRIPTION:    Obtain dyes more rapidly by farming them
+VERSION:        0.1
+FORUM:          http://forum.minetest.net/viewtopic.php?id=5332
 
+CONTRIBUTERS
+------------
+bas080
+-Added API capability
+-Fixed node details for slope corners
+-Added register stairs and slabs
 
-Install:
---------
-Simply copy the complete "noncubic" folder in the ..minetest-0.4.4-win32/mods/minetest/ directory.
-
-
-
-Dependence:
------------
-Default Stairs MOD (inkluding Minetest v0.4 or higher)
-
-
+API
+---
+Use detail_level varaible to set detail
+See api.lua for api functions
 
 For Slower PC's:
 ----------------
 You can change in the init.lua the 'detail_level = 20' lower (or higher for faster PC's)
-
 Example: 'detail_level = 16' works very well for older PC's and looks good. =D
 
-
-
-Recipes:
---------
+RECIPES
+-------
 
 Milling Machine Block:
 ----------------------
