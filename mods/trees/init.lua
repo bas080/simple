@@ -12,7 +12,7 @@ minetest.register_tool("trees:drawer", {
 	on_use = function(itemstack, user, pointed_thing)
 		if pointed_thing.under then
 			local height = 4+math.ceil(math.random(11))
-			abstract_trees.grow_conifertree(pointed_thing.above, height)
+			abstract_trees.grow_jungletree(pointed_thing.above, height)
 		end
 	end,
 })
