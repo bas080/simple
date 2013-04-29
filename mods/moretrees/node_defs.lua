@@ -366,3 +366,8 @@ minetest.register_alias("conifers:leaves", "moretrees:fir_leaves")
 minetest.register_alias("conifers:leaves_special", "moretrees:fir_leaves_bright")
 minetest.register_alias("conifers:sapling", "moretrees:fir_sapling")
 
+minetest.register_alias("moretrees:jungletree_trunk", "default:jungletree")
+minetest.register_alias("moretrees:jungletree_sapling", "trees:jungletree_sapling")
+minetest.register_alias("moretrees:leaves_green", "trees:leaves_green")
+minetest.register_alias("moretrees:leaves_yellow", "trees:leaves_yellow")
+minetest.register_alias("moretrees:leaves_red", "trees:leaves_red")
