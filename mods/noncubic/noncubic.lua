@@ -1,5 +1,6 @@
 --API functions
 ---------------
+
 --Single nodes
 --------------
 --noncubic.register_slope(modname, subname, recipeitem, groups, images, description)
@@ -23,7 +24,9 @@
 --noncubic.register_element_cross_double(subname, recipeitem, groups3, images3, description3)
 --noncubic.register_element_end_double(subname, recipeitem, groups3, images3, description3)
 --noncubic.register_stick(subname, recipeitem2, groups2, images2, description2)
---Stair
+
+--Stairs
+--------
 --noncubic.register_stair(modname, subname, recipeitem, groups, images, description, drop)
 --Group nodes
 -------------
@@ -59,14 +62,7 @@ noncubic.register_slope = function(modname, subname, recipeitem, groups, images,
     },
     groups = groups,
   })
-  minetest.register_craft({
-    output = modname..':slope_' .. subname .. ' 6',
-    recipe = {
-      {recipeitem, "", ""},
-      {recipeitem, "default:stick", ""},
-      {recipeitem, recipeitem, recipeitem},    
-    },
-  })
+  
   minetest.register_craft({
     output = modname..':slope_' .. subname .. ' 6',
     recipe = {
@@ -113,8 +109,8 @@ noncubic.register_slope_upsdown = function(modname, subname, recipeitem, groups,
     output = modname..':slope_upsdown_' .. subname .. ' 6',
     recipe = {
       {recipeitem, recipeitem, recipeitem},
-      {"", recipeitem, recipeitem},  
-      {"", "", recipeitem},  
+      {recipeitem, "default:stick", ""},  
+      {recipeitem, "", ""},  
     },
   })
   minetest.register_craft({
@@ -978,7 +974,6 @@ end
 
 --groups
 --------
-
 noncubic.register_roof = function(modname, subname, recipeitem, groups, images , description)
   noncubic.register_slope_edge(modname, subname, recipeitem, groups, images, description)
   noncubic.register_slope_inner_edge(modname, subname, recipeitem, groups, images, description)

@@ -5,12 +5,9 @@ by Calinou
 Licensed under the zlib/libpng license for code and CC BY-SA 3.0 Unported for textures, see LICENSE.txt for info.
 ****
 --]]
-
-stairsplus = {}
-
 -- Node will be called <modname>:stair_<subname>
 
-function stairsplus.register_stair(modname, subname, recipeitem, groups, images, description, drop)
+function noncubic.register_stair(modname, subname, recipeitem, groups, images, description, drop)
 		minetest.register_node(modname .. ":stair_" .. subname, {
 		description = description,
 		drawtype = "nodebox",
@@ -721,7 +718,7 @@ end
 
 -- Node will be called <modname>slab_<subname>
 
-function stairsplus.register_slab(modname, subname, recipeitem, groups, images, description, drop)
+function noncubic.register_slab(modname, subname, recipeitem, groups, images, description, drop)
 	minetest.register_node(modname .. ":slab_" .. subname, {
 		description = description,
 		drawtype = "nodebox",
@@ -1328,7 +1325,7 @@ end
 
 -- Node will be called <modname>panel_<subname>
 
-function stairsplus.register_panel(modname, subname, recipeitem, groups, images, description, drop)
+function noncubic.register_panel(modname, subname, recipeitem, groups, images, description, drop)
 	minetest.register_node(modname .. ":panel_" .. subname .. "_bottom", {
 		description = description,
 		drawtype = "nodebox",
@@ -1439,7 +1436,7 @@ end
 
 -- Node will be called <modname>micro_<subname>
 
-function stairsplus.register_micro(modname, subname, recipeitem, groups, images, description, drop)
+function noncubic.register_micro(modname, subname, recipeitem, groups, images, description, drop)
 	minetest.register_node(modname .. ":micro_" .. subname .. "_bottom", {
 		description = description,
 		drawtype = "nodebox",
@@ -1525,126 +1522,9 @@ function stairsplus.register_micro(modname, subname, recipeitem, groups, images,
 end
 
 -- Nodes will be called <modname>:{stair,slab,panel,micro}_<subname>
-function stairsplus.register_stair_and_slab_and_panel_and_micro(modname, subname, recipeitem, groups, images, desc_stair, desc_slab, desc_panel, desc_micro, drop)
-	stairsplus.register_stair(modname, subname, recipeitem, groups, images, desc_stair, drop)
-	stairsplus.register_slab(modname, subname, recipeitem, groups, images, desc_slab, drop)
-	stairsplus.register_panel(modname, subname, recipeitem, groups, images, desc_panel, drop)
-	stairsplus.register_micro(modname, subname, recipeitem, groups, images, desc_micro, drop)
+function noncubic.register_stair_and_slab_and_panel_and_micro(modname, subname, recipeitem, groups, images, desc_stair, desc_slab, desc_panel, desc_micro, drop)
+	noncubic.register_stair(modname, subname, recipeitem, groups, images, desc_stair, drop)
+	noncubic.register_slab(modname, subname, recipeitem, groups, images, desc_slab, drop)
+	noncubic.register_panel(modname, subname, recipeitem, groups, images, desc_panel, drop)
+	noncubic.register_micro(modname, subname, recipeitem, groups, images, desc_micro, drop)
 end
-
-stairsplus.register_stair_and_slab_and_panel_and_micro("stairsplus", "wood", "default:wood",
-		{snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3, not_in_creative_inventory=1},
-		{"default_wood.png"},
-		"Wooden Stairs",
-		"Wooden Slab",
-		"Wooden Panel",
-		"Wooden Microblock",
-		"wood")
-
-stairsplus.register_stair_and_slab_and_panel_and_micro("stairsplus", "stone", "default:stone",
-		{cracky=3, not_in_creative_inventory=1},
-		{"default_stone.png"},
-		"Stone Stairs",
-		"Stone Slab",
-		"Stone Panel",
-		"Stone Microblock",
-		"cobble")
-
-stairsplus.register_stair_and_slab_and_panel_and_micro("stairsplus", "cobble", "default:cobble",
-		{cracky=3, not_in_creative_inventory=1},
-		{"default_cobble.png"},
-		"Cobblestone Stairs",
-		"Cobblestone Slab",
-		"Cobblestone Panel",
-		"Cobblestone Microblock",
-		"cobble")
-		
-stairsplus.register_stair_and_slab_and_panel_and_micro("stairsplus", "mossycobble", "default:mossycobble",
-		{cracky=3, not_in_creative_inventory=1},
-		{"default_mossycobble.png"},
-		"Mossy Cobblestone Stairs",
-		"Mossy Cobblestone Slab",
-		"Mossy Cobblestone Panel",
-		"Mossy Cobblestone Microblock",
-		"mossycobble")
-
-stairsplus.register_stair_and_slab_and_panel_and_micro("stairsplus", "brick", "default:brick",
-		{cracky=3, not_in_creative_inventory=1},
-		{"default_brick.png"},
-		"Brick Stairs",
-		"Brick Slab",
-		"Brick Panel",
-		"Brick Microblock",
-		"brick")
-
-stairsplus.register_stair_and_slab_and_panel_and_micro("stairsplus", "sandstone", "default:sandstone",
-		{crumbly=2,cracky=2, not_in_creative_inventory=1},
-		{"default_sandstone.png"},
-		"Sandstone Stairs",
-		"Sandstone Slab",
-		"Sandstone Panel",
-		"Sandstone Microblock",
-		"sandstone")
-		
-stairsplus.register_stair_and_slab_and_panel_and_micro("stairsplus", "steelblock", "default:steelblock",
-		{snappy=1,bendy=2,cracky=1,melty=2,level=2, not_in_creative_inventory=1},
-		{"default_steel_block.png"},
-		"Steel Block Stairs",
-		"Steel Block Slab",
-		"Steel Block Panel",
-		"Steel Microblock",
-		"steelblock")
-		
-stairsplus.register_stair_and_slab_and_panel_and_micro("stairsplus", "desert_stone", "default:desert_stone",
-		{cracky=3, not_in_creative_inventory=1},
-		{"default_desert_stone.png"},
-		"Desert Stone Stairs",
-		"Desert Stone Slab",
-		"Desert Stone Panel",
-		"Desert Stone Microblock",
-		"desert_stone")
-		
-stairsplus.register_stair_and_slab_and_panel_and_micro("stairsplus", "glass", "default:glass",
-		{snappy=2,cracky=3,oddly_breakable_by_hand=3, not_in_creative_inventory=1},
-		{"default_glass.png"},
-		"Glass Stairs",
-		"Glass Slab",
-		"Glass Panel",
-		"Glass Microblock",
-		"glass")
-		
-stairsplus.register_stair_and_slab_and_panel_and_micro("stairsplus", "tree", "default:tree",
-		{tree=1,snappy=1,choppy=2,oddly_breakable_by_hand=1,flammable=2, not_in_creative_inventory=1},
-		{"default_tree_top.png", "default_tree_top.png", "default_tree.png"},
-		"Tree Stairs",
-		"Tree Slab",
-		"Tree Panel",
-		"Tree Microblock",
-		"tree")
-		
-stairsplus.register_stair_and_slab_and_panel_and_micro("stairsplus", "jungletree", "default:jungletree",
-		{tree=1,snappy=1,choppy=2,oddly_breakable_by_hand=1,flammable=2, not_in_creative_inventory=1},
-		{"default_jungletree_top.png", "default_jungletree_top.png", "default_jungletree.png"},
-		"Jungle Tree Stairs",
-		"Jungle Tree Slab",
-		"Jungle Tree Panel",
-		"Jungle Tree Microblock",
-		"jungletree")
-
-stairsplus.register_stair_and_slab_and_panel_and_micro("stairsplus", "junglewood", "default:junglewood",
-		{snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3, not_in_creative_inventory=1},
-		{"default_junglewood.png"},
-		"Wooden Stairs",
-		"Wooden Slab",
-		"Wooden Panel",
-		"Wooden Microblock",
-		"wood")
-
-stairsplus.register_stair_and_slab_and_panel_and_micro("stairsplus", "grass", "default:dirt",
-{crumbly=3},
-{"default_grass.png", "default_dirt.png", "default_dirt.png^default_grass_side.png"},
-"Grass Stairs",
-"Grass Slab",
-"Grass Panel",
-"Grass Microblock",
-"grass")

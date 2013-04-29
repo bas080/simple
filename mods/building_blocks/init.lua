@@ -1,5 +1,4 @@
 minetest.register_alias("tar", "building_blocks:Tar")
-minetest.register_alias("fakegrass", "building_blocks:fakegrass")
 minetest.register_alias("tar_knife", "building_blocks:knife")
 minetest.register_alias("adobe", "building_blocks:Adobe")
 minetest.register_alias("building_blocks_roofing", "building_blocks:Roofing")
@@ -93,13 +92,7 @@ minetest.register_craft({
 		{'craft "default:stick"', 'craft "default:stick"'},
 	}
 })
-minetest.register_craft({
-	output = 'building_blocks:fakegrass 2',
-	recipe = {
-		{'default:leaves'},
-		{"default:dirt"},
-	}
-})
+
 
 minetest.register_craft({
 	type = "cooking",
@@ -296,11 +289,6 @@ stairs.register_stair_and_slab("hardwood","building_blocks:hardwood",
 		{"building_blocks_hardwood.png"},
 		"Hardwood stair",
 		"Hardwood slab")
-stairs.register_stair_and_slab("fakegrass","building_blocks:fakegrass",
-		{crumbly=3},
-		{"default_grass.png"},
-		"Grass stair",
-		"Grass slab")
 stairs.register_stair_and_slab("tar","building_blocks:Tar",
 		{crumbly=1},
 		{"tar.png"},
@@ -316,15 +304,7 @@ minetest.register_craft({
 	recipe = "building_blocks:hardwood",
 	burntime = 28,
 })
-minetest.register_node("building_blocks:fakegrass", {
-	tiles = {"default_grass.png", "default_dirt.png", "default_dirt.png^default_grass_side.png"},
-	description = "Fake Grass",
-	is_ground_content = true,
-	groups = {crumbly=3,spleef=1},
-		sounds = default.node_sound_dirt_defaults({
-		footstep = {name="default_grass_footstep", gain=0.4},
-	}),
-})
+
 minetest.register_craftitem("building_blocks:faggot", {
 	image = "building_blocks_faggot.png",
 	on_place_on_ground = minetest.craftitem_place_item,

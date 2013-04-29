@@ -1,7 +1,7 @@
 NONCUBIC
 
 BY:             yves_de_beck
-DESCRIPTION:    Obtain dyes more rapidly by farming them
+DESCRIPTION:    Easily register stairs and other irregular nodes
 VERSION:        0.1
 FORUM:          http://forum.minetest.net/viewtopic.php?id=5332
 
