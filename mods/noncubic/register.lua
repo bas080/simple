@@ -36,7 +36,7 @@ noncubic.register_stick("noncubic", "sandstone","default:sandstone",
 "Sandstone")
 
 noncubic.register_elements("noncubic", "leaves","default:leaves",
-{snappy=2,choppy=2,oddly_breakable_by_hand=3},
+{snappy=3, flammable=2, leaves=1},
 {"default_leaves.png"},
 "Leaves")
 
