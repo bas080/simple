@@ -8,12 +8,20 @@
 
 BY:             bas080
 DESCRIPTION:    Bigger trees but still tiny trees
-VERSION:        1.0
+VERSION:        1.5
 LICENCE:        WTFPL
 FORUM:          http://forum.minetest.net/viewtopic.php?id=2344
 
 Changelog
 ---------
+1.5
+* Trees
+ - Updated jungletree
+ - Updated mangrovetree
+ - Added conifertree
+ - Wood node defs and craft
+ - Fixed spawning
+
 1.0
 * Trees
  - Palm
