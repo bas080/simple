@@ -82,3 +82,19 @@ minetest.register_node("blocks:chain_gold", {
     fixed = {-1/16, -8/16, -1/16, 1/16, 8/16, 1/16},
   },
 })
+
+minetest.register_node("blocks:cobble_street_alt", {
+	description = "Cobble Street",
+	tiles = {"blocks_cobble_street_2.png"},
+	is_ground_content = true,
+	groups = {cracky=3, stone=2},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("blocks:cobble_street", {
+	description = "Cobble Street",
+	tiles = {"blocks_cobble_street.png"},
+	is_ground_content = true,
+	groups = {cracky=3, stone=2},
+	sounds = default.node_sound_stone_defaults(),
+})

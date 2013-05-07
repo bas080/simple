@@ -21,6 +21,9 @@ Changelog
  - Added conifertree
  - Wood node defs and craft
  - Fixed spawning
+ - Removed some mangrovetree nodes
+ - Added aliases
+ - Improved some textures
 
 1.0
 * Trees

@@ -10,6 +10,8 @@ minetest.register_alias("gum", "mtpaint:eraser")
 minetest.register_alias("picker", "mtpaint:picker")
 minetest.register_alias("colorpicker", "mtpaint:picker")
 minetest.register_alias("nodepicker", "mtpaint:picker")
+minetest.register_alias("rotate", "mtpaint:rotater")
+minetest.register_alias("rotater", "mtpaint:rotater")
 --function
 paint.has_air = function(pos)
   for i=-1,1,2 do
@@ -84,7 +86,7 @@ minetest.register_tool("mtpaint:eraser", {
 })
 
 minetest.register_tool("mtpaint:pencil", {
-  description = "Pencil",
+  description = "Draw",
   inventory_image = "paint_pencil.png",
   on_use = function(itemstack, user, pointed_thing)
     if pointed_thing.type == "node" then
@@ -111,7 +113,7 @@ minetest.register_tool("mtpaint:pencil", {
 })
 
 minetest.register_tool("mtpaint:picker", {
-  description = "Picker",
+  description = "Pick",
   inventory_image = "paint_picker.png",
   on_use = function(itemstack, user, pointed_thing)
     if pointed_thing.type == "node" then
@@ -181,6 +183,85 @@ minetest.register_tool("mtpaint:fill", {
     return
   end,
 })
+
+minetest.register_tool("mtpaint:rotater", {
+  description = "Rotate",
+  inventory_image = "paint_rotate.png",
+  on_use = function(itemstack, user, pointed_thing)
+    --From technic
+    -- Must be pointing to facedir applicable node
+    if pointed_thing.type~="node" then return end
+    local pos=minetest.get_pointed_thing_position(pointed_thing,above)
+    local node=minetest.env:get_node(pos)
+    local node_name=node.name
+    if minetest.registered_nodes[node_name].paramtype2 == "facedir" or minetest.registered_nodes[node_name].paramtype2 == "wallmounted" then
+    if node.param2==nil  then return end
+    -- Get ready to set the param2
+    local n = node.param2
+    if minetest.registered_nodes[node_name].paramtype2 == "facedir" then
+    n = n+1
+    if n == 4 then n = 0 end
+    else
+    n = n+1
+    if n == 6 then n = 0 end
+    end
+    -- hacky_swap_node, unforunatly.
+    local meta = minetest.env:get_meta(pos)
+    local meta0 = meta:to_table()
+    node.param2 = n
+    minetest.env:set_node(pos,node)
+    meta = minetest.env:get_meta(pos)
+    meta:from_table(meta0)
+    local item=itemstack:to_table()
+    local item_wear=tonumber((item["wear"]))
+    item_wear=item_wear+0
+    if item_wear>65535 then itemstack:clear() return itemstack end
+    item["wear"]=tostring(item_wear)
+    itemstack:replace(item)
+    return itemstack
+    else
+    return itemstack
+    end
+  end,
+  on_place = function(itemstack, user, pointed_thing)
+    --From technic
+    -- Must be pointing to facedir applicable node
+    if pointed_thing.type~="node" then return end
+    local pos=minetest.get_pointed_thing_position(pointed_thing,above)
+    local node=minetest.env:get_node(pos)
+    local node_name=node.name
+    if minetest.registered_nodes[node_name].paramtype2 == "facedir" or minetest.registered_nodes[node_name].paramtype2 == "wallmounted" then
+    if node.param2==nil  then return end
+    -- Get ready to set the param2
+    local n = node.param2
+    if minetest.registered_nodes[node_name].paramtype2 == "facedir" then
+      n = n-1
+      if n == -1 then n = 3 end
+    else
+      n = n-1
+      if n == 7 then n = 0 end
+    end
+    -- hacky_swap_node, unforunatly.
+    local meta = minetest.env:get_meta(pos)
+    local meta0 = meta:to_table()
+    node.param2 = n
+    minetest.env:set_node(pos,node)
+    meta = minetest.env:get_meta(pos)
+    meta:from_table(meta0)
+    local item=itemstack:to_table()
+    local item_wear=tonumber((item["wear"]))
+    item_wear=item_wear+0
+    if item_wear>65535 then itemstack:clear() return itemstack end
+    item["wear"]=tostring(item_wear)
+    itemstack:replace(item)
+    return itemstack
+    else
+    return itemstack
+    end
+  end,
+})
+
+
 --[[WIP
 minetest.register_tool("mtpaint:select_square", {
   description = "Square selection",
